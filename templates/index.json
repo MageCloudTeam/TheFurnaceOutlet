@@ -1,0 +1,296 @@
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/finance-hands.jpg",
+            "mobile_image": "shopify:\/\/shop_images\/finance-hands.jpg",
+            "show_overlay": true,
+            "overlay_opacity": 46,
+            "text_color": "#ffffff",
+            "title": "Fast easy financing with no interest if paid within 6 months",
+            "content": "",
+            "content_position": "bottom_right",
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "button_text": "Button",
+            "link": ""
+          }
+        },
+        "slide-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/price-guarantee.jpg",
+            "mobile_image": "shopify:\/\/shop_images\/price-guarantee.jpg",
+            "show_overlay": true,
+            "overlay_opacity": 46,
+            "text_color": "#ffffff",
+            "title": "Low price guaranteed or we pay you 100 dollars",
+            "content": "",
+            "content_position": "bottom_right",
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "button_text": "Button",
+            "link": ""
+          }
+        },
+        "e167ed23-4dc8-4169-816e-50f7c70100a9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/delivery.jpg",
+            "mobile_image": "shopify:\/\/shop_images\/delivery.jpg",
+            "show_overlay": true,
+            "overlay_opacity": 46,
+            "text_color": "#ffffff",
+            "title": "Fast free delivery ships the same day when ordered before 2pm eastern standard time",
+            "content": "",
+            "content_position": "bottom_right",
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "button_text": "Button",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide-1",
+        "slide-2",
+        "e167ed23-4dc8-4169-816e-50f7c70100a9"
+      ],
+      "settings": {
+        "edge_to_edge": true,
+        "section_size": "preserve_ratio",
+        "carousel_effect": "slide",
+        "autoplay": true,
+        "cycle_speed": 5
+      }
+    },
+    "text-with-icons": {
+      "type": "text-with-icons",
+      "blocks": {
+        "icon-1": {
+          "type": "item",
+          "settings": {
+            "icon": "bi-delivery",
+            "title": "Free delivery worldwide",
+            "content": "<p>Short content about your store<\/p>"
+          }
+        },
+        "icon-2": {
+          "type": "item",
+          "settings": {
+            "icon": "bi-returns",
+            "title": "Satisfied or refunded",
+            "content": "<p>Short content about your store<\/p>"
+          }
+        },
+        "icon-3": {
+          "type": "item",
+          "settings": {
+            "icon": "bi-customer-support",
+            "title": "Top-notch support",
+            "content": "<p>Short content about your store<\/p>"
+          }
+        },
+        "icon-4": {
+          "type": "item",
+          "settings": {
+            "icon": "bi-secure-payment",
+            "title": "Secure payments",
+            "content": "<p>Short content about your store<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "icon-1",
+        "icon-2",
+        "icon-3",
+        "icon-4"
+      ],
+      "settings": {
+        "stack_mobile": false
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "popular-products",
+        "title": "Featured collection",
+        "products_count": 12,
+        "layout": "vertical",
+        "stack_products": false,
+        "show_quick_buy": true,
+        "link_title": "View all",
+        "link_url": ""
+      }
+    },
+    "featured-product": {
+      "type": "featured-product",
+      "blocks": {
+        "product-meta": {
+          "type": "product_meta",
+          "settings": {
+            "show_vendor": true,
+            "show_sku": false,
+            "show_reviews_badge": false,
+            "show_share_buttons": true
+          }
+        },
+        "featured-description": {
+          "type": "featured_description",
+          "settings": {
+          }
+        },
+        "variant-selector": {
+          "type": "variant_selector",
+          "settings": {
+            "selector_mode": "block",
+            "color_mode": "color",
+            "show_quantity_selector": true,
+            "show_taxes_included": false,
+            "show_inventory_quantity": false,
+            "low_inventory_threshold": 0
+          }
+        },
+        "buy-buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true
+          }
+        },
+        "1caa0844-de60-41a7-93e7-0c9f14810120": {
+          "type": "store_pickup",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "product-meta",
+        "featured-description",
+        "variant-selector",
+        "buy-buttons",
+        "1caa0844-de60-41a7-93e7-0c9f14810120"
+      ],
+      "settings": {
+        "product": "durastar-36000-btu-cooling-36000-btu-heating-22-5-seer-four-zone-mini-split-ductless-package-with-one-9000-btu-three-12000-btu-ceiling-cassette-evaporators",
+        "title": "Featured product",
+        "link_title": "View details",
+        "link_url": "shopify:\/\/products\/durastar-36000-btu-cooling-36000-btu-heating-22-5-seer-four-zone-mini-split-ductless-package-with-four-9000-btu-ceiling-cassette-evaporators",
+        "image_size": "small",
+        "enable_image_zoom": true,
+        "enable_video_looping": false,
+        "zoom_effect": "inside",
+        "carousel_effect": "fade"
+      }
+    },
+    "collection-list": {
+      "type": "collection-list",
+      "blocks": {
+        "collection-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "4-zone-ac-units",
+            "link": "shopify:\/\/collections\/4-zone-ac-units"
+          }
+        },
+        "collection-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "gas-furnace-systems",
+            "link": "shopify:\/\/collections\/gas-furnace-systems"
+          }
+        },
+        "collection-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories",
+            "link": "shopify:\/\/collections\/accessories"
+          }
+        },
+        "collection-4": {
+          "type": "collection",
+          "settings": {
+            "collection": "ptac",
+            "link": "shopify:\/\/collections\/ptac"
+          }
+        },
+        "collection-5": {
+          "type": "collection",
+          "settings": {
+            "collection": "hvac-package-unit",
+            "link": "shopify:\/\/collections\/hvac-package-unit"
+          }
+        },
+        "collection-6": {
+          "type": "collection",
+          "settings": {
+            "collection": "ductless-mini-splits",
+            "link": "shopify:\/\/collections\/ductless-mini-splits"
+          }
+        }
+      },
+      "block_order": [
+        "collection-1",
+        "collection-2",
+        "collection-3",
+        "collection-4",
+        "collection-5",
+        "collection-6"
+      ],
+      "settings": {
+        "title": "Our collections",
+        "link_title": "View all",
+        "link": "shopify:\/\/collections",
+        "round_images": true,
+        "show_collection_title": true
+      }
+    },
+    "16329198156d649ffc": {
+      "type": "video",
+      "settings": {
+        "title": "Factory Furnace Outlet Heating & Cooling Products Reviews",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=JzuEWxxeZfk",
+        "image": "shopify:\/\/shop_images\/Screenshot_from_2021-09-29_15-53-27.png"
+      }
+    },
+    "blog-posts": {
+      "type": "blog-posts",
+      "settings": {
+        "blog": "news",
+        "blog_posts_count": 3,
+        "title": "Blog posts",
+        "link_title": "View all",
+        "show_category": true,
+        "show_author": true,
+        "show_date": true,
+        "show_excerpt": true,
+        "stack_mobile": true
+      }
+    },
+    "16329210310203bf32": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/furnace.png",
+        "image_position": "left",
+        "image_width": 35,
+        "title": "ABOUT OUR STORE",
+        "content": "<p>We invite you to browse through our store and shop with confidence. If you like, you are welcome to create an account with us, or shop as a guest. Either way, your shopping cart will be active until you leave the store.<\/p>",
+        "button_text": "Our products",
+        "button_link": "shopify:\/\/collections\/all"
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "text-with-icons",
+    "featured-collection",
+    "featured-product",
+    "collection-list",
+    "16329198156d649ffc",
+    "blog-posts",
+    "16329210310203bf32"
+  ]
+}

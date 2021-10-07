@@ -1,0 +1,51 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-blog-post",
+      "blocks": {
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "title": "Join Us",
+            "content": "<p>A short sentence describing what someone will receive by subscribing<\/p>",
+            "subtext": "100% free, Unsubscribe any time!",
+            "background": "#1e2d7d",
+            "text": "#ffffff"
+          }
+        },
+        "social-media": {
+          "type": "social_media",
+          "settings": {
+            "title": "Follow us",
+            "show_rss": true
+          }
+        },
+        "f9c75707-aca1-4392-8983-b06472610583": {
+          "type": "featured_products",
+          "settings": {
+            "title": "Featured products",
+            "product_1": "3-5-ton-heat-pump-package-unit-goodman-gph1442h41-14-seer",
+            "product_2": "durastar-36000-btu-cooling-36000-btu-heating-22-5-seer-four-zone-mini-split-ductless-package-with-four-12000-btu-concealed-duct-evaporators",
+            "product_3": "durastar-36000-btu-cooling-36000-btu-heating-22-5-seer-four-zone-mini-split-ductless-package-with-one-9000-btu-three-12000-btu-ceiling-cassette-evaporators"
+          }
+        }
+      },
+      "block_order": [
+        "newsletter",
+        "social-media",
+        "f9c75707-aca1-4392-8983-b06472610583"
+      ],
+      "settings": {
+        "show_category": true,
+        "show_author": true,
+        "show_date": true,
+        "show_share_buttons": true,
+        "show_tags": true,
+        "show_gravatar": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
