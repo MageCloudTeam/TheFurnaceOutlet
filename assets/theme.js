@@ -270,6 +270,7 @@
         element.offsetHeight; // Force redraw
 
         element.style[propertyToAnimate] = 0;
+        element.setAttribute('show','false');
 
         if (animationQueue[element.id]) {
           element.removeEventListener('transitionend', animationQueue[element.id]);
@@ -296,10 +297,10 @@
         var propertyToAnimate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'height';
         // To do the animation we temporarily hide it, check the height, and transition to it
         element.style[propertyToAnimate] = "".concat(element.scrollHeight, "px");
-
         var transitionEnded = function transitionEnded(event) {
           if (event.propertyName === propertyToAnimate) {
             var defaultValue = 'auto';
+            element.setAttribute('show','true');
 
             if (propertyToAnimate === 'max-height') {
               defaultValue = 'none';
@@ -886,13 +887,13 @@
 
       this.domDelegate = new Delegate(document.body);
 
-      this.btnsCollapsibleWrap = document.querySelector('.tabs_wrapper'),
-      this.btnsCollapsible = this.btnsCollapsibleWrap.querySelectorAll('[aria-controls]');
-
-      console.log(this.btnsCollapsible);
+      let btnsCollapsibleWrap = document.querySelector('.tabs_wrapper');
+      this.btnsCollapsible = btnsCollapsibleWrap.querySelectorAll('[aria-controls]');
+      this.content = document.querySelectorAll(".card__collapsible");
 
       if (this.btnsCollapsible[0] || this.btnsCollapsible[0].getAttribute('aria-expanded') === 'false') {
         this.btnsCollapsible[0].setAttribute('aria-expanded', 'true');
+        Animation.slideDown(this.content[0]);
       }else{
         return;
       }
@@ -915,7 +916,6 @@
       key: "_toggleCollapsible",
       value: function _toggleCollapsible(event, target) {
         var _this = this;
-
         // If the target is null, it may be because someone has sent the global event "collapsible:toggle". If that the case
         // we can retrieve the toggle button by using the event.detail.id
         if (!target && event.detail) {
@@ -925,7 +925,6 @@
         var isOpen = target.getAttribute('aria-expanded') === 'true',
             parentCollapsible = target.parentNode;
             
-
         if (isOpen) {
           _this._close(parentCollapsible);
         } else {
@@ -946,11 +945,24 @@
     }, {
       key: "_open",
       value: function _open(collapsible) {
+        
         var toggleButton = collapsible.querySelector('[aria-controls]');
 
         if (!toggleButton || toggleButton.getAttribute('aria-expanded') === 'true') {
           return; // It's already open
         }
+
+        this.content.forEach( function(item){
+          if(item.getAttribute('show') === 'true'){
+            Animation.slideUp(item);
+          }
+        })
+
+        this.btnsCollapsible.forEach( function(item){
+          if(item.getAttribute('aria-expanded') === 'true'){
+            item.setAttribute('aria-expanded', 'false')
+          }
+        })
 
         var collapsibleContent = document.querySelector("#".concat(toggleButton.getAttribute('aria-controls')));
         toggleButton.setAttribute('aria-expanded', 'true');
@@ -981,13 +993,12 @@
       value: function _close(collapsible) {
         var toggleButton = collapsible.querySelector('[aria-controls]');
         
-        
         if (!toggleButton || toggleButton.getAttribute('aria-expanded') === 'false') {
           return; // It's already closed
         }
 
         var collapsibleContent = document.querySelector("#".concat(toggleButton.getAttribute('aria-controls')));
-        console.log(collapsibleContent)
+        // console.log(collapsibleContent)
         if (toggleButton.hasAttribute('data-collapsible-force-overflow')) {
           collapsibleContent.style.overflow = 'hidden';
         }

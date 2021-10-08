@@ -404,7 +404,7 @@
               {%- case block.type -%}
                 {%- when "description" -%}
                   {%- if product.description != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
                       <div class="card__collapsible-content">
                         <div class="rte text--pull">
                           {{ product.description | remove: 'data-section-type="product"' }}
@@ -414,7 +414,7 @@
                   {%- endif -%}
                 {%- when "specifications" -%}
                   {%- if block.settings.specifications_parameters != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
                       <div class="card__collapsible-content">
                         <div class="rte text--pull">
                           {{ block.settings.specifications_parameters }}
@@ -424,7 +424,7 @@
                   {%- endif -%}
                  {%- when "documents_tab" -%}
                   {%- if block.settings.documents != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
                       <div class="card__collapsible-content">
                         <div class="rte text--pull">
                           {{ block.settings.documents_tab }}
@@ -433,7 +433,7 @@
                     </div>
                   {%- endif -%}
                 {%- when "reviews" -%}
-                  <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                  <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
                     <div class="card__collapsible-content">
                       <div class="rte text--pull">
                         <div class="product-block-list__item product-block-list__item--reviews" {{ block.shopify_attributes }}>
@@ -451,7 +451,7 @@
                   </div>
                 {%- when "accessories_tab" -%}
                   {%- if block.settings.accessories != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
                       <div class="card__collapsible-content">
                         <div class="rte text--pull">
                           {{ block.settings.accessories }}
@@ -461,7 +461,7 @@
                   {%- endif -%}
                 {%- when "similar_products_tab" -%}
                   {%- if block.settings.similar_products != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
                       <div class="card__collapsible-content">
                         <div class="rte text--pull">
                           {{ block.settings.similar_products }}
@@ -471,7 +471,7 @@
                   {%- endif -%}
                 {%- when "product_questions_tab" -%}
                   {%- if block.settings.product_questions != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
                       <div class="card__collapsible-content">
                         <div class="rte text--pull">
                           {{ block.settings.product_questions }}
