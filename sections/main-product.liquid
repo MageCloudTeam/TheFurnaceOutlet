@@ -324,7 +324,7 @@
                 {%- when "description" -%}
                   {%- if product.description != blank -%}
                     <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
-                      <div class="card">
+                      <div class="card btn">
                         <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
                           <span class="card__title heading h3">{{ 'product.general.description' | t }}</span>
                           <span class="plus-button plus-button--large"></span>
@@ -335,9 +335,62 @@
                 {%- when "specifications" -%}
                   {%- if block.settings.specifications_parameters != blank -%}
                     <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
-                      <div class="card">
+                      <div class="card btn">
                         <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
                           <span class="card__title heading h3">{{ 'product.general.specifications' | t }}</span>
+                          <span class="plus-button plus-button--large"></span>
+                        </button>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- when "documents_tab" -%}
+                  {%- if block.settings.documents != blank -%}
+                    <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
+                      <div class="card btn">
+                        <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
+                          <span class="card__title heading h3">{{ 'product.general.documents' | t }}</span>
+                          <span class="plus-button plus-button--large"></span>
+                        </button>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- when "reviews" -%}
+                  <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
+                    <div class="card btn">
+                      <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
+                        <span class="card__title heading h3">{{ 'product.general.reviews' | t }}</span>
+                        <span class="plus-button plus-button--large"></span>
+                      </button>
+                    </div>
+                  </div>
+                {%- when "accessories_tab" -%}
+                  {%- if block.settings.accessories != blank -%}
+                    <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
+                      <div class="card btn">
+                        <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
+                          <span class="card__title heading h3">{{ 'product.general.accessories' | t }}</span>
+                          <span class="plus-button plus-button--large"></span>
+                        </button>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- when "similar_products_tab" -%}
+                  {%- if block.settings.similar_products != blank -%}
+                    <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
+                      <div class="card btn">
+                        <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
+                          <span class="card__title heading h3">{{ 'product.general.similar_products' | t }}</span>
+                          <span class="plus-button plus-button--large"></span>
+                        </button>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- when "product_questions_tab" -%}
+                  {%- if block.settings.product_questions != blank -%}
+                    <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
+                      <div class="card btn">
+                        <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
+                          <span class="card__title heading h3">{{ 'product.general.product_questions' | t }}</span>
                           <span class="plus-button plus-button--large"></span>
                         </button>
                       </div>
@@ -369,25 +422,66 @@
                       </div>
                     </div>
                   {%- endif -%}
+                 {%- when "documents_tab" -%}
+                  {%- if block.settings.documents != blank -%}
+                    <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                      <div class="card__collapsible-content">
+                        <div class="rte text--pull">
+                          {{ block.settings.documents_tab }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- when "reviews" -%}
+                  <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                    <div class="card__collapsible-content">
+                      <div class="rte text--pull">
+                        <div class="product-block-list__item product-block-list__item--reviews" {{ block.shopify_attributes }}>
+                          <span id="product-reviews" class="anchor"></span>
+        
+                          <div class="card">
+                            <div class="card__section">
+                              {%- assign reviews_count = product.metafields.spr.reviews | split: '<meta itemprop="reviewCount" content="' | last | split: '">' | first | times: 1 -%}
+                              <div id="shopify-product-reviews" class="spr-reviews {% if reviews_count > 0 %}spr-reviews--has-reviews{% endif %}" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {%- when "accessories_tab" -%}
+                  {%- if block.settings.accessories != blank -%}
+                    <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                      <div class="card__collapsible-content">
+                        <div class="rte text--pull">
+                          {{ block.settings.accessories }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- when "similar_products_tab" -%}
+                  {%- if block.settings.similar_products != blank -%}
+                    <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                      <div class="card__collapsible-content">
+                        <div class="rte text--pull">
+                          {{ block.settings.similar_products }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- when "product_questions_tab" -%}
+                  {%- if block.settings.product_questions != blank -%}
+                    <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                      <div class="card__collapsible-content">
+                        <div class="rte text--pull">
+                          {{ block.settings.product_questions }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endif -%}
               {%- endcase -%}
             {%- endfor -%}
           </div>
-          
-              {%- comment -%}
-              --------------------------------------------------------------------------------------
-              REVIEWS
-              --------------------------------------------------------------------------------------
-               <div class="product-block-list__item product-block-list__item--reviews" {{ block.shopify_attributes }}>
-                  <span id="product-reviews" class="anchor"></span>
-
-                  <div class="card">
-                    <div class="card__section">
-                      {%- assign reviews_count = product.metafields.spr.reviews | split: '<meta itemprop="reviewCount" content="' | last | split: '">' | first | times: 1 -%}
-                      <div id="shopify-product-reviews" class="spr-reviews {% if reviews_count > 0 %}spr-reviews--has-reviews{% endif %}" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
-                    </div>
-                  </div>
-                </div>
-              {%- endcomment -%}
         </div>  
       </div>
     </div>
@@ -619,6 +713,65 @@
       ]
     },
     {
+      "type": "documents_tab",
+      "name": "Documents",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",   
+          "id": "documents",
+          "label": "Documents"
+        }
+      ]
+    },
+    {
+      "type": "reviews",
+      "name": "Reviews",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "You need to install [Shopify's free Product Reviews](https://apps.shopify.com/product-reviews) app before enabling those options."
+        }
+      ]
+    },
+    {
+      "type": "accessories_tab",
+      "name": "Accessories",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",   
+          "id": "accessories",
+          "label": "Accessories"
+        }
+      ]
+    },
+    {
+      "type": "similar_products_tab",
+      "name": "Similar products",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",   
+          "id": "similar_products",
+          "label": "Similar products"
+        }
+      ]
+    },
+    {
+      "type": "product_questions_tab",
+      "name": "Product questions",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",   
+          "id": "product_questions",
+          "label": "Product questions"
+        }
+      ]
+    },
+    {
       "type": "content",
       "name": "Content",
       "settings": [
@@ -694,17 +847,6 @@
             }
           ],
           "default": "show_all"
-        }
-      ]
-    },
-    {
-      "type": "reviews",
-      "name": "Reviews",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "You need to install [Shopify's free Product Reviews](https://apps.shopify.com/product-reviews) app before enabling those options."
         }
       ]
     },

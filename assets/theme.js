@@ -886,6 +886,17 @@
 
       this.domDelegate = new Delegate(document.body);
 
+      this.btnsCollapsibleWrap = document.querySelector('.tabs_wrapper'),
+      this.btnsCollapsible = this.btnsCollapsibleWrap.querySelectorAll('[aria-controls]');
+
+      console.log(this.btnsCollapsible);
+
+      if (this.btnsCollapsible[0] || this.btnsCollapsible[0].getAttribute('aria-expanded') === 'false') {
+        this.btnsCollapsible[0].setAttribute('aria-expanded', 'true');
+      }else{
+        return;
+      }
+
       this._attachListeners();
     }
 
@@ -913,11 +924,12 @@
 
         var isOpen = target.getAttribute('aria-expanded') === 'true',
             parentCollapsible = target.parentNode;
+            
 
         if (isOpen) {
-          this._close(parentCollapsible);
+          _this._close(parentCollapsible);
         } else {
-          this._open(parentCollapsible);
+          _this._open(parentCollapsible);
         } // We make sure to close any siblings collapsible as well
 
 
@@ -969,7 +981,7 @@
       value: function _close(collapsible) {
         var toggleButton = collapsible.querySelector('[aria-controls]');
         
-
+        
         if (!toggleButton || toggleButton.getAttribute('aria-expanded') === 'false') {
           return; // It's already closed
         }
