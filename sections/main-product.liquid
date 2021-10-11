@@ -63,37 +63,82 @@
 
       <div class="product-block-list product-block-list--{{ section.settings.image_size }}">
         <div class="product-block-list__wrapper">
-          {%- if product.media.size > 0 -%}
-            <div class="product-block-list__item product-block-list__item--gallery">
-              {% render 'product-gallery' %}
-            </div>
-          {%- endif -%}
+          <div class="product-block-list__wrapper-items">
+            {%- if product.media.size > 0 -%}
+              <div class="product-block-list__item product-block-list__item--gallery">
+                {% render 'product-gallery' %}
+              </div>
+            {%- endif -%}
 
-          <div class="product-block-list__item product-block-list__item--info">
-            {%- render 'product-info' -%}
-          </div>
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
 
-          {%- for block in section.blocks -%}
-            {%- case block.type -%}
+                {%- when 'content' -%}
+                  {%- comment -%}
+                  --------------------------------------------------------------------------------------
+                  CONTENT (we first check the page and then inline content)
+                  --------------------------------------------------------------------------------------
+                  {%- endcomment -%}
 
-              {%- when 'content' -%}
+                  {%- assign page = block.settings.page -%}
+
+                  {%- if page != blank -%}
+                    {%- assign title = page.title -%}
+                    {%- assign content = page.content -%}
+                  {%- else -%}
+                    {%- assign title = block.settings.title -%}
+                    {%- assign content = block.settings.content -%}
+                  {%- endif -%}
+
+                  {%- if title != blank and content != blank -%}
+                    <div class="product-block-list__item product-block-list__item--content" {{ block.shopify_attributes }}>
+                      <div class="card">
+                        {%- if block.settings.display_mode == 'collapse' -%}
+                          <button class="card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
+                            <span class="card__title heading h3">{{ title }}</span>
+                            <span class="plus-button plus-button--large"></span>
+                          </button>
+
+                          <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
+                            <div class="card__collapsible-content">
+                              <div class="rte text--pull">
+                                {{ content }}
+                              </div>
+                            </div>
+                          </div>
+                        {%- else -%}
+                          <div class="card__header">
+                            <h2 class="card__title heading h3">{{ title }}</h2>
+                          </div>
+
+                          <div class="card__section {% if block.settings.display_mode == 'view_more' %}expandable-content{% endif %}" {% if block.settings.display_mode == 'view_more' %}aria-expanded="false"{% endif %}>
+                            <div class="rte text--pull">
+                              {{ content }}
+                            </div>
+
+                            {%- if block.settings.display_mode == 'view_more' -%}
+                              <button class="expandable-content__toggle">
+                                <span class="expandable-content__toggle-icon"></span>
+                                <span class="expandable-content__toggle-text" data-view-more="{{ 'product.general.view_more' | t | escape }}" data-view-less="{{ 'product.general.view_less' | t | escape }}">{{- 'product.general.view_more' | t -}}</span>
+                              </button>
+                            {%- endif -%}
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  {%- endif -%}
+
+              {%- when 'liquid' -%}
                 {%- comment -%}
                 --------------------------------------------------------------------------------------
-                CONTENT (we first check the page and then inline content)
+                LIQUID COE
                 --------------------------------------------------------------------------------------
                 {%- endcomment -%}
 
-                {%- assign page = block.settings.page -%}
+                {%- assign title = block.settings.title -%}
+                {%- assign liquid = block.settings.liquid -%}
 
-                {%- if page != blank -%}
-                  {%- assign title = page.title -%}
-                  {%- assign content = page.content -%}
-                {%- else -%}
-                  {%- assign title = block.settings.title -%}
-                  {%- assign content = block.settings.content -%}
-                {%- endif -%}
-
-                {%- if title != blank and content != blank -%}
+                {%- if title != blank and liquid != blank -%}
                   <div class="product-block-list__item product-block-list__item--content" {{ block.shopify_attributes }}>
                     <div class="card">
                       {%- if block.settings.display_mode == 'collapse' -%}
@@ -105,7 +150,7 @@
                         <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
                           <div class="card__collapsible-content">
                             <div class="rte text--pull">
-                              {{ content }}
+                              {{ liquid }}
                             </div>
                           </div>
                         </div>
@@ -116,7 +161,7 @@
 
                         <div class="card__section {% if block.settings.display_mode == 'view_more' %}expandable-content{% endif %}" {% if block.settings.display_mode == 'view_more' %}aria-expanded="false"{% endif %}>
                           <div class="rte text--pull">
-                            {{ content }}
+                            {{ liquid }}
                           </div>
 
                           {%- if block.settings.display_mode == 'view_more' -%}
@@ -131,194 +176,150 @@
                   </div>
                 {%- endif -%}
 
-            {%- when 'liquid' -%}
-              {%- comment -%}
-              --------------------------------------------------------------------------------------
-              LIQUID COE
-              --------------------------------------------------------------------------------------
-              {%- endcomment -%}
+                {%- comment -%}
+                --------------------------------------------------------------------------------------
+                TRUST BADGE
+                --------------------------------------------------------------------------------------
+                {%- endcomment -%}
 
-              {%- assign title = block.settings.title -%}
-              {%- assign liquid = block.settings.liquid -%}
+                {%- when 'trust' -%}
+                  {%- if block.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+                    {%- assign show_payment_icons = true -%}
+                  {%- else -%}
+                    {%- assign show_payment_icons = false -%}
+                  {%- endif -%}
 
-              {%- if title != blank and liquid != blank -%}
-                <div class="product-block-list__item product-block-list__item--content" {{ block.shopify_attributes }}>
-                  <div class="card">
-                    {%- if block.settings.display_mode == 'collapse' -%}
-                      <button class="card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
-                        <span class="card__title heading h3">{{ title }}</span>
-                        <span class="plus-button plus-button--large"></span>
-                      </button>
+                  {%- if block.settings.custom_security_badge or show_payment_icons -%}
+                    <div class="product-block-list__item product-block-list__item--trust">
+                      <div class="card">
+                        <div class="card__header card__header--flex">
+                          <h2 class="card__title heading h3">{{ block.settings.trust_title | escape }}</h2>
 
-                      <div id="block-{{ section.id }}-{{ block.id }}" class="card__collapsible">
-                        <div class="card__collapsible-content">
-                          <div class="rte text--pull">
-                            {{ liquid }}
-                          </div>
-                        </div>
-                      </div>
-                    {%- else -%}
-                      <div class="card__header">
-                        <h2 class="card__title heading h3">{{ title }}</h2>
-                      </div>
-
-                      <div class="card__section {% if block.settings.display_mode == 'view_more' %}expandable-content{% endif %}" {% if block.settings.display_mode == 'view_more' %}aria-expanded="false"{% endif %}>
-                        <div class="rte text--pull">
-                          {{ liquid }}
+                          {%- render 'icon', icon: 'lock', width: 22, height: 24 -%}
                         </div>
 
-                        {%- if block.settings.display_mode == 'view_more' -%}
-                          <button class="expandable-content__toggle">
-                            <span class="expandable-content__toggle-icon"></span>
-                            <span class="expandable-content__toggle-text" data-view-more="{{ 'product.general.view_more' | t | escape }}" data-view-less="{{ 'product.general.view_less' | t | escape }}">{{- 'product.general.view_more' | t -}}</span>
-                          </button>
-                        {%- endif -%}
-                      </div>
-                    {%- endif -%}
-                  </div>
-                </div>
-              {%- endif -%}
-
-              {%- comment -%}
-              --------------------------------------------------------------------------------------
-              TRUST BADGE
-              --------------------------------------------------------------------------------------
-              {%- endcomment -%}
-
-              {%- when 'trust' -%}
-                {%- if block.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
-                  {%- assign show_payment_icons = true -%}
-                {%- else -%}
-                  {%- assign show_payment_icons = false -%}
-                {%- endif -%}
-
-                {%- if block.settings.custom_security_badge or show_payment_icons -%}
-                  <div class="product-block-list__item product-block-list__item--trust">
-                    <div class="card">
-                      <div class="card__header card__header--flex">
-                        <h2 class="card__title heading h3">{{ block.settings.trust_title | escape }}</h2>
-
-                        {%- render 'icon', icon: 'lock', width: 22, height: 24 -%}
-                      </div>
-
-                      <div class="card__section">
-                        {%- if show_payment_icons -%}
-                          {%- if block.settings.custom_security_badge -%}
-                            <p class="card__subtitle heading h6">{{ 'product.general.payment' | t }}</p>
-                          {%- endif -%}
-
-                          <div class="payment-list">
-                            {% for type in shop.enabled_payment_types %}
-                              {{ type | payment_type_svg_tag: class: 'payment-list__item' }}
-                            {% endfor %}
-                          </div>
-
-                          <p class="payment-list__notice">{{ 'product.general.payment_notice' | t }}</p>
-                        {%- endif -%}
-
-                        {%- if show_payment_icons and block.settings.custom_security_badge -%}
-                          <hr class="card__separator">
-                        {%- endif -%}
-
-                        {%- if block.settings.custom_security_badge -%}
+                        <div class="card__section">
                           {%- if show_payment_icons -%}
-                            <p class="card__subtitle heading h6">{{ 'product.general.security' | t }}</p>
+                            {%- if block.settings.custom_security_badge -%}
+                              <p class="card__subtitle heading h6">{{ 'product.general.payment' | t }}</p>
+                            {%- endif -%}
+
+                            <div class="payment-list">
+                              {% for type in shop.enabled_payment_types %}
+                                {{ type | payment_type_svg_tag: class: 'payment-list__item' }}
+                              {% endfor %}
+                            </div>
+
+                            <p class="payment-list__notice">{{ 'product.general.payment_notice' | t }}</p>
                           {%- endif -%}
 
-                          {%- assign badge_width = block.settings.custom_security_badge.width | at_most: 450 | append: 'x' -%}
-                          <img class="product__trust-badge" style="width: {{ block.settings.custom_security_badge_width }}px"
-                               src="{{ block.settings.custom_security_badge | img_url: badge_width }}"
-                               srcset="{{ block.settings.custom_security_badge | img_url: badge_width }} 1x, {{ block.settings.custom_security_badge | img_url: badge_width, scale: 2 }} 2x"
-                               alt="{{ block.settings.custom_security_badge.alt | escape }}">
-                        {%- endif -%}
+                          {%- if show_payment_icons and block.settings.custom_security_badge -%}
+                            <hr class="card__separator">
+                          {%- endif -%}
+
+                          {%- if block.settings.custom_security_badge -%}
+                            {%- if show_payment_icons -%}
+                              <p class="card__subtitle heading h6">{{ 'product.general.security' | t }}</p>
+                            {%- endif -%}
+
+                            {%- assign badge_width = block.settings.custom_security_badge.width | at_most: 450 | append: 'x' -%}
+                            <img class="product__trust-badge" style="width: {{ block.settings.custom_security_badge_width }}px"
+                                src="{{ block.settings.custom_security_badge | img_url: badge_width }}"
+                                srcset="{{ block.settings.custom_security_badge | img_url: badge_width }} 1x, {{ block.settings.custom_security_badge | img_url: badge_width, scale: 2 }} 2x"
+                                alt="{{ block.settings.custom_security_badge.alt | escape }}">
+                          {%- endif -%}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                {%- endif -%}
+                  {%- endif -%}
 
-              {%- comment -%}
-              --------------------------------------------------------------------------------------
-              ESTIMATE SHIPPING
-              --------------------------------------------------------------------------------------
-              {%- endcomment -%}
+                {%- comment -%}
+                --------------------------------------------------------------------------------------
+                ESTIMATE SHIPPING
+                --------------------------------------------------------------------------------------
+                {%- endcomment -%}
 
-              {%- when 'shipping_estimator' -%}
-                {%- if product.available -%}
-                  <div class="product-block-list__item product-block-list__item--shipping" {{ block.shopify_attributes }}>
-                    <div class="card">
-                      <div class="card__header">
-                        <h2 class="card__title heading h3">{{ 'product.general.estimate_shipping' | t }}</h2>
-                      </div>
-
-                      <div class="card__section">
-                        <div class="shipping-estimator form" role="form">
-                          <div class="form__input-row">
-                            <div class="form__input-wrapper">
-                              <label for="shipping-estimator-country" class="form__label">{{ 'cart.shipping_estimator.country' | t }}</label>
-
-                              <div class="select-wrapper select-wrapper--primary">
-                                {%- render 'icon', icon: 'arrow-bottom' -%}
-
-                                <select name="country" id="shipping-estimator-country" data-default="{{ customer.default_address.country | default: block.settings.shipping_estimator_default_country }}" required>
-                                  {{- country_option_tags -}}
-                                </select>
-                              </div>
-                            </div>
-
-                            <div class="form__input-wrapper" style="display: none">
-                              <label for="shipping-estimator-province" class="form__label">{{ 'cart.shipping_estimator.province' | t }}</label>
-
-                              <div class="select-wrapper select-wrapper--primary">
-                                {%- render 'icon', icon: 'arrow-bottom' -%}
-
-                                <select name="province" id="shipping-estimator-province" data-default="{{ customer.default_address.province }}"></select>
-                              </div>
-                            </div>
-
-                            <div class="form__input-wrapper" style="max-width: 155px">
-                              <label for="shipping-estimator-zip" class="form__label">{{ 'cart.shipping_estimator.zip_code' | t }}</label>
-                              <input type="text" name="zip" id="shipping-estimator-zip" class="form__field form__field--text" value="{{ customer.default.address.zip }}" required>
-                            </div>
-                          </div>
-
-                          <button type="button" class="form__submit button button--primary" data-action="estimate-shipping">{{ 'cart.shipping_estimator.estimate' | t }}</button>
-
-                          <div class="shipping-estimator__results rte" style="display: none;"></div>
+                {%- when 'shipping_estimator' -%}
+                  {%- if product.available -%}
+                    <div class="product-block-list__item product-block-list__item--shipping" {{ block.shopify_attributes }}>
+                      <div class="card">
+                        <div class="card__header">
+                          <h2 class="card__title heading h3">{{ 'product.general.estimate_shipping' | t }}</h2>
                         </div>
+
+                        <div class="card__section">
+                          <div class="shipping-estimator form" role="form">
+                            <div class="form__input-row">
+                              <div class="form__input-wrapper">
+                                <label for="shipping-estimator-country" class="form__label">{{ 'cart.shipping_estimator.country' | t }}</label>
+
+                                <div class="select-wrapper select-wrapper--primary">
+                                  {%- render 'icon', icon: 'arrow-bottom' -%}
+
+                                  <select name="country" id="shipping-estimator-country" data-default="{{ customer.default_address.country | default: block.settings.shipping_estimator_default_country }}" required>
+                                    {{- country_option_tags -}}
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="form__input-wrapper" style="display: none">
+                                <label for="shipping-estimator-province" class="form__label">{{ 'cart.shipping_estimator.province' | t }}</label>
+
+                                <div class="select-wrapper select-wrapper--primary">
+                                  {%- render 'icon', icon: 'arrow-bottom' -%}
+
+                                  <select name="province" id="shipping-estimator-province" data-default="{{ customer.default_address.province }}"></select>
+                                </div>
+                              </div>
+
+                              <div class="form__input-wrapper" style="max-width: 155px">
+                                <label for="shipping-estimator-zip" class="form__label">{{ 'cart.shipping_estimator.zip_code' | t }}</label>
+                                <input type="text" name="zip" id="shipping-estimator-zip" class="form__field form__field--text" value="{{ customer.default.address.zip }}" required>
+                              </div>
+                            </div>
+
+                            <button type="button" class="form__submit button button--primary" data-action="estimate-shipping">{{ 'cart.shipping_estimator.estimate' | t }}</button>
+
+                            <div class="shipping-estimator__results rte" style="display: none;"></div>
+                          </div>
+                        </div>
+
+                        {%- if block.settings.show_refunds_policy and shop.refund_policy != blank -%}
+                          <div class="card__section card__section--tight">
+                            <button class="product__refund-policy-link link link--accented" data-action="open-modal" aria-controls="modal-refunds-policy">{{ 'product.general.refund_policy' | t }} {%- render 'icon', icon: 'arrow-right' -%}</button>
+                          </div>
+                        {%- endif -%}
                       </div>
 
                       {%- if block.settings.show_refunds_policy and shop.refund_policy != blank -%}
-                        <div class="card__section card__section--tight">
-                          <button class="product__refund-policy-link link link--accented" data-action="open-modal" aria-controls="modal-refunds-policy">{{ 'product.general.refund_policy' | t }} {%- render 'icon', icon: 'arrow-right' -%}</button>
-                        </div>
-                      {%- endif -%}
-                    </div>
+                        <div id="modal-refunds-policy" class="modal" aria-hidden="true">
+                          <div class="modal__dialog" role="dialog">
+                            <header class="modal__header">
+                              <h3 class="modal__title heading h2">{{ 'product.general.refund_policy' | t }}</h3>
+                              <button class="modal__close link" data-action="close-modal" title="{{ 'general.accessibility.close' | t | escape }}">
+                                {%- render 'icon', icon: 'close' -%}
+                              </button>
+                            </header>
 
-                    {%- if block.settings.show_refunds_policy and shop.refund_policy != blank -%}
-                      <div id="modal-refunds-policy" class="modal" aria-hidden="true">
-                        <div class="modal__dialog" role="dialog">
-                          <header class="modal__header">
-                            <h3 class="modal__title heading h2">{{ 'product.general.refund_policy' | t }}</h3>
-                            <button class="modal__close link" data-action="close-modal" title="{{ 'general.accessibility.close' | t | escape }}">
-                              {%- render 'icon', icon: 'close' -%}
-                            </button>
-                          </header>
-
-                          <div class="modal__content">
-                            <div class="rte">
-                              {{ shop.refund_policy }}
+                            <div class="modal__content">
+                              <div class="rte">
+                                {{ shop.refund_policy }}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    {%- endif -%}
-                  </div>
-                {%- endif -%}
-            {%- endcase -%}
-          {%- endfor -%}
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+          <div class="product-block-list__item product-block-list__item--info">
+            {%- render 'product-info' -%}
+          </div>
         </div>
         <div class="tabs_wrapper">
-          <div style="display: flex;">
+          <div class="tabs_wrapper-items">
             {%- for block in section.blocks -%}
               {%- case block.type -%} 
                 {%- when "description" -%}
@@ -399,7 +400,7 @@
               {%- endcase -%}
             {%- endfor -%}
           </div>
-          <div>
+          <div class="content_wrapper-items">
             {%- for block in section.blocks -%}  
               {%- case block.type -%}
                 {%- when "description" -%}

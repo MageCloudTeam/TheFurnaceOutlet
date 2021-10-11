@@ -2619,7 +2619,7 @@ img.lazyload[data-sizes=auto] {
 
 .card__title {
   margin-bottom: 0;
-  font-size: 17px;
+  font-size: 14px;
 }
 
 .card__subtitle {
@@ -2656,6 +2656,12 @@ img.lazyload[data-sizes=auto] {
   padding: 10px 25px;
 }
 
+@media screen and (max-width: 1180px) {
+  .tabs_wrapper .card .card__button{
+    padding: 10px 12px;
+  }
+}
+
 .card__collapsible-button .plus-button {
   margin-left: 10px;
   color: var(--heading-color);
@@ -2685,7 +2691,7 @@ img.lazyload[data-sizes=auto] {
 }
 
 .card__collapsible-content {
-  padding: 20 20px 20px 0px;
+  padding: 20px 20px 0px;
 }
 
 .card__separator {
@@ -9003,6 +9009,10 @@ shopify-payment-terms {
   margin-top: 15px;
 }
 
+.tabs_wrapper-items{
+  display: flex;
+}
+
 @media screen and (max-width: 640px) {
   .product-block-list__item:first-child .card {
     border-top: none;
@@ -9018,6 +9028,23 @@ shopify-payment-terms {
   .product-block-list__item--info > .card {
     top: 0 !important;
   }
+
+  .tabs_wrapper-items{
+    display: block;
+  }
+
+  .tabs_wrapper .product-block-list__item--description{
+    width: auto;
+  }
+
+  .tabs_wrapper .card .card__button{
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card__title{
+    font-size: 17px;
+  }
 }
 
 @media screen and (min-width: 1000px) {
@@ -9031,8 +9058,14 @@ shopify-payment-terms {
     margin-left: 0;
   }
 
+  .product-block-list__item--content,
+  .product-block-list__item--trust,
+  .product-block-list__item--shipping{
+    margin-top: 10px;
+  }
+
   .product-block-list__item--info,
-  .product-block-list__item--gallery{
+  .product-block-list__wrapper-items{
     flex-basis: 50%;
   }
 
