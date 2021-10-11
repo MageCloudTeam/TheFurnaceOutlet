@@ -884,20 +884,7 @@
   var CollapsibleManager = /*#__PURE__*/function () {
     function CollapsibleManager() {
       _classCallCheck(this, CollapsibleManager);
-
-      this.domDelegate = new Delegate(document.body);
-
-      let btnsCollapsibleWrap = document.querySelector('.tabs_wrapper');
-      this.btnsCollapsible = btnsCollapsibleWrap.querySelectorAll('[aria-controls]');
-      this.content = document.querySelectorAll(".card__collapsible");
-
-      if (this.btnsCollapsible[0] || this.btnsCollapsible[0].getAttribute('aria-expanded') === 'false') {
-        this.btnsCollapsible[0].setAttribute('aria-expanded', 'true');
-        Animation.slideDown(this.content[0]);
-      }else{
-        return;
-      }
-
+      this.domDelegate = new Delegate(document.body); 
       this._attachListeners();
     }
 
@@ -906,13 +893,28 @@
       value: function _attachListeners() {
         this.domDelegate.on('click', '[data-action="toggle-collapsible"]:not([disabled])', this._toggleCollapsible.bind(this));
         document.addEventListener('collapsible:toggle', this._toggleCollapsible.bind(this));
+
+        if( this.domDelegate.rootElement.classList.contains('template-product')){
+       
+          this.btnsCollapsibleWrap = document.querySelector('.tabs_wrapper');
+          let btnsCollapsible = this.btnsCollapsibleWrap.querySelectorAll('[aria-controls]'),
+              content = this.btnsCollapsibleWrap.querySelectorAll(".card__collapsible");
+  
+          if (btnsCollapsible[0] || btnsCollapsible[0].getAttribute('aria-expanded') === 'false') {
+            btnsCollapsible[0].setAttribute('aria-expanded', 'true');
+            Animation.slideDown(content[0]);
+          }else{
+            return;
+          }
+        }else{
+          return;
+        }
       }
       /**
        * Toggle a given collapsible
        */
 
-    },
-     {
+    },  {
       key: "_toggleCollapsible",
       value: function _toggleCollapsible(event, target) {
         var _this = this;
@@ -946,23 +948,29 @@
       key: "_open",
       value: function _open(collapsible) {
         
+
         var toggleButton = collapsible.querySelector('[aria-controls]');
 
         if (!toggleButton || toggleButton.getAttribute('aria-expanded') === 'true') {
           return; // It's already open
         }
 
-        this.content.forEach( function(item){
-          if(item.getAttribute('show') === 'true'){
-            Animation.slideUp(item);
-          }
-        })
+        if( this.domDelegate.rootElement.classList.contains('template-product')){
+          let btnsCollapsible = this.btnsCollapsibleWrap.querySelectorAll('[aria-controls]'),
+              content = this.btnsCollapsibleWrap.querySelectorAll(".card__collapsible");
 
-        this.btnsCollapsible.forEach( function(item){
-          if(item.getAttribute('aria-expanded') === 'true'){
-            item.setAttribute('aria-expanded', 'false')
-          }
-        })
+          content.forEach( function(item){
+            if(item.getAttribute('show') === 'true'){
+              Animation.slideUp(item);
+            }
+          })
+  
+          btnsCollapsible.forEach( function(item){
+            if(item.getAttribute('aria-expanded') === 'true'){
+              item.setAttribute('aria-expanded', 'false')
+            }
+          })
+        }
 
         var collapsibleContent = document.querySelector("#".concat(toggleButton.getAttribute('aria-controls')));
         toggleButton.setAttribute('aria-expanded', 'true');
@@ -998,7 +1006,6 @@
         }
 
         var collapsibleContent = document.querySelector("#".concat(toggleButton.getAttribute('aria-controls')));
-        // console.log(collapsibleContent)
         if (toggleButton.hasAttribute('data-collapsible-force-overflow')) {
           collapsibleContent.style.overflow = 'hidden';
         }
