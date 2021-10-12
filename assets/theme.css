@@ -9075,6 +9075,7 @@ shopify-payment-terms {
 
   .product-block-list__item--info {
     margin-left: 15px;
+    z-index: 1;
   }
 }
 
@@ -11228,6 +11229,7 @@ shopify-payment-terms {
 
 .content_icon-close{
   position: relative;
+  margin: 10px 0;
 }
 
 .popup-icons_wrap .content_icon-wrap{
@@ -11242,10 +11244,11 @@ shopify-payment-terms {
 }
 
 .content_icon-wrap .content_header-wrap{
-  background: #5a9393;
-  padding: 5px 10px;
+  background:#005985;
+  padding: 10px 10px;
   align-items: center;
   font-size: 19px;
+  color: white
 }
 
 .popup-icons_wrap .text-with-icons__icon-wrapper{
@@ -11254,6 +11257,7 @@ shopify-payment-terms {
 
 .content_icon-wrap .content_header-wrap .content_icon-header{
   margin: 0;
+  font-weight: 900;
 }
 
 .content_icon-wrap .content_icon{

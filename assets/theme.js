@@ -1064,7 +1064,6 @@
           _this._open(parentCollapsible);
         } // We make sure to close any siblings collapsible as well
 
-
         if (target.getAttribute('data-close-siblings') !== 'false') {
           Dom.getSiblings(parentCollapsible).forEach(function (collapsibleToClose) {
             return _this._close(collapsibleToClose);
