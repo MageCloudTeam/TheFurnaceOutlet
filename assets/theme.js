@@ -926,12 +926,13 @@
 
         var isOpen = target.getAttribute('aria-expanded') === 'true',
             parentCollapsible = target.parentNode;
-            
+
         if (isOpen) {
           _this._close(parentCollapsible);
         } else {
           _this._open(parentCollapsible);
-        } // We make sure to close any siblings collapsible as well
+        } 
+        // We make sure to close any siblings collapsible as well
 
 
         if (target.getAttribute('data-close-siblings') !== 'false') {
@@ -948,9 +949,8 @@
       key: "_open",
       value: function _open(collapsible) {
         
-
         var toggleButton = collapsible.querySelector('[aria-controls]');
-
+        
         if (!toggleButton || toggleButton.getAttribute('aria-expanded') === 'true') {
           return; // It's already open
         }
@@ -1020,6 +1020,113 @@
     }]);
 
     return CollapsibleManager;
+  }();
+
+  var IconPopup = /*#__PURE__*/function () {
+    function IconPopup() {
+      _classCallCheck(this, IconPopup);
+      this.domDelegate = new Delegate(document.body); 
+      this._attachListeners();
+    }
+
+    _createClass(IconPopup, [{
+      key: "_attachListeners",
+      value: function _attachListeners() {
+        this.domDelegate.on('click', '[data-action="toggle-collapsible-popup"]', this._toggleCollapsible.bind(this));
+        document.addEventListener('collapsible:toggle', this._toggleCollapsible.bind(this));
+
+        if( this.domDelegate.rootElement.classList.contains('template-product')){
+          this.popupCollapsibleWrap = document.querySelector('.popup-icons_wrap');
+        }else{
+          return;
+        }
+      }
+      /**
+       * Toggle a given collapsible
+       */
+
+    },  {
+      key: "_toggleCollapsible",
+      value: function _toggleCollapsible(event, target) {
+        var _this = this;
+        // If the target is null, it may be because someone has sent the global event "collapsible:toggle". If that the case
+        // we can retrieve the toggle button by using the event.detail.id
+        if (!target && event.detail) {
+          target = document.querySelector("[aria-controls=\"".concat(event.detail.id, "\"]"));
+        }
+
+        var isOpen = target.getAttribute('aria-expanded') === 'true',
+            parentCollapsible = target.parentNode;
+        
+        if (isOpen) {
+          _this._close(parentCollapsible);
+        } else {
+          _this._open(parentCollapsible);
+        } // We make sure to close any siblings collapsible as well
+
+
+        if (target.getAttribute('data-close-siblings') !== 'false') {
+          Dom.getSiblings(parentCollapsible).forEach(function (collapsibleToClose) {
+            return _this._close(collapsibleToClose);
+          });
+        }
+      }
+      /**
+       * Open a given collapsible
+       */
+
+    }, {
+      key: "_open",
+      value: function _open(collapsible) {
+        
+        var toggleButton = collapsible.querySelector('[aria-controls]');
+        var collapsibleContent = document.querySelector("#".concat(toggleButton.getAttribute('aria-controls')));
+
+        if (!toggleButton || toggleButton.getAttribute('aria-expanded') === 'true') {
+          return; // It's already open
+        }
+
+        if( this.domDelegate.rootElement.classList.contains('template-product')){
+          if(collapsibleContent.getAttribute('show') === 'false'){
+            collapsibleContent.classList.add("Show");
+            collapsibleContent.classList.remove("Hide");
+          }
+
+          if(toggleButton.getAttribute('aria-expanded') === 'true'){
+            toggleButton.classList.toggle("Show");
+            toggleButton.setAttribute('aria-expanded', 'false')
+          }
+
+          toggleButton.setAttribute('aria-expanded', 'true');
+        }
+        
+      }
+      /**
+       * Close a given collapsible
+       */
+
+    }, {
+      key: "_close",
+      value: function _close(collapsible) {
+        var toggleButton = collapsible.querySelector('[aria-controls]');
+        var collapsibleContent = document.querySelector("#".concat(toggleButton.getAttribute('aria-controls')));
+        
+        if (!toggleButton || toggleButton.getAttribute('aria-expanded') === 'false') {
+          return; // It's already closed
+        }
+
+        if( this.domDelegate.rootElement.classList.contains('template-product')){
+          if(collapsibleContent.getAttribute('show') === 'false'){
+            collapsibleContent.classList.add("Hide");
+            collapsibleContent.classList.remove("Show");
+          }
+        }
+
+        toggleButton.setAttribute('aria-expanded', 'false');
+      }
+    }]);
+
+    return IconPopup;
   }();
 
   var CountrySelector = /*#__PURE__*/function () {
@@ -18327,7 +18434,8 @@
       new CollapsibleManager();
       new LoadingBar();
       new ModalManager();
-      new PopoverManager(); // Then, we instantiate specific sections that may appear in all pages, and then only the template specific sections
+      new PopoverManager();
+      new IconPopup(); // Then, we instantiate specific sections that may appear in all pages, and then only the template specific sections
 
       var sections = new SectionContainer();
       sections.register('account', AccountSection);

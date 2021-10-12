@@ -69,6 +69,16 @@
         </div>
       {%- endif -%}
     {%- endform -%}
+    <div class="popup-icons">
+      <div class="row popup-icons_wrap">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'popup_icons' -%}
+              {%- render 'popup-icons', block: block -%}
+          {%- endcase -%}    
+        {% endfor %}
+      </div>
+    </div>
   </div>
 
   {% comment %}

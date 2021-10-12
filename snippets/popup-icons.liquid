@@ -1,0 +1,29 @@
+<div class="col-xl-6 popup-btn">
+  <button class="content_icon-close" data-action="toggle-collapsible-popup" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
+    <div class="text-with-icons__item">
+      <div class="text-with-icons__icon-wrapper">
+        {%- if block.settings.icon != blank -%}
+          {%- render 'icon', icon: block.settings.icon, stroke_width: 1.5 -%}  
+        {%- endif -%}
+      </div>
+      {%- if block.settings.header_icon != blank -%}
+        <div class="text-with-icons__content-wrapper">
+          <p>{{ block.settings.header_icon }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="content_icon-wrap Hide">
+      <div class="content_header-wrap">
+        <h1 class="content_icon-header">{{ block.settings.header_icon }}</h1>
+      </div>
+      <div class="content_icon">
+        <p>{{ block.settings.content_popap }}</p>
+      </div>
+    </div>
+  </button>
+</div>
+
+
+
+
+

@@ -8888,6 +8888,10 @@ shopify-payment-terms {
   top: -2px;
 }
 
+.popup-icons{
+  margin-top: 30px;
+}
+
 @media screen and (max-width: 640px) {
   .product-form__payment-container .shopify-payment-button {
     margin-top: 16px;
@@ -11221,6 +11225,51 @@ shopify-payment-terms {
 .text-with-icons__content > p {
   margin-bottom: 0;
 }
+
+.content_icon-close{
+  position: relative;
+}
+
+.popup-icons_wrap .content_icon-wrap{
+  position: absolute;
+  top: 48px;
+  left: 0;
+  background: white;
+  min-width: 350px;
+  width: 100%;
+  border: 1px solid #606060;
+  transition: all 0.2s;
+}
+
+.content_icon-wrap .content_header-wrap{
+  background: #5a9393;
+  padding: 5px 10px;
+  align-items: center;
+  font-size: 19px;
+}
+
+.popup-icons_wrap .text-with-icons__icon-wrapper{
+  margin: 0 18px 0 0;
+}
+
+.content_icon-wrap .content_header-wrap .content_icon-header{
+  margin: 0;
+}
+
+.content_icon-wrap .content_icon{
+  padding: 10px;
+  background: whitesmoke;
+}
+
+.Show{
+  z-index: 5;
+  transform: scale3d(1, 1, 1);
+}
+
+.Hide{
+  transform: scale3d(1, 0, 1);
+}
+
 
 @media screen and (max-width: 640px) {
   .text-with-icons {
