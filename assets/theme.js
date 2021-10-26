@@ -1064,6 +1064,7 @@
           _this._open(parentCollapsible);
         } // We make sure to close any siblings collapsible as well
 
+
         if (target.getAttribute('data-close-siblings') !== 'false') {
           Dom.getSiblings(parentCollapsible).forEach(function (collapsibleToClose) {
             return _this._close(collapsibleToClose);
@@ -12944,14 +12945,16 @@
 
       this.element = element;
       this.inputElement = this.element.querySelector('[name="quantity"]');
-      this.delegateElement = new Delegate(this.element);
+      this.delegateElement = new Delegate(this.element);    
 
       this._attachListeners();
+
     }
 
     _createClass(QuantityPicker, [{
       key: "_attachListeners",
       value: function _attachListeners() {
+
         this.delegateElement.on('click', '[data-action="decrease-picker-quantity"]', this._onDecrease.bind(this));
         this.delegateElement.on('click', '[data-action="increase-picker-quantity"]', this._onIncrease.bind(this));
         this.delegateElement.on('keyup', this._onInputValueChanged.bind(this));
@@ -12959,7 +12962,7 @@
       }
     }, {
       key: "_onDecrease",
-      value: function _onDecrease() {
+      value: function onDecrease() {
         this.inputElement.value = Math.max(1, parseInt(this.inputElement.value) - 1);
       }
     }, {
@@ -12980,10 +12983,80 @@
       key: "_onInputFocusOut",
       value: function _onInputFocusOut(event) {
         event.target.value = Math.max(1, parseInt(event.target.value) || 1);
+        console.log()
       }
     }]);
 
     return QuantityPicker;
+  }();
+
+  var QuantityPickerAccessories = /*#__PURE__*/function () {
+    function QuantityPickerAccessories(element) {
+      _classCallCheck(this, QuantityPickerAccessories);
+
+      if (!element) {
+        return;
+      }
+
+      if(element[0] != undefined){
+        element.forEach((item) => {
+          item.addEventListener('click', (e) => {
+            let target = e.target;
+            if (target.parentElement.classList.contains('quantity-selector--product')) {
+              let attribute = target.getAttribute("data-action");
+              let targetParentElement = target.parentNode;
+              this.element = targetParentElement;
+              this.inputElement = this.element.querySelector('[name="quantity"]');
+  
+              if(attribute == "increase-picker-quantity"){
+                onIncrease(this.inputElement);
+              }else if(attribute == "decrease-picker-quantity") {
+                onDecrease(this.inputElement);
+              }else{
+                return;
+              }
+            }
+          });
+  
+          item.addEventListener('keyup', (e) => {
+            let target = e.target;
+            if (target.parentElement.classList.contains('quantity-selector--product')) {
+              let targetParentElement = target.parentNode;
+              this.element = targetParentElement;
+              this.inputElement = this.element.querySelector('[name="quantity"]');
+  
+              onInputValueChanged(this.inputElement);
+            }
+          })
+        });  
+      }else{
+        // document.querySelector('.accessories').style.display = "none";
+      }   
+
+      function onDecrease(input) {
+        input.value = Math.max(0, parseInt(input.value) - 1);
+      }
+
+      function onIncrease(input) {
+        input.value = parseInt(input.value) + 1;
+      }
+
+      function onInputValueChanged(input) {
+
+        let value = input.value
+
+        if (value !== '' && isNaN(value)) {
+          value = Math.max(0, parseInt(value) || 0);
+        }
+      }
+
+      // function _onInputFocusOut(event) {
+      //   event.target.value = Math.max(1, parseInt(event.target.value) || 1);
+      // }
+
+    }
+
+    return QuantityPickerAccessories;
   }();
 
   var ShippingEstimator = /*#__PURE__*/function () {
@@ -13483,6 +13556,14 @@
           this.quantityPicker = new QuantityPicker(quantityPickerElement);
         }
       }
+
+      if (this.options['showQuantitySelector']) {
+        var quantityPickerElementWrap = this.element.querySelector('.product-list--vertical-accessories');
+        var quantityPickerElement = quantityPickerElementWrap.querySelectorAll('.quantity-selector--product');
+        new QuantityPickerAccessories(quantityPickerElement);
+      }
+
+     
 
       var productInfoElement = this.element.querySelector('.product-block-list__item--info .card');
 

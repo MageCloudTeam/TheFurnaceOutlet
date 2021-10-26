@@ -347,7 +347,7 @@
                   {%- endif -%}
                 {%- when "documents_tab" -%}
                   {%- if block.settings.documents != blank -%}
-                    <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
+                    <div class="product-block-list__item product-block-list__item--description documents" {{ block.shopify_attributes }}>
                       <div class="card btn">
                         <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
                           <span class="card__title heading h3">{{ 'product.general.documents' | t }}</span>
@@ -357,7 +357,7 @@
                     </div>
                   {%- endif -%}
                 {%- when "reviews" -%}
-                  <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
+                  <div class="product-block-list__item product-block-list__item--description reviews" {{ block.shopify_attributes }}>
                     <div class="card btn">
                       <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
                         <span class="card__title heading h3">{{ 'product.general.reviews' | t }}</span>
@@ -366,19 +366,17 @@
                     </div>
                   </div>
                 {%- when "accessories_tab" -%}
-                  {%- if block.settings.accessories != blank -%}
-                    <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
-                      <div class="card btn">
-                        <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
-                          <span class="card__title heading h3">{{ 'product.general.accessories' | t }}</span>
-                          <span class="plus-button plus-button--large"></span>
-                        </button>
-                      </div>
+                  <div class="product-block-list__item product-block-list__item--description accessories" {{ block.shopify_attributes }}>
+                    <div class="card btn">
+                      <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
+                        <span class="card__title heading h3">{{ 'product.general.accessories' | t }}</span>
+                        <span class="plus-button plus-button--large"></span>
+                      </button>
                     </div>
-                  {%- endif -%}
+                  </div>
                 {%- when "similar_products_tab" -%}
                   {%- if block.settings.similar_products != blank -%}
-                    <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
+                    <div class="product-block-list__item product-block-list__item--description similar_products" {{ block.shopify_attributes }}>
                       <div class="card btn">
                         <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
                           <span class="card__title heading h3">{{ 'product.general.similar_products' | t }}</span>
@@ -389,7 +387,7 @@
                   {%- endif -%}
                 {%- when "product_questions_tab" -%}
                   {%- if block.settings.product_questions != blank -%}
-                    <div class="product-block-list__item product-block-list__item--description" {{ block.shopify_attributes }}>
+                    <div class="product-block-list__item product-block-list__item--description product_question" {{ block.shopify_attributes }}>
                       <div class="card btn">
                         <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
                           <span class="card__title heading h3">{{ 'product.general.product_questions' | t }}</span>
@@ -452,15 +450,43 @@
                     </div>
                   </div>
                 {%- when "accessories_tab" -%}
-                  {%- if block.settings.accessories != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
-                      <div class="card__collapsible-content">
-                        <div class="rte text--pull">
-                          {{ block.settings.accessories }}
-                        </div>
+                  <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
+                    <div class="card__collapsible-content">
+                      <div class="text--pull">
+                        <div class="product-recommendations">
+                          <div class="scroller">
+                            <div class="scroller__inner">
+                              <div class="product-list--vertical-accessories">
+                                {% for tag in product.tags %}
+                                  {%- if tag contains 'SKU_' or tag contains 'sku_' -%}
+                                    {%- assign selected_variant_SKU = tag | remove_first: "SKU_" -%}
+                                    {%- assign selected_variant_sku = tag | remove_first: "sku_" -%}
+                                  {%- endif -%}
+
+                                  {% for collection in collections %}
+                                    {% paginate collection.products by 1000000 %}
+                                      {% for product in collection.products %}
+                                        {% for variant in product.variants %}
+
+                                          {%- assign accessorie_sku = variant.sku -%}
+
+                                          {% if accessorie_sku contains selected_variant_sku or accessorie_sku contains selected_variant_SKU %}
+                                            {%- render 'product-info-accessories', product: product, grid_classes: '1/4--lap 1/5--desk 1/6--wide' -%}
+                                          {% endif %}
+                                          
+                                        {% endfor %}
+                                      {% endfor %}
+                                    {% endpaginate %}
+                                  {% endfor %}
+                                {% endfor %}
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div> 
                       </div>
                     </div>
-                  {%- endif -%}
+                  </div>
                 {%- when "similar_products_tab" -%}
                   {%- if block.settings.similar_products != blank -%}
                     <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
@@ -561,7 +587,7 @@
         {
           "type": "checkbox",
           "id": "bolt_text",
-          "label": "Short desc. bolt text",
+          "label": "Short desc. bold text",
           "default": true
         }
       ]
@@ -903,13 +929,7 @@
       "type": "accessories_tab",
       "name": "Accessories",
       "limit": 1,
-      "settings": [
-        {
-          "type": "richtext",   
-          "id": "accessories",
-          "label": "Accessories"
-        }
-      ]
+      "settings": []
     },
     {
       "type": "similar_products_tab",

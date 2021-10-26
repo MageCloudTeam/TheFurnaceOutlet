@@ -177,14 +177,14 @@
         ],
         "settings": {
           "enable_sticky_header": true,
-          "logo": "shopify:\/\/shop_images\/furnace.png",
+          "logo": "shopify:\/\/shop_images\/logoTheFurnaceOutlet1_1-ColorCorrect.png",
           "logo_max_width": 300,
           "mobile_logo_max_width": 140,
           "show_locale_selector": true,
           "show_currency_selector": true,
           "navigation_menu": "main-menu",
           "navigation_mobile_menu": "main-menu",
-          "desktop_navigation_layout": "condensed",
+          "desktop_navigation_layout": "inline",
           "desktop_navigation_open_trigger": "hover",
           "show_navigation_social_media": true,
           "navigation_phone_number": "Call us 888 286 0211",
@@ -210,11 +210,17 @@
               "menu": "quick-links"
             }
           },
+          "d431b1a0-1edd-409f-94ab-6ba140d9fb44": {
+            "type": "links",
+            "settings": {
+              "menu": "customer-services"
+            }
+          },
           "footer-0": {
             "type": "text",
             "settings": {
               "title": "CONTACT US",
-              "content": "<p>Phone: (888) 286-0211<br\/>Fax: (888) 286-0211<\/p><p>Email: info@thefurnaceoutlet.com<\/p><p>Address: Factory Furnace Outlet,<br\/>426 alexandersville road<br\/>Miamisburg, OH 45342<\/p>"
+              "content": "<p>Phone: (888) 286-0211<br\/>Fax: (888) 286-0211<\/p><p>Email: info@thefurnaceoutlet.com<\/p><p>Address: The Furnace Outlet,<br\/>7540 MCEWEN RD, Centerville Ohio 45459, United States<\/p>"
             }
           },
           "footer-2": {
@@ -228,6 +234,7 @@
         "block_order": [
           "9e45e147-e525-4869-aa5c-ee7e6d45d77f",
           "921d414f-1fd8-41a2-87fc-75cf1c65ad04",
+          "d431b1a0-1edd-409f-94ab-6ba140d9fb44",
           "footer-0",
           "footer-2"
         ],

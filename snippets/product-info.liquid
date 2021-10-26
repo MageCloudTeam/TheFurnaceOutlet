@@ -1,7 +1,7 @@
 {%- assign selected_variant = product.selected_or_first_available_variant -%}
 {%- assign product_form_id = 'product_form_' | append: section.id | append: product.id -%}
 
-<div class="card {% if product.media.size > 0 %}card--collapsed{% endif %} {% if template.name == 'product' %}card--sticky{% endif %}">
+<div class="card {% if product.media.size > 0 %}card--collapsed{% endif %} {% if template.name == 'product' %}card--sticky{% endif %} {{ grid_classes }}">
   {%- if section.settings.enable_image_zoom -%}
     <div id="product-zoom-{{ section.id }}" class="product__zoom-wrapper"></div>
   {%- endif -%}

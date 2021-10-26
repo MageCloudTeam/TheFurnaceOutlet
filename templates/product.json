@@ -31,10 +31,79 @@
             "show_payment_button": false
           }
         },
+        "2af6353b-3f87-44b8-bb11-a281c780d4f0": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-fast-delivery",
+            "header_icon": "Free Delivery",
+            "content_popap": "<p><strong>Free Delivery<\/strong><\/p>"
+          }
+        },
+        "12bb0c56-ef50-4663-88ac-d7a693ed08e0": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-returns",
+            "header_icon": "Easy Returns",
+            "content_popap": "<p><strong>Easy Returns<\/strong><\/p>"
+          }
+        },
+        "b77484dd-3df5-48d2-a988-8d771caed17b": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-shield",
+            "header_icon": "Premium Guarante",
+            "content_popap": "<p><strong>Premium Guarante<\/strong><\/p>"
+          }
+        },
+        "1ec9991d-54b9-4980-bb46-5a818bfac3a9": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-time",
+            "header_icon": "Video",
+            "content_popap": "<p><strong>Video<\/strong><\/p>"
+          }
+        },
         "description": {
           "type": "description",
           "settings": {
             "display_mode": "collapse"
+          }
+        },
+        "70fb96b3-f2ea-4ded-80e7-2dc116f2a30e": {
+          "type": "documents_tab",
+          "settings": {
+            "documents": "<p>w<\/p>"
+          }
+        },
+        "b2278765-7015-499c-a4b9-e068b3b25506": {
+          "type": "specifications",
+          "settings": {
+            "specifications_parameters": "<p>{{ product.metafields.my_fields.specification_text | metafield_tag }}<\/p>"
+          }
+        },
+        "13a92b53-3192-4f81-b893-530b38c8adc9": {
+          "type": "accessories_tab",
+          "settings": {
+            "accessories_1": "15-1-4-x-1-2-for-gree-ductless-mini-split-line-set",
+            "accessories_2": "10-kw-electric-heat-kit-for-package-unit-hkp-10c",
+            "accessories_3": "",
+            "accessories_4": "",
+            "accessories_5": "",
+            "accessories_6": "",
+            "accessories_7": "",
+            "accessories_8": "",
+            "accessories_9": "",
+            "accessories_10": "",
+            "accessories_11": "",
+            "accessories_12": "",
+            "accessories_13": "",
+            "accessories_14": "",
+            "accessories_15": ""
+          }
+        },
+        "cabad50f-e171-4a69-8111-f7be7ed671cf": {
+          "type": "reviews",
+          "settings": {
           }
         }
       },
@@ -42,7 +111,15 @@
         "product_meta",
         "variant_selector",
         "buy_buttons",
-        "description"
+        "2af6353b-3f87-44b8-bb11-a281c780d4f0",
+        "12bb0c56-ef50-4663-88ac-d7a693ed08e0",
+        "b77484dd-3df5-48d2-a988-8d771caed17b",
+        "1ec9991d-54b9-4980-bb46-5a818bfac3a9",
+        "description",
+        "70fb96b3-f2ea-4ded-80e7-2dc116f2a30e",
+        "b2278765-7015-499c-a4b9-e068b3b25506",
+        "13a92b53-3192-4f81-b893-530b38c8adc9",
+        "cabad50f-e171-4a69-8111-f7be7ed671cf"
       ],
       "settings": {
         "image_size": "small",

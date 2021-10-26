@@ -1,0 +1,30 @@
+{%- assign selected_variant = product.selected_or_first_available_variant -%}
+{%- assign product_form_id = 'product_form_' | append: section.id | append: product.id -%}
+
+<div class="product-item-accessories {% if horizontal %}product-item--horizontal{% elsif list %}product-item--list{% else %}product-item--vertical{% endif %} {% if section.id == 'blog-sidebar' %}product-item--compact{% endif %} {{ grid_classes }}">
+
+  {%- form 'product', product, id: product_form_id, class: 'product-form-accessories' -%}
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+
+      {%- when 'accessories_tab' -%}
+        {%- render 'product-items-accessories', product: product, block: block -%}
+        {%- render 'product-variant-selector-accessories', product: product, form: form, block: block -%}
+          
+
+      {%- endcase -%}
+    {%- endfor -%}
+
+  {%- endform -%}
+
+  {% comment %}
+  ------------------------------------------------------------------------------
+  Product Data. This must be outputted for all products (including home page).
+
+  IMPORTANT: THIS CODE IS VITAL. DO NOT EDIT IT NOR REMOVE IT. MAKE SURE TO KEEP
+  THE EXACT SAME ATTRIBUTES.
+  ------------------------------------------------------------------------------
+  {% endcomment %}
+
+  {%- assign variant_selector_block = section.blocks | where: 'type', 'variant_selector' | first -%}
+</div>
