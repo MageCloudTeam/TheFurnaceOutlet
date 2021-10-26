@@ -13030,7 +13030,7 @@
           })
         });  
       }else{
-        // document.querySelector('.accessories').style.display = "none";
+        document.querySelector('.accessories').style.display = "none";
       }   
 
       function onDecrease(input) {
