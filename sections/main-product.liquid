@@ -458,28 +458,18 @@
                             <div class="scroller__inner">
                               <div class="product-list--vertical-accessories">
                                 {% for tag in product.tags %}
-                                  {%- if tag contains 'SKU_' or tag contains 'sku_' -%}
-                                    {%- assign selected_variant_SKU = tag | remove_first: "SKU_" -%}
-                                    {%- assign selected_variant_sku = tag | remove_first: "sku_" -%}
+                                  {%- if tag contains 'accessory_' -%}
+                                    {%- assign selected_variant_hundle = tag | remove_first: "accessory_" -%}
+                                    {%- assign selected_variant_hundle_arr = selected_variant_hundle | split: " " -%}
+
+                                    {% for product_publish in selected_variant_hundle_arr %}
+                                      {% if all_products[product_publish].handle == product_publish %}
+                                        {% assign product = all_products[product_publish] %}
+                                        {%- render 'product-info-accessories', product: product, grid_classes: '1/4--lap 1/5--desk 1/6--wide' -%}
+                                      {% endif %}
+                                    {% endfor %}
                                   {%- endif -%}
-
-                                  {% for collection in collections %}
-                                    {% paginate collection.products by 1000000 %}
-                                      {% for product in collection.products %}
-                                        {% for variant in product.variants %}
-
-                                          {%- assign accessorie_sku = variant.sku -%}
-
-                                          {% if accessorie_sku contains selected_variant_sku or accessorie_sku contains selected_variant_SKU %}
-                                            {%- render 'product-info-accessories', product: product, grid_classes: '1/4--lap 1/5--desk 1/6--wide' -%}
-                                          {% endif %}
-                                          
-                                        {% endfor %}
-                                      {% endfor %}
-                                    {% endpaginate %}
-                                  {% endfor %}
                                 {% endfor %}
-                                
                               </div>
                             </div>
                           </div>

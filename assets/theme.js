@@ -13045,8 +13045,8 @@
 
         let value = input.value
 
-        if (value !== '' && isNaN(value)) {
-          value = Math.max(0, parseInt(value) || 0);
+        if (value == '' || isNaN(value)) {
+          input.value = Math.max(0, parseInt(value) || 0);
         }
       }
 
