@@ -13,6 +13,7 @@
 {%- assign navigation_mobile_menu = linklists[navigation_mobile_menu_handle] -%}
 
 <section data-section-id="{{ section.id }}" data-section-type="header" data-section-settings='{{ section_settings }}'>
+  <div class="click_block"></div>
   <header class="header header--{{ section.settings.desktop_navigation_layout }} {% unless section.settings.show_condensed_search %}header--search-expanded{% endunless %}" role="banner">
     <div class="container">
       <div class="header__inner">
@@ -441,6 +442,7 @@
 
             {%- if settings.cart_type != 'page' and template != 'cart' -%}
               {%- render 'mini-cart' -%}
+              {%- render 'mini-cart-popup' -%}
             {%- endif -%}
           </div>
         </div>

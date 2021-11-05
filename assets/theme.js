@@ -1,4 +1,5 @@
-(function (factory) {
+
+ (function (factory) {
   typeof define === 'function' && define.amd ? define('index', factory) :
   factory();
 }((function () { 'use strict';
@@ -1936,10 +1937,16 @@
       }
 
       this.miniCartElement = this.element.querySelector('.mini-cart');
+      this.miniCartPopupElement = this.element.querySelector('.mini-cart-popup');
+      
+
+      this.isMiniCartPopupOpen = false;
       this.isMiniCartOpen = false;
 
       if (window.theme.pageType !== 'cart' && this.miniCartElement) {
+        this.closeMiniCartPopup = this.miniCartPopupElement.querySelector('.close__mini-cart-popup');
         this.miniCartToggleElement = this.element.querySelector("[aria-controls=\"".concat(this.miniCartElement.id, "\"]"));
+        this.miniCartPopupToggleElement = this.element.querySelector("[aria-controls=\"".concat(this.miniCartPopupElement.id, "\"]"));
 
         this._checkMiniCartScrollability();
       }
@@ -1964,7 +1971,9 @@
         if (window.theme.pageType !== 'cart' && window.theme.cartType !== 'page') {
           this.delegateElement.on('click', '[data-action="toggle-mini-cart"]', this._toggleMiniCart.bind(this));
           this.delegateElement.on('keyup', this._checkMiniCartClose.bind(this));
+          window.addEventListener('keyup', this._checkMiniCartClosePopup.bind(this));
           this.delegateRoot.on('click', this._onWindowClick.bind(this));
+          this.delegateRoot.on('click', this._onWindowClickPopup.bind(this));
           window.addEventListener('resize', this._calculateMiniCartHeightListener);
         }
 
@@ -1975,6 +1984,7 @@
         this.delegateRoot.on('keydown', '.quantity-selector__value', this._blockEnterKey.bind(this));
         this.delegateRoot.on('product:added', this._onProductAdded.bind(this));
         this.delegateRoot.on('cart:refresh', this._onCartRefresh.bind(this));
+        this.delegateRoot.on('cart:refresh', this._onCartRefreshPopup.bind(this));
       }
     }, {
       key: "_toggleMiniCart",
@@ -2004,11 +2014,25 @@
 
         this._calculateMiniCartHeight(); // Trap the focus
 
-
         Accessibility.trapFocus(this.miniCartElement, 'mini-cart');
         document.body.classList.add('no-mobile-scroll');
       }
     }, {
+      key: "_openMiniCartPopup",
+      value: function _openMiniCartPopup() {
+        
+        if (Responsive.getCurrentBreakpoint() === 'phone') {
+          this.miniCartPopupToggleElement.querySelector('.header__cart-icon').setAttribute('aria-expanded', 'true');
+        } // Finally also set aria-hidden to false on controlled element
+
+
+        this.miniCartPopupElement.setAttribute('aria-hidden', 'false');
+        this.isMiniCartPopupOpen = true;
+
+        Accessibility.trapFocus(this.miniCartPopupElement, 'mini-cart-popup');
+        document.body.classList.add('no-mobile-scroll');
+      }
+    },{
       key: "_closeMiniCart",
       value: function _closeMiniCart() {
         this.miniCartToggleElement.setAttribute('aria-expanded', 'false'); // If we are on mobile phone we also set the aria-expanded attribute to true on the icon state holder
@@ -2024,6 +2048,20 @@
         document.body.classList.remove('no-mobile-scroll');
       }
     }, {
+      key: "_closeMiniCartPopup",
+      value: function _closeMiniCartPopup() {
+        if (Responsive.getCurrentBreakpoint() === 'phone') {
+          this.miniCartPopupElement.style.maxHeight = '';
+        } // Finally also set aria-hidden to false on controlled element
+
+
+        this.miniCartPopupElement.setAttribute('aria-hidden', 'true');
+        document.querySelector('.click_block').style.display = "none";
+        
+        this.isMiniCartPopupOpen = false;
+        document.body.classList.remove('no-mobile-scroll');
+      }
+    }, {
       key: "_checkMiniCartClose",
       value: function _checkMiniCartClose(event) {
         if (!this.isMiniCartOpen) {
@@ -2032,6 +2070,21 @@
 
         if (event.key === 'Escape') {
           this._closeMiniCart();
+        }
+      }
+    }, {
+      key: "_checkMiniCartClosePopup",
+      value: function _checkMiniCartClosePopup(event) {
+        if (!this.isMiniCartPopupOpen) {
+          return;
+        }
+
+        if(event){
+          event.preventDefault();
+
+          if(event.key === 'Escape'){
+            this._closeMiniCartPopup();
+          }
         }
       }
     }, {
@@ -2105,6 +2158,10 @@
             _this._rerender(false).then(function () {
               document.dispatchEvent(new CustomEvent('theme:loading:end'));
             });
+
+            _this._rerenderPopup(false).then(function () {
+              document.dispatchEvent(new CustomEvent('theme:loading:end'));
+            });
           });
         });
         event.preventDefault();
@@ -2143,7 +2200,6 @@
           var cartSection = document.querySelector('[data-section-type="cart"]');
           url = "".concat(window.routes.cartUrl, "?section_id=").concat(cartSection.getAttribute('data-section-id'));
         }
-
         return fetch(url, {
           credentials: 'same-origin',
           method: 'GET',
@@ -2151,7 +2207,9 @@
             'Cache-Control': 'no-cache'
           }
         }).then(function (content) {
+
           content.text().then(function (html) {
+
             // We extract the data-item-count from the returned element
             var myDiv = document.createElement('div');
             myDiv.innerHTML = html;
@@ -2167,7 +2225,7 @@
                 // Note: we could use outerHTML here but outerHTML does not update the reference to new object
                 var tempElement = document.createElement('div');
                 tempElement.innerHTML = html; // When we re-render, we need to preserve the scroll position when content changes
-
+                
                 var miniCartItemListElement = _this2.miniCartElement.querySelector('.mini-cart__line-item-list'),
                     scrollPosition = null;
 
@@ -2215,7 +2273,66 @@
        * Check if the mini-cart is scrollable
        */
 
-    }, {
+    },
+     {
+      key: "_rerenderPopup",
+      value: function _rerenderPopup() {
+        var _this2 = this;
+
+        var url = '';
+
+        if (window.theme.pageType !== 'cart') {
+          url = "".concat(window.routes.cartUrl, "?section_id=mini-cart-popup");
+        } else {
+          var cartSection = document.querySelector('[data-section-type="cart"]');
+          url = "".concat(window.routes.cartUrl, "?section_id=").concat(cartSection.getAttribute('data-section-id'));
+        }
+
+        return fetch(url, {
+          credentials: 'same-origin',
+          method: 'GET',
+          headers: {
+            'Cache-Control': 'no-cache'
+          }
+        }).then(function (content) {
+
+          content.text().then(function (html) {
+
+            if (window.theme.cartType !== 'page') {
+              if (window.theme.pageType !== 'cart') {
+
+                var tempElement = document.createElement('div');
+                tempElement.innerHTML = html;
+
+                _this2.miniCartPopupElement.innerHTML = tempElement.querySelector('.mini-cart-popup').innerHTML;
+
+                _this2.element.dispatchEvent(new CustomEvent('cart:rerendered'));
+              } else {
+                // The replacement of the DOM here could be made better and more resilient (maybe exploring using a virtual DOM approach in future?)
+                var _tempElement = document.createElement('div');
+
+                _tempElement.innerHTML = html;
+                var originalCart = document.querySelector('[data-section-type="cart"]');
+                originalCart.innerHTML = _tempElement.querySelector('[data-section-type="cart"]').innerHTML;
+
+                if (scrollToTop) {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                  });
+                }
+
+                _this2.element.dispatchEvent(new CustomEvent('cart:rerendered', {
+                  bubbles: true
+                }));
+              }
+            }
+          });
+        });
+      }
+
+    }, 
+    {
       key: "_checkMiniCartScrollability",
       value: function _checkMiniCartScrollability() {
         var miniCartItemList = this.miniCartElement.querySelector('.mini-cart__line-item-list');
@@ -2234,6 +2351,7 @@
         var _this3 = this;
 
         this.itemCount += event.detail.quantity;
+
         /* Add the quantity added */
 
         this._onCartRefresh().then(function () {
@@ -2252,9 +2370,20 @@
                 event.detail.button.innerHTML = window.languages.productFormAddToCart;
               }, 1500);
             }
+          }
+        });
+
+        this._onCartRefreshPopup().then(function () {
+          if (window.theme.pageType !== 'cart') {
 
             if (window.theme.pageType !== 'cart' && window.theme.cartType === 'drawer') {
-              _this3._openMiniCart();
+              if(!_this3.isMiniCartPopupOpen){
+                _this3._openMiniCartPopup();
+                document.querySelector('.click_block').style.display = "block";
+              }
+              if(_this3.isMiniCartOpen){
+                _this3._closeMiniCart();
+              }
             }
           }
         });
@@ -2281,10 +2410,29 @@
        */
 
     }, {
+      key: "_onCartRefreshPopup",
+      value: function _onCartRefreshPopup() {
+
+        return this._rerenderPopup().then(function () {
+          document.dispatchEvent(new CustomEvent('theme:loading:end'));
+        });
+      }
+      /**
+       * We need to catch click outside the element to automatically close mini-cart
+       */
+
+    }, {
       key: "_onWindowClick",
       value: function _onWindowClick(event) {
         if (this.miniCartElement && this.isMiniCartOpen && !this.element.contains(event.target)) {
           this._closeMiniCart();
+        }
+      }
+    }, {
+      key: "_onWindowClickPopup",
+      value: function _onWindowClickPopup(event) {
+        if (this.miniCartPopupElement && this.isMiniCartPopupOpen && !this.element.contains(event.target)) {
+          this._closeMiniCartPopup();
         }
       }
     }]);
@@ -3276,7 +3424,7 @@
       this.element = element;
       this.delegateElement = new Delegate(this.element);
       this.options = options;
-      var productJsonElement = this.element.querySelector('[data-product-json]'); // If we are using placeholder, there is no JSON so we wrap here!
+      var productJsonElement = this.element.querySelector('[data-product-json-accessories]'); 
 
       if (productJsonElement) {
         var jsonData = JSON.parse(productJsonElement.innerHTML);
@@ -3712,27 +3860,50 @@
         target.setAttribute('disabled', 'disabled');
         document.dispatchEvent(new CustomEvent('theme:loading:start')); // Then we add the product in Ajax
 
-        var formElement = this.element.querySelector('form[action*="/cart/add"]');
-        fetch("".concat(window.routes.cartAddUrl, ".js"), {
-          body: JSON.stringify(Form.serialize(formElement)),
-          credentials: 'same-origin',
+        let formElements = this.element.querySelectorAll('form[action*="/cart/add"]');
+        let cartQty = 0;
+           
+        let items = [];
+
+        formElements.forEach((item) => {
+          if(item.querySelector('[name="quantity"]').value > 0){
+
+            cartQty += parseInt(item.querySelector('[name="quantity"]').value);
+            let productJsonElementAccessories = item.querySelector('[data-product-json-accessories]');
+            let jsonDataAccessories = JSON.parse(productJsonElementAccessories.innerHTML);
+
+            items.push({
+              'id': JSON.stringify(jsonDataAccessories['product-accessories']),
+              'quantity': item.querySelector('[name="quantity"]').value
+            })      
+          }
+        })
+
+        let productData = {
+          'items': items
+        }; 
+
+        fetch('/cart/add.js', {
+          body: JSON.stringify(productData),
           method: 'POST',
+          credentials: 'same-origin', 
           headers: {
             'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest' // This is needed as currently there is a bug in Shopify that assumes this header
-
+            'X-Requested-With': 'XMLHttpRequest'
           }
-        }).then(function (response) {
+          
+        }).then(response => {
+           
           document.dispatchEvent(new CustomEvent('theme:loading:end'));
-
+          
           if (response.ok) {
             target.removeAttribute('disabled'); // We simply trigger an event so the mini-cart can re-render
-
+            
             _this4.element.dispatchEvent(new CustomEvent('product:added', {
               bubbles: true,
               detail: {
                 variant: _this4.currentVariant,
-                quantity: parseInt(formElement.querySelector('[name="quantity"]').value)
+                quantity: parseInt(cartQty)
               }
             })); // If we are in the context of quick view, we also force closing the modal
 
@@ -3749,7 +3920,26 @@
               _this4._showAlert(content['description'], 'error', target);
             });
           }
+
         });
+
+        let cartAttr = {
+          'attributes': {
+            'main-prod-title': _this4.productData.title
+          }
+        }
+
+        fetch('/cart/update.js', {
+          body: JSON.stringify(cartAttr),
+          method: 'POST',
+          credentials: 'same-origin', 
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+          
+        })
+        
         event.preventDefault();
       }
       /**
@@ -12983,7 +13173,6 @@
       key: "_onInputFocusOut",
       value: function _onInputFocusOut(event) {
         event.target.value = Math.max(1, parseInt(event.target.value) || 1);
-        console.log()
       }
     }]);
 
@@ -13543,6 +13732,7 @@
 
       this.productVariants = new ProductVariants(this.element, this.options);
 
+
       if (this.options['showShippingEstimator']) {
         this.shippingEstimator = new ShippingEstimator(this.element.querySelector('.shipping-estimator'), {
           singleProduct: true
@@ -13948,7 +14138,6 @@
             modal.querySelector('.modal__inner').innerHTML = content;
             modal.classList.remove('is-loading'); // Register a new section to power the JS
 
-            console.log(modal.querySelector('[data-section-type="product"]'));
             var modalProductSection = new ProductSection(modal.querySelector('[data-section-type="product"]')); // We set a listener so we can cleanup on close
 
             var doCleanUp = function doCleanUp() {
@@ -18794,3 +18983,4 @@
   })();
 
 })));
+

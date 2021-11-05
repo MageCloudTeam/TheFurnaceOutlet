@@ -459,10 +459,10 @@
                               <div class="product-list--vertical-accessories">
                                 {% for tag in product.tags %}
                                   {%- if tag contains 'accessory_' -%}
-                                    {%- assign selected_variant_hundle = tag | remove_first: "accessory_" -%}
-                                    {%- assign selected_variant_hundle_arr = selected_variant_hundle | split: " " -%}
+                                    {%- assign variant_hundle = tag | remove_first: "accessory_" -%}
+                                    {%- assign variant_hundle_arr = variant_hundle | split: " " -%}
 
-                                    {% for product_publish in selected_variant_hundle_arr %}
+                                    {% for product_publish in variant_hundle_arr %}
                                       {% if all_products[product_publish].handle == product_publish %}
                                         {% assign product = all_products[product_publish] %}
                                         {%- render 'product-info-accessories', product: product, grid_classes: '1/4--lap 1/5--desk 1/6--wide' -%}
