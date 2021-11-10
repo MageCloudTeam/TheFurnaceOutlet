@@ -1938,7 +1938,6 @@
 
       this.miniCartElement = this.element.querySelector('.mini-cart');
       this.miniCartPopupElement = this.element.querySelector('.mini-cart-popup');
-      
 
       this.isMiniCartPopupOpen = false;
       this.isMiniCartOpen = false;
@@ -1947,6 +1946,7 @@
         this.closeMiniCartPopup = this.miniCartPopupElement.querySelector('.close__mini-cart-popup');
         this.miniCartToggleElement = this.element.querySelector("[aria-controls=\"".concat(this.miniCartElement.id, "\"]"));
         this.miniCartPopupToggleElement = this.element.querySelector("[aria-controls=\"".concat(this.miniCartPopupElement.id, "\"]"));
+        
 
         this._checkMiniCartScrollability();
       }
@@ -1976,7 +1976,7 @@
           this.delegateRoot.on('click', this._onWindowClickPopup.bind(this));
           window.addEventListener('resize', this._calculateMiniCartHeightListener);
         }
-
+        
         this.delegateRoot.on('click', '[data-action="decrease-quantity"]', this._updateQuantity.bind(this));
         this.delegateRoot.on('click', '[data-action="increase-quantity"]', this._updateQuantity.bind(this));
         this.delegateRoot.on('change', '.quantity-selector:not(.quantity-selector--product) .quantity-selector__value', this._updateQuantity.bind(this));
@@ -2282,7 +2282,7 @@
         var url = '';
 
         if (window.theme.pageType !== 'cart') {
-          url = "".concat(window.routes.cartUrl, "?section_id=mini-cart-popup&product_url="+_this2.options.mainProduct );
+          url = "".concat(window.routes.cartUrl, "?section_id=mini-cart-popup" );
         } else {
           var cartSection = document.querySelector('[data-section-type="cart"]');
           url = "".concat(window.routes.cartUrl, "?section_id=").concat(cartSection.getAttribute('data-section-id'));
@@ -2303,10 +2303,26 @@
 
                 var tempElement = document.createElement('div');
                 tempElement.innerHTML = html;
-
                 _this2.miniCartPopupElement.innerHTML = tempElement.querySelector('.mini-cart-popup').innerHTML;
-
                 _this2.element.dispatchEvent(new CustomEvent('cart:rerendered'));
+
+                let checkArr = _this2.miniCartPopupElement.querySelectorAll('#checked-discount');
+
+                checkArr.forEach((item) => {
+                  item.addEventListener('click', (event) => {
+                    let target = event.target;
+
+                    if(target.checked){
+                      _this2._addAccessoriesFromPopup(item);
+
+                      _this2.miniCartPopupElement.querySelector('.add-accessories').style.display = 'block';
+                      _this2.miniCartPopupElement.querySelector('.view-cart').style.display = 'none';
+                    }else{
+                      _this2._rmAccessoriesWithPopup(item);
+                    }
+                  });
+                })
+
               } else {
                 // The replacement of the DOM here could be made better and more resilient (maybe exploring using a virtual DOM approach in future?)
                 var _tempElement = document.createElement('div');
@@ -2328,11 +2344,54 @@
               }
             }
           });
+
+          
         });
       }
+    }, {
+      key: "_addAccessoriesFromPopup",
+      value: function _addAccessoriesFromPopup(item){
 
-    }, 
-    {
+        let items = [];
+  
+        let productJsonElementAccessories = item.parentNode.querySelector('[data-product-json-accessories]');
+        let jsonDataAccessories = JSON.parse(productJsonElementAccessories.innerHTML);
+  
+        items.push({
+          'id': JSON.stringify(jsonDataAccessories['product-accessories']),
+          'quantity': 1
+        })
+  
+        let productDataAccess = {
+          'items': items
+        };
+  
+        fetch('/cart/add.js', {
+          body: JSON.stringify(productDataAccess),
+          method: 'POST',
+          credentials: 'same-origin', 
+          headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+      }
+    }, {
+      key: "_rmAccessoriesWithPopup",
+      value: function _rmAccessoriesWithPopup(item){
+        fetch('/cart.js', {
+          credentials: 'same-origin',
+          method: 'GET',
+          headers: {
+            'Cache-Control': 'no-cache'
+          }
+        }).then(function (content) {
+          content.json().then(function (cartObj) {
+            console.log()
+          })
+        })
+      }
+    }, {
       key: "_checkMiniCartScrollability",
       value: function _checkMiniCartScrollability() {
         var miniCartItemList = this.miniCartElement.querySelector('.mini-cart__line-item-list');
@@ -3883,23 +3942,6 @@
           'items': items
         }; 
 
-        let cartAttr = {
-          'attributes': {
-            'main-prod-title': _this4.productData.title
-          }
-        }
-
-        fetch('/cart/update.js', {
-          body: JSON.stringify(cartAttr),
-          method: 'POST',
-          credentials: 'same-origin', 
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
-          }
-          
-        })
-
         fetch('/cart/add.js', {
           body: JSON.stringify(productData),
           method: 'POST',
@@ -3939,6 +3981,23 @@
           }
 
         });
+
+        let cartAttr = {
+          'attributes': {
+            'main-prod-title': _this4.productData.title
+          }
+        }
+
+        fetch('/cart/update.js', {
+          body: JSON.stringify(cartAttr),
+          method: 'POST',
+          credentials: 'same-origin', 
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+          
+        })
         
         event.preventDefault();
       }

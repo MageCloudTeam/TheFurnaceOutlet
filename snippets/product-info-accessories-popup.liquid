@@ -1,21 +1,17 @@
 {%- assign selected_variant = product.selected_or_first_available_variant -%}
 {%- assign product_form_id = 'product_form_' | append: section.id | append: product.id -%}
 
-<div class="product-item-accessories {% if horizontal %}product-item--horizontal{% elsif list %}product-item--list{% else %}product-item--vertical{% endif %} {% if section.id == 'blog-sidebar' %}product-item--compact{% endif %} {{ grid_classes }}">
-
-  {%- form 'product', product, id: product_form_id, class: 'product-form-accessories' -%}
+<div class="product-item-accessories product-item-accessories-popup {% if horizontal %}product-item--horizontal{% elsif list %}product-item--list{% else %}product-item--vertical{% endif %} {% if section.id == 'blog-sidebar' %}product-item--compact{% endif %} {{ grid_classes }}">
+  
     {%- render 'product-items-accessories-popup', product: product, block: block -%}
 
-  {%- endform -%}
+    {% comment %}
+    ------------------------------------------------------------------------------
+    Product Data. This must be outputted for all products (including home page).
 
-  {% comment %}
-  ------------------------------------------------------------------------------
-  Product Data. This must be outputted for all products (including home page).
-
-  IMPORTANT: THIS CODE IS VITAL. DO NOT EDIT IT NOR REMOVE IT. MAKE SURE TO KEEP
-  THE EXACT SAME ATTRIBUTES.
-  ------------------------------------------------------------------------------
-  {% endcomment %}
-
-  {%- assign variant_selector_block = section.blocks | where: 'type', 'variant_selector' | first -%}
+    IMPORTANT: THIS CODE IS VITAL. DO NOT EDIT IT NOR REMOVE IT. MAKE SURE TO KEEP
+    THE EXACT SAME ATTRIBUTES.
+    ------------------------------------------------------------------------------
+    {% endcomment %}
+  
 </div>

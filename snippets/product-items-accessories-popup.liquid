@@ -168,7 +168,20 @@
       {%- endif -%}
     </div>
     <div class="checked-discount">
-      <input type="checkbox" id="checked-discount" >
+      {% for variant in product.variants %}
+        {% if variant.inventory_quantity > 0 %}
+          <input type="checkbox" id="checked-discount">  
+        {% else %}
+            <span>out of stock</span>
+        {% endif %}
+        
+      {% endfor %}
+      
+      <script type="application/json" data-product-json-accessories>
+        {
+          "product-accessories": {{ product.first_available_variant.id | json }}
+        }
+      </script>
     </div>
   </div>
 </div>

@@ -1,7 +1,4 @@
-
-<form method="post" action="{{ routes.cart_url }}" id="mini-cart-popup" class="mini-cart-popup" aria-hidden="true" novalidate="novalidate" data-item-count="{{ cart.item_count }}">
-  <input type="hidden" name="attributes[collection_products_per_page]" value="">
-  <input type="hidden" name="attributes[collection_layout]" value="">
+<div id="mini-cart-popup" class="mini-cart-popup" aria-hidden="true" novalidate="novalidate" data-item-count="{{ cart.item_count }}">
   {%- capture shipping_alert -%}
     {%- if settings.cart_show_free_shipping_threshold -%}
       {%- assign threshold_in_cents = settings.cart_free_shipping_threshold | times: 100 -%}
@@ -32,176 +29,180 @@
     <div class="mini-cart__inner-popup">
       {%- for line_item in cart.items -%}
         {% if line_item.title == cart.attributes.main-prod-title %}
-          <div class="mini-cart__content-popup">
-            {%- if shipping_alert != blank -%}
-              <div class="mini-cart__alert-wrapper">
-                {{- shipping_alert -}}
-              </div>
-            {%- endif -%}
-            <div class="mini-cart__line-item-list-popup">
-              <div class="mini-cart__line-item-popup">
-                <div class="mini-cart__image-wrapper-popup">
-                  <div class="aspect-ratio" style="padding-bottom: 80%">
-                    <img src="{{ line_item.image | img_url: '180x' }}" alt="">
-                  </div>
+            
+            <div class="mini-cart__content-popup">
+              {%- if shipping_alert != blank -%}
+                <div class="mini-cart__alert-wrapper">
+                  {{- shipping_alert -}}
                 </div>
-                <div class="mini-cart__item-wrapper">
-                  <div class="mini-cart__product-info-popup">
-                    {%- unless line_item.product.tags contains '__gift' -%}
-                      {%- if settings.show_vendor -%}
-                        {%- assign vendor_handle = line_item.vendor | handle -%}
-                        {%- assign collection_for_vendor = collections[vendor_handle] -%}
+              {%- endif -%}
+              <div class="mini-cart__line-item-list-popup">
+                <div class="mini-cart__line-item-popup">
+                  <div class="mini-cart__image-wrapper-popup">
+                    <div class="aspect-ratio" style="padding-bottom: 80%">
+                      <img src="{{ line_item.image | img_url: '180x' }}" alt="">
+                    </div>
+                  </div>
+                  <div class="mini-cart__item-wrapper">
+                    <div class="mini-cart__product-info-popup">
+                      {%- unless line_item.product.tags contains '__gift' -%}
+                        {%- if settings.show_vendor -%}
+                          {%- assign vendor_handle = line_item.vendor | handle -%}
+                          {%- assign collection_for_vendor = collections[vendor_handle] -%}
 
-                        {%- unless collection_for_vendor.empty? -%}
-                          <a class="mini-cart__product-vendor-popup link" href="{{ collection_for_vendor.url }}">{{ line_item.vendor }}</a>
-                          {%- else -%}
-                          <a class="mini-cart__product-vendor-popup link" href="{{ line_item.vendor | url_for_vendor }}">{{ line_item.vendor }}</a>
-                        {%- endunless -%}
+                          {%- unless collection_for_vendor.empty? -%}
+                            <a class="mini-cart__product-vendor-popup link" href="{{ collection_for_vendor.url }}">{{ line_item.vendor }}</a>
+                            {%- else -%}
+                            <a class="mini-cart__product-vendor-popup link" href="{{ line_item.vendor | url_for_vendor }}">{{ line_item.vendor }}</a>
+                          {%- endunless -%}
+                        {%- endif -%}
+                      {%- endunless -%}
+
+                      <a href="{{ line_item.url }}" class="mini-cart__product-title-popup text--strong link">{{ line_item.title }}</a>
+
+                      {%- comment -%}If we have a Shopify Script, we use the reduced price here, otherwise we check the compare at price{%- endcomment -%}
+
+                      <div class="mini-cart__price-list-popup">
+                        {%- if line_item.product.compare_at_price > line_item.product.price -%}
+                          <span class="price"><strong>Qty: </strong>{{ line_item.quantity }} x </span>
+                          <span class="price price--highlight">{{ line_item.final_line_price | money }}</span>
+                          <span class="price price--compare">{{ line_item.product.compare_at_price | times: line_item.quantity | money }}</span><br>
+                          
+                          
+                          <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
+                          <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
+
+                          <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
+                        {%- else  -%}
+                          <span class="price"><strong>Qty: </strong>{{ line_item.quantity }}</span><br>
+
+                          <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
+                          <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
+
+                          <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
+                        {%- endif -%}
+                      </div>
+
+                      {%- if line_item.unit_price_measurement -%}
+                        <div class="mini-cart__price-info-popup">
+                          <div class="unit-price-measurement">
+                            <span class="unit-price-measurement__price">{{ line_item.unit_price | money }}</span>
+                            <span class="unit-price-measurement__separator">/ </span>
+
+                            {%- if line_item.unit_price_measurement.reference_value != 1 -%}
+                              <span class="unit-price-measurement__reference-value">{{ line_item.unit_price_measurement.reference_value }}</span>
+                            {%- endif -%}
+
+                            <span class="unit-price-measurement__reference-unit">{{ line_item.unit_price_measurement.reference_unit }}</span>
+                          </div>
+                        </div>
                       {%- endif -%}
-                    {%- endunless -%}
 
-                    <a href="{{ line_item.url }}" class="mini-cart__product-title-popup text--strong link">{{ line_item.title }}</a>
-
-                    {%- comment -%}If we have a Shopify Script, we use the reduced price here, otherwise we check the compare at price{%- endcomment -%}
-
-                    <div class="mini-cart__price-list-popup">
-                      {%- if line_item.product.compare_at_price > line_item.product.price -%}
-                        <span class="price"><strong>Qty: </strong>{{ line_item.quantity }} x </span>
-                        <span class="price price--highlight">{{ line_item.final_line_price | money }}</span>
-                        <span class="price price--compare">{{ line_item.product.compare_at_price | times: line_item.quantity | money }}</span><br>
-                        
-                        
-                        <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
-                        <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
-
-                        <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
-                      {%- else  -%}
-                        <span class="price"><strong>Qty: </strong>{{ line_item.quantity }}</span><br>
-
-                        <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
-                        <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
-
-                        <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
+                      {%- if line_item.line_level_discount_allocations != blank -%}
+                        <ul class="mini-cart__discount-list-popup" role="list">
+                          {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                            <li class="mini-cart__discount">
+                              {%- render 'icon', icon: 'sale' -%}{{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})
+                            </li>
+                          {%- endfor -%}
+                        </ul>
                       {%- endif -%}
                     </div>
-
-                    {%- if line_item.unit_price_measurement -%}
-                      <div class="mini-cart__price-info-popup">
-                        <div class="unit-price-measurement">
-                          <span class="unit-price-measurement__price">{{ line_item.unit_price | money }}</span>
-                          <span class="unit-price-measurement__separator">/ </span>
-
-                          {%- if line_item.unit_price_measurement.reference_value != 1 -%}
-                            <span class="unit-price-measurement__reference-value">{{ line_item.unit_price_measurement.reference_value }}</span>
-                          {%- endif -%}
-
-                          <span class="unit-price-measurement__reference-unit">{{ line_item.unit_price_measurement.reference_unit }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <form method="post" action="{{ routes.cart_url }}">
+              <div class="card__collapsible-content">
+                <div class="text--pull">
+                  <div class="product-recommendations">
+                    <div class="scroller">
+                      <div class="scroller__inner">
+                        <h1 class="header-Save">Save 10% on Installation Parts and Accessories</h1>
+                        <h1 class="header-accessories">accessories</h1>
+                        <div class="product-list--vertical-accessories">
+                          {% for tag in line_item.product.tags %}
+                            {%- if tag contains 'accessory_' -%}
+                              {%- assign selected_variant_hundle = tag | remove_first: "accessory_" -%}
+                              {%- assign selected_variant_hundle_arr = selected_variant_hundle | split: " " -%}
+            
+                              {% for product_publish in selected_variant_hundle_arr %}
+                                {% if all_products[product_publish].handle == product_publish %}
+                                  {% assign related_product = all_products[product_publish] %}
+                                  {%- render 'product-info-accessories-popup', product: related_product, grid_classes: '1/4--lap 1/5--desk 1/6--wide' -%}
+                                {% endif %}
+                              {% endfor %}
+                            {%- endif -%}
+                          {% endfor %}
                         </div>
                       </div>
-                    {%- endif -%}
-
-                    {%- if line_item.line_level_discount_allocations != blank -%}
-                      <ul class="mini-cart__discount-list-popup" role="list">
-                        {%- for discount_allocation in line_item.line_level_discount_allocations -%}
-                          <li class="mini-cart__discount">
-                            {%- render 'icon', icon: 'sale' -%}{{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})
-                          </li>
-                        {%- endfor -%}
-                      </ul>
-                    {%- endif -%}
-                  </div>
+                    </div>
+                  </div> 
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div class="card__collapsible-content">
-            <div class="text--pull">
-              <div class="product-recommendations">
-                <div class="scroller">
-                  <div class="scroller__inner">
-                    <h1 class="header-Save">Save 10% on Installation Parts and Accessories</h1>
-                    <h1 class="header-accessories">accessories</h1>
-                    <div class="product-list--vertical-accessories">
-                      {% for tag in line_item.product.tags %}
-                        {%- if tag contains 'accessory_' -%}
-                          {%- assign selected_variant_hundle = tag | remove_first: "accessory_" -%}
-                          {%- assign selected_variant_hundle_arr = selected_variant_hundle | split: " " -%}
-        
-                          {% for product_publish in selected_variant_hundle_arr %}
-                            {% if all_products[product_publish].handle == product_publish %}
-                              {% assign related_product = all_products[product_publish] %}
-                              {%- render 'product-info-accessories-popup', product: related_product, grid_classes: '1/4--lap 1/5--desk 1/6--wide' -%}
-                            {% endif %}
-                          {% endfor %}
-                        {%- endif -%}
-                      {% endfor %}
+              <div class="mini-cart__recap-popup">
+                {%- if cart.cart_level_discount_applications != blank -%}
+                  {%- for discount_application in cart.cart_level_discount_applications -%}
+                    <div class="mini-cart__recap-price-line mini-cart__recap-price-line--highlight text--pull">
+                      <span>{{ discount_application.title }}</span>
+                      <span>-{{ discount_application.total_allocated_amount | money }}</span>
                     </div>
+                  {%- endfor -%}
+                {%- endif -%}
+
+                <div class="mini-cart__recap-price-line">
+                  <span>{{ 'cart.general.total' | t }}</span>
+                  <span>{{ cart.total_price | money_with_currency }}</span>
+                </div>
+
+                {%- comment -%}To calculate the total discount, we take both into account the Shopify Script (for Plus merchants), but we also add the compare at price{%- endcomment -%}
+
+                {%- assign total_discount = 0 -%}
+
+                {%- for line_item in cart.items -%}
+                  {%- if line_item.final_line_price < line_item.original_line_price -%}
+                    {%- assign total_discount = total_discount | plus: line_item.total_discount -%}
+                  {%- elsif line_item.variant.compare_at_price > line_item.variant.price -%}
+                    {%- assign line_discount = line_item.variant.compare_at_price | minus: line_item.variant.price | times: line_item.quantity -%}
+                    {%- assign total_discount = total_discount | plus: line_discount -%}
+                  {%- endif -%}
+                {%- endfor -%}
+
+                {%- if total_discount > 0 -%}
+                  {%- capture amount_saved -%}<span>{{ total_discount | money }}</span>{%- endcapture -%}
+                  <span class="mini-cart__amount-saved">{{ 'cart.general.amount_saved_html' | t: amount_saved: amount_saved }}</span>
+                {%- endif -%}
+
+                <div class="mini-cart__button-container">
+                  <div class="button-group button-group--loose button-group--fit">
+                    
+                    <a href="{{ routes.cart_url }}" class="button button--secondary view-cart">{{ 'cart.general.view_cart' | t }}</a>
+                    <button type="submit" class="button button--secondary add-accessories">{{ 'cart.general.add_accessories' | t }}</button>
+                    {%- if settings.cart_show_checkout_button -%}
+                      <button type="submit" name="checkout" class="button button--primary">{{ 'cart.general.checkout' | t }}</button>
+                    {%- endif -%}
                   </div>
                 </div>
-              </div> 
-            </div>
-          </div>
 
-          <div class="mini-cart__recap-popup">
-            {%- if cart.cart_level_discount_applications != blank -%}
-              {%- for discount_application in cart.cart_level_discount_applications -%}
-                <div class="mini-cart__recap-price-line mini-cart__recap-price-line--highlight text--pull">
-                  <span>{{ discount_application.title }}</span>
-                  <span>-{{ discount_application.total_allocated_amount | money }}</span>
-                </div>
-              {%- endfor -%}
-            {%- endif -%}
+                {%- if settings.hide_express_checkout_buttons -%}
+                  {%- comment -%}
+                    By showing the div in the cart but hiding it in CSS, the express checkout buttons are hidden from the first step of the checkout, and
+                    are rather deferred to the payment step. This is a hacky trick, but it is often requested by merchants.
+                  {%- endcomment -%}
 
-            <div class="mini-cart__recap-price-line">
-              <span>{{ 'cart.general.total' | t }}</span>
-              <span>{{ cart.total_price | money_with_currency }}</span>
-            </div>
-
-            {%- comment -%}To calculate the total discount, we take both into account the Shopify Script (for Plus merchants), but we also add the compare at price{%- endcomment -%}
-
-            {%- assign total_discount = 0 -%}
-
-            {%- for line_item in cart.items -%}
-              {%- if line_item.final_line_price < line_item.original_line_price -%}
-                {%- assign total_discount = total_discount | plus: line_item.total_discount -%}
-              {%- elsif line_item.variant.compare_at_price > line_item.variant.price -%}
-                {%- assign line_discount = line_item.variant.compare_at_price | minus: line_item.variant.price | times: line_item.quantity -%}
-                {%- assign total_discount = total_discount | plus: line_discount -%}
-              {%- endif -%}
-            {%- endfor -%}
-
-            {%- if total_discount > 0 -%}
-              {%- capture amount_saved -%}<span>{{ total_discount | money }}</span>{%- endcapture -%}
-              <span class="mini-cart__amount-saved">{{ 'cart.general.amount_saved_html' | t: amount_saved: amount_saved }}</span>
-            {%- endif -%}
-
-            <div class="mini-cart__button-container">
-              <div class="button-group button-group--loose button-group--fit">
-                <a href="{{ routes.cart_url }}" class="button button--secondary">{{ 'cart.general.view_cart' | t }}</a>
-                {%- if settings.cart_show_checkout_button -%}
-                  <button type="submit" name="checkout" class="button button--primary">{{ 'cart.general.checkout' | t }}</button>
+                  {%- if additional_checkout_buttons -%}
+                    <div class="additional-checkout-buttons" style="display: none !important">
+                      {{ content_for_additional_checkout_buttons }}
+                    </div>
+                  {%- endif -%}
                 {%- endif -%}
               </div>
-            </div>
-
-            {%- if settings.hide_express_checkout_buttons -%}
-              {%- comment -%}
-                By showing the div in the cart but hiding it in CSS, the express checkout buttons are hidden from the first step of the checkout, and
-                are rather deferred to the payment step. This is a hacky trick, but it is often requested by merchants.
-              {%- endcomment -%}
-
-              {%- if additional_checkout_buttons -%}
-                <div class="additional-checkout-buttons" style="display: none !important">
-                  {{ content_for_additional_checkout_buttons }}
-                </div>
-              {%- endif -%}
-            {%- endif -%}
-          </div>
+            </form>
         {% endif %}
       {%- endfor -%}
     </div>
   {%- endif -%}
-</form>
+</div>
   
   

@@ -2483,6 +2483,10 @@ img.lazyload[data-sizes=auto] {
   background: rgba(var(--secondary-button-background-rgb), 0.8);
 }
 
+#mini-cart-popup .add-accessories{
+  display: none;
+}
+
 .button--ternary {
   color: var(--accent-color);
   box-shadow: 0 0 0 1px var(--border-color) inset;
@@ -3195,7 +3199,7 @@ img.lazyload[data-sizes=auto] {
 } 
 
 .mini-cart__inner-popup .card__collapsible-content .product-list--vertical-accessories{
-  overflow: overlay;
+  overflow: auto;
   height: 273px;
   border: 1px solid #efefef;
 }
@@ -9207,6 +9211,10 @@ select option {
   margin: 0;
 }
 
+.product-item-accessories .product-item__info{
+  width: 0%;
+}
+
 .product-item--horizontal-accessories{
   display: flex;
 }
@@ -9227,10 +9235,6 @@ select option {
 
 .product-form__info-item-accessories {
   display: block;
-}
-
-.product-form-accessories .product-item__info{
-  width: 0%;
 }
 
 .product-form__info-title-accessories {
