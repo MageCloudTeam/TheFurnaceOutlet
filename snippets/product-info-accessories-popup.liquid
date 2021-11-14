@@ -4,6 +4,7 @@
 <div class="product-item-accessories product-item-accessories-popup {% if horizontal %}product-item--horizontal{% elsif list %}product-item--list{% else %}product-item--vertical{% endif %} {% if section.id == 'blog-sidebar' %}product-item--compact{% endif %} {{ grid_classes }}">
   
     {%- render 'product-items-accessories-popup', product: product, block: block -%}
+    {%- render 'product-variant-selector-accessories-popup', product: product, form: form, block: block -%}
 
     {% comment %}
     ------------------------------------------------------------------------------
@@ -13,5 +14,4 @@
     THE EXACT SAME ATTRIBUTES.
     ------------------------------------------------------------------------------
     {% endcomment %}
-  
 </div>

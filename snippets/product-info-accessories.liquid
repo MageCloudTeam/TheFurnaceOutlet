@@ -15,10 +15,10 @@
     {%- endfor -%}
 
     <script type="application/json" data-product-json-accessories>
-    {
-      "product-accessories": {{ product.first_available_variant.id | json }}
-    }
-  </script>
+      {
+        "product-accessories": {{ product.first_available_variant.id | json }}
+      }
+    </script>
 
   {%- endform -%}
 
