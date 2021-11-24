@@ -1238,7 +1238,7 @@ body:not(.is-tabbing) textarea:focus {
 }
 
 .container {
-  max-width: 1480px;
+  max-width: 1580px;
   margin-left: auto;
   margin-right: auto;
   padding: 0 var(--mobile-container-gutter);
@@ -9258,10 +9258,11 @@ select option {
 }
 
 .product-form__info-title {
-  display: table-cell;
-  padding-right: 12px;
+  display: block;
+  padding-right: 20px;
   vertical-align: baseline;
   white-space: nowrap; /* Fix for Japanese kanji */
+  line-height: 2.3;
 }
 
 .product-form__info-item--quantity > * {
@@ -9606,9 +9607,8 @@ shopify-payment-terms {
  */
 
 .price-list {
-  display: inline-flex;
   align-items: baseline;
-  line-height: 1;
+  line-height: 2;
 }
 
 .price {

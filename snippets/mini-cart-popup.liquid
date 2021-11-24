@@ -29,7 +29,7 @@
     <div class="mini-cart__inner-popup">
       {%- for line_item in cart.items -%}
         {% if line_item.title == cart.attributes.main-prod-title %}
-            
+          {% if line_item.product.tags contains 'accessory' %}
             <div class="mini-cart__content-popup">
               {%- if shipping_alert != blank -%}
                 <div class="mini-cart__alert-wrapper">
@@ -38,80 +38,83 @@
               {%- endif -%}
               <div class="mini-cart__line-item-list-popup">
                 <div class="mini-cart__line-item-popup">
-                  <div class="mini-cart__image-wrapper-popup">
-                    <div class="aspect-ratio" style="padding-bottom: 80%">
-                      <img src="{{ line_item.image | img_url: '180x' }}" alt="">
+                  
+                    <div class="mini-cart__image-wrapper-popup">
+                      <div class="aspect-ratio" style="padding-bottom: 80%">
+                        <img src="{{ line_item.image | img_url: '180x' }}" alt="">
+                      </div>
                     </div>
-                  </div>
-                  <div class="mini-cart__item-wrapper">
-                    <div class="mini-cart__product-info-popup">
-                      {%- unless line_item.product.tags contains '__gift' -%}
-                        {%- if settings.show_vendor -%}
-                          {%- assign vendor_handle = line_item.vendor | handle -%}
-                          {%- assign collection_for_vendor = collections[vendor_handle] -%}
+                    <div class="mini-cart__item-wrapper">
+                      <div class="mini-cart__product-info-popup">
+                        {%- unless line_item.product.tags contains '__gift' -%}
+                          {%- if settings.show_vendor -%}
+                            {%- assign vendor_handle = line_item.vendor | handle -%}
+                            {%- assign collection_for_vendor = collections[vendor_handle] -%}
 
-                          {%- unless collection_for_vendor.empty? -%}
-                            <a class="mini-cart__product-vendor-popup link" href="{{ collection_for_vendor.url }}">{{ line_item.vendor }}</a>
-                            {%- else -%}
-                            <a class="mini-cart__product-vendor-popup link" href="{{ line_item.vendor | url_for_vendor }}">{{ line_item.vendor }}</a>
-                          {%- endunless -%}
+                            {%- unless collection_for_vendor.empty? -%}
+                              <a class="mini-cart__product-vendor-popup link" href="{{ collection_for_vendor.url }}">{{ line_item.vendor }}</a>
+                              {%- else -%}
+                              <a class="mini-cart__product-vendor-popup link" href="{{ line_item.vendor | url_for_vendor }}">{{ line_item.vendor }}</a>
+                            {%- endunless -%}
+                          {%- endif -%}
+                        {%- endunless -%}
+
+                        <a href="{{ line_item.url }}" class="mini-cart__product-title-popup text--strong link">{{ line_item.title }}</a>
+
+                        {%- comment -%}If we have a Shopify Script, we use the reduced price here, otherwise we check the compare at price{%- endcomment -%}
+
+                        <div class="mini-cart__price-list-popup">
+                          {%- if line_item.product.compare_at_price > line_item.product.price -%}
+                            <span class="price"><strong>Qty: </strong>{{ line_item.quantity }} x </span>
+                            <span class="price price--highlight">{{ line_item.final_line_price | money }}</span>
+                            <span class="price price--compare">{{ line_item.product.compare_at_price | times: line_item.quantity | money }}</span><br>
+                            
+                            
+                            <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
+                            <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
+
+                            <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
+                          {%- else  -%}
+                            <span class="price"><strong>Qty: </strong>{{ line_item.quantity }}</span><br>
+
+                            <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
+                            <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
+
+                            <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
+                          {%- endif -%}
+                        </div>
+
+                        {%- if line_item.unit_price_measurement -%}
+                          <div class="mini-cart__price-info-popup">
+                            <div class="unit-price-measurement">
+                              <span class="unit-price-measurement__price">{{ line_item.unit_price | money }}</span>
+                              <span class="unit-price-measurement__separator">/ </span>
+
+                              {%- if line_item.unit_price_measurement.reference_value != 1 -%}
+                                <span class="unit-price-measurement__reference-value">{{ line_item.unit_price_measurement.reference_value }}</span>
+                              {%- endif -%}
+
+                              <span class="unit-price-measurement__reference-unit">{{ line_item.unit_price_measurement.reference_unit }}</span>
+                            </div>
+                          </div>
                         {%- endif -%}
-                      {%- endunless -%}
 
-                      <a href="{{ line_item.url }}" class="mini-cart__product-title-popup text--strong link">{{ line_item.title }}</a>
-
-                      {%- comment -%}If we have a Shopify Script, we use the reduced price here, otherwise we check the compare at price{%- endcomment -%}
-
-                      <div class="mini-cart__price-list-popup">
-                        {%- if line_item.product.compare_at_price > line_item.product.price -%}
-                          <span class="price"><strong>Qty: </strong>{{ line_item.quantity }} x </span>
-                          <span class="price price--highlight">{{ line_item.final_line_price | money }}</span>
-                          <span class="price price--compare">{{ line_item.product.compare_at_price | times: line_item.quantity | money }}</span><br>
-                          
-                          
-                          <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
-                          <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
-
-                          <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
-                        {%- else  -%}
-                          <span class="price"><strong>Qty: </strong>{{ line_item.quantity }}</span><br>
-
-                          <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
-                          <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
-
-                          <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
+                        {%- if line_item.line_level_discount_allocations != blank -%}
+                          <ul class="mini-cart__discount-list-popup" role="list">
+                            {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                              <li class="mini-cart__discount">
+                                {%- render 'icon', icon: 'sale' -%}{{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})
+                              </li>
+                            {%- endfor -%}
+                          </ul>
                         {%- endif -%}
                       </div>
-
-                      {%- if line_item.unit_price_measurement -%}
-                        <div class="mini-cart__price-info-popup">
-                          <div class="unit-price-measurement">
-                            <span class="unit-price-measurement__price">{{ line_item.unit_price | money }}</span>
-                            <span class="unit-price-measurement__separator">/ </span>
-
-                            {%- if line_item.unit_price_measurement.reference_value != 1 -%}
-                              <span class="unit-price-measurement__reference-value">{{ line_item.unit_price_measurement.reference_value }}</span>
-                            {%- endif -%}
-
-                            <span class="unit-price-measurement__reference-unit">{{ line_item.unit_price_measurement.reference_unit }}</span>
-                          </div>
-                        </div>
-                      {%- endif -%}
-
-                      {%- if line_item.line_level_discount_allocations != blank -%}
-                        <ul class="mini-cart__discount-list-popup" role="list">
-                          {%- for discount_allocation in line_item.line_level_discount_allocations -%}
-                            <li class="mini-cart__discount">
-                              {%- render 'icon', icon: 'sale' -%}{{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})
-                            </li>
-                          {%- endfor -%}
-                        </ul>
-                      {%- endif -%}
                     </div>
-                  </div>
+                  
                 </div>
               </div>
             </div>
+            
             <form method="post" action="{{ routes.cart_url }}">
               <div class="card__collapsible-content">
                 <div class="text--pull">
@@ -199,10 +202,97 @@
                 {%- endif -%}
               </div>
             </form>
+          {% else %}
+            <div class="mini-cart__content-popup">
+              {%- render 'icon', icon: 'full-cart' -%}
+              <div class="wrap_heading-cart">
+                {%- render 'icon', icon: 'confirm-cart' -%}
+                <p class="heading-cart">{{ 'cart.general.full_cart' | t }}</p>
+              </div>
+
+              <div class="wrap_title-product mini-cart__price-list-popup">
+                <span class="price"><strong>Title:</strong></span>
+                <a href="{{ line_item.url }}" class="mini-cart__product-title-popup text--strong link">{{ line_item.title }}</a>
+              </div>
+
+              <div class="mini-cart__price-list-popup">
+                {%- if line_item.product.compare_at_price > line_item.product.price -%}
+                  <span class="price"><strong>Qty: </strong>{{ line_item.quantity }} x </span>
+                  <span class="price price--highlight">{{ line_item.final_line_price | money }}</span>
+                  <span class="price price--compare">{{ line_item.product.compare_at_price | times: line_item.quantity | money }}</span><br>
+                  
+                  
+                  <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
+                  <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
+
+                  <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
+                {%- else  -%}
+                  <span class="price"><strong>Qty: </strong>{{ line_item.quantity }}</span><br>
+
+                  <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
+                  <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
+
+                  <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
+                {%- endif -%}
+              </div>
+
+              <div class="mini-cart__button-container">
+                <div class="button-group button-group--loose button-group--fit">
+                  <a href="{{ routes.cart_url }}" class="button button--secondary view-cart">{{ 'cart.general.view_cart' | t }}</a>
+                  <a href="{{ settings.cart_empty_button_link }}" class="button button--primary button--full">{{ 'cart.general.empty_button' | t }}</a>
+                </div>
+              </div>
+              
+            </div>
+
+            {% style %}
+              .mini-cart__inner-popup{
+                width: 80%;
+                margin: auto;
+                padding: 20px 0;
+              }
+
+              .wrap_heading-cart{
+                display: flex;
+                justify-content: center;
+                padding: 15px 0;
+              }
+
+              .wrap_heading-cart svg{
+                width: 24px;
+                margin-right: 20px;
+              }
+          
+              .heading-cart{
+                text-align: center;
+                font-size: 25px;
+                font-weight: 900;
+                text-transform: uppercase;
+                color: #00a912;
+              }
+
+              .wrap_title-product{
+                display: flex;
+              }
+
+              .wrap_title-product .price{
+                flex-basis: 38px;
+              }
+            {% endstyle %}
+          {% endif %}
         {% endif %}
       {%- endfor -%}
     </div>
   {%- endif -%}
+  {% style %}
+    .mini-cart__line-item-popup{
+      padding: 100px 0 100px;
+    }
+
+    .mini-cart__line-item-list-popup{
+      max-height: none;
+    }
+  {% endstyle %}
 </div>
   
   

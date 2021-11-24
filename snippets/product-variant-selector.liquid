@@ -138,7 +138,9 @@
 <div class="product-form__info-list">
   <div class="product-form__info-item">
     <span class="product-form__info-title text--strong">{{ 'product.form.price' | t }}:</span>
-
+    {%- if selected_variant.compare_at_price > selected_variant.price -%}
+      <span class="product-form__info-title text--strong">{{ 'product.general.regular_price' | t }}:</span>
+    {%- endif -%}
     <div class="product-form__info-content" role="region" aria-live="polite">
       <div class="price-list">
         {%- if selected_variant.compare_at_price > selected_variant.price -%}
@@ -262,3 +264,9 @@
     {%- endif -%}
   {%- endif -%}
 </div>
+
+{% style %}
+  .card__section .price--highlight{
+    display: block;
+  }
+{% endstyle %}
