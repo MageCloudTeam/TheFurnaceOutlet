@@ -2378,9 +2378,8 @@
 
         /* Add the quantity added */
 
-        this._onCartRefresh().then(function () {
-          if (window.theme.pageType !== 'cart') {
-            // If we don't have the sticky header enabled, we scroll to top to make sure it is visible
+        this._onCartRefreshPopup().then(function () {
+          _this3._onCartRefresh().then(function () {
             if (window.theme.cartType === 'drawer' && !_this3.options['useStickyHeader']) {
               window.scrollTo({
                 top: 0,
@@ -2394,12 +2393,9 @@
                 event.detail.button.innerHTML = window.languages.productFormAddToCart;
               }, 1500);
             }
-          }
-        });
+          })
 
-        this._onCartRefreshPopup().then(function () {
           if (window.theme.pageType !== 'cart') {
-
             if (window.theme.pageType !== 'cart' && window.theme.cartType === 'drawer') {
               if(!_this3.isMiniCartPopupOpen){
                 _this3._openMiniCartPopup();
@@ -2411,6 +2407,7 @@
             }
           }
         });
+        
       }
       /**
        * Allows to refresh the mini-cart
