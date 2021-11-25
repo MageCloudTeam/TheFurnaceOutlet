@@ -9473,6 +9473,14 @@ shopify-payment-terms {
   display: flex;
 }
 
+.tabs_wrapper .content_wrapper-items .description .product-list--scrollable p{
+  padding: 10px 20px;
+}
+
+.tabs_wrapper .content_wrapper-items .documents_tab .product-list--scrollable{
+  display: block;
+}
+
 @media screen and (max-width: 640px) {
   .product-block-list__item:first-child .card {
     border-top: none;

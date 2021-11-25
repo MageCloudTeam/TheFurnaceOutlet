@@ -383,16 +383,14 @@
                     </div>
                   </div>
                 {%- when "similar_products_tab" -%}
-                  {%- if block.settings.similar_products != blank -%}
-                    <div class="product-block-list__item product-block-list__item--description similar_products" {{ block.shopify_attributes }}>
-                      <div class="card btn">
-                        <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
-                          <span class="card__title heading h3">{{ 'product.general.similar_products' | t }}</span>
-                          <span class="plus-button plus-button--large"></span>
-                        </button>
-                      </div>
+                  <div class="product-block-list__item product-block-list__item--description similar_products" {{ block.shopify_attributes }}>
+                    <div class="card btn">
+                      <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
+                        <span class="card__title heading h3">{{ 'product.general.similar_products' | t }}</span>
+                        <span class="plus-button plus-button--large"></span>
+                      </button>
                     </div>
-                  {%- endif -%}
+                  </div>
                 {%- when "product_questions_tab" -%}
                   {%- if block.settings.product_questions != blank -%}
                     <div class="product-block-list__item product-block-list__item--description product_question" {{ block.shopify_attributes }}>
@@ -412,53 +410,59 @@
               {%- case block.type -%}
                 {%- when "description" -%}
                   {%- if product.description != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
+                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible description">
                       <div class="card__collapsible-content">
                         <div class="rte text--pull">
-                          {{ product.description | remove: 'data-section-type="product"' }}
+                          <div class="product-list product-list--vertical product-list--scrollable">
+                            {{ product.description | remove: 'data-section-type="product"' }}
+                          </div>
                         </div>
                       </div>
                     </div>  
                   {%- endif -%}
                 {%- when "specifications" -%}
                   {%- if block.settings.specifications_parameters != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
+                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible specifications">
                       <div class="card__collapsible-content">
                         <div class="rte text--pull">
-                          {{ block.settings.specifications_parameters }}
+                          <div class="product-list product-list--vertical product-list--scrollable">
+                            {{ block.settings.specifications_parameters }}
+                          </div>
                         </div>
                       </div>
                     </div>
                   {%- endif -%}
                 {%- when "documents_tab" -%}
-                  <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
+                  <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible documents_tab">
                     <div class="card__collapsible-content">
                       <div class="rte text--pull">
-                        {% if product.metafields.my_fields.documments_pdf1.value.url != blank %}
-                          <div class="pdf_item">
-                            {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf1.value.url }}">{{ block.settings.name_pdf_file1 }}</a>
-                          </div>
-                        {% endif %}
-                        {% if product.metafields.my_fields.documments_pdf2.value.url != blank %}
-                          <div class="pdf_item">
-                            {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf2.value.url }}">{{ block.settings.name_pdf_file2 }}</a>
-                          </div>
-                        {% endif %}
-                        {% if product.metafields.my_fields.documments_pdf3.value.url != blank %}
-                          <div class="pdf_item">
-                            {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf3.value.url }}">{{ block.settings.name_pdf_file3 }}</a>
-                          </div>
-                        {% endif %}
-                        {% if product.metafields.my_fields.documments_pdf4.value.url != blank %}
-                          <div class="pdf_item">
-                            {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf4.value.url }}">{{ block.settings.name_pdf_file4 }}</a>
-                          </div>
-                        {% endif %}
+                        <div class="product-list product-list--vertical product-list--scrollable">
+                          {% if product.metafields.my_fields.documments_pdf1.value.url != blank %}
+                            <div class="pdf_item">
+                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf1.value.url }}">{{ block.settings.name_pdf_file1 }}</a>
+                            </div>
+                          {% endif %}
+                          {% if product.metafields.my_fields.documments_pdf2.value.url != blank %}
+                            <div class="pdf_item">
+                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf2.value.url }}">{{ block.settings.name_pdf_file2 }}</a>
+                            </div>
+                          {% endif %}
+                          {% if product.metafields.my_fields.documments_pdf3.value.url != blank %}
+                            <div class="pdf_item">
+                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf3.value.url }}">{{ block.settings.name_pdf_file3 }}</a>
+                            </div>
+                          {% endif %}
+                          {% if product.metafields.my_fields.documments_pdf4.value.url != blank %}
+                            <div class="pdf_item">
+                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf4.value.url }}">{{ block.settings.name_pdf_file4 }}</a>
+                            </div>
+                          {% endif %}
+                        </div>
                       </div>
                     </div>
                   </div>
                 {%- when "reviews" -%}
-                  <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
+                  <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible reviews">
                     <div class="card__collapsible-content">
                       <div class="rte text--pull">
                         <div class="product-block-list__item product-block-list__item--reviews" {{ block.shopify_attributes }}>
@@ -475,7 +479,7 @@
                     </div>
                   </div>
                 {%- when "accessories_tab" -%}
-                  <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
+                  <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible accessories_tab">
                     <div class="card__collapsible-content">
                       <div class="text--pull">
                         <div class="product-recommendations">
@@ -503,18 +507,30 @@
                     </div>
                   </div>
                 {%- when "similar_products_tab" -%}
-                  {%- if block.settings.similar_products != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
-                      <div class="card__collapsible-content">
-                        <div class="rte text--pull">
-                          {{ block.settings.similar_products }}
+                  <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible similar_products_tab">
+                    <div class="card__collapsible-content">
+                      <div class="rte text--pull">
+                        <div class="product-list product-list--vertical product-list--scrollable">
+                          {% for tag in product.tags %}
+                            {%- if tag contains 'similar_' -%}
+                              {%- assign variant_hundle = tag | remove_first: "similar_" -%}
+                              {%- assign variant_hundle_arr = variant_hundle | split: " " -%}
+
+                              {% for product_publish in variant_hundle_arr %}
+                                {% if all_products[product_publish].handle == product_publish %}
+                                  {% assign product = all_products[product_publish] %}
+                                  {%- render 'product-item', product: product, grid_classes: '1/4--lap 1/5--desk 1/6--wide' -%}
+                                {% endif %}
+                              {% endfor %}
+                            {%- endif -%}
+                          {% endfor %}
                         </div>
                       </div>
                     </div>
-                  {%- endif -%}
+                  </div>
                 {%- when "product_questions_tab" -%}
                   {%- if block.settings.product_questions != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
+                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible product_questions_tab">
                       <div class="card__collapsible-content">
                         <div class="rte text--pull">
                           {{ block.settings.product_questions }}
@@ -966,13 +982,7 @@
       "type": "similar_products_tab",
       "name": "Similar products",
       "limit": 1,
-      "settings": [
-        {
-          "type": "richtext",   
-          "id": "similar_products",
-          "label": "Similar products"
-        }
-      ]
+      "settings": []
     },
     {
       "type": "product_questions_tab",
