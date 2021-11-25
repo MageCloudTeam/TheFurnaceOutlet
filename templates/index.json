@@ -117,7 +117,7 @@
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "collection": "popular-products",
+        "collection": "heat-pumps",
         "title": "Featured collection",
         "products_count": 12,
         "layout": "vertical",
@@ -189,11 +189,18 @@
     "collection-list": {
       "type": "collection-list",
       "blocks": {
-        "collection-1": {
+        "2e84161f-63e6-45ba-8925-1d2e39a2da2a": {
           "type": "collection",
           "settings": {
-            "collection": "4-zone-ac-units",
-            "link": "shopify:\/\/collections\/4-zone-ac-units"
+            "collection": "air-conditioners-1",
+            "link": ""
+          }
+        },
+        "8f636251-f1e7-48dc-a7b9-edcd8274d911": {
+          "type": "collection",
+          "settings": {
+            "collection": "heat-pumps",
+            "link": ""
           }
         },
         "collection-2": {
@@ -203,18 +210,11 @@
             "link": "shopify:\/\/collections\/gas-furnace-systems"
           }
         },
-        "collection-3": {
+        "collection-6": {
           "type": "collection",
           "settings": {
-            "collection": "accessories",
-            "link": "shopify:\/\/collections\/accessories"
-          }
-        },
-        "collection-4": {
-          "type": "collection",
-          "settings": {
-            "collection": "ptac",
-            "link": "shopify:\/\/collections\/ptac"
+            "collection": "ductless-mini-splits",
+            "link": "shopify:\/\/collections\/ductless-mini-splits"
           }
         },
         "collection-5": {
@@ -224,21 +224,37 @@
             "link": "shopify:\/\/collections\/hvac-package-unit"
           }
         },
-        "collection-6": {
+        "collection-4": {
           "type": "collection",
           "settings": {
-            "collection": "ductless-mini-splits",
-            "link": "shopify:\/\/collections\/ductless-mini-splits"
+            "collection": "ptac",
+            "link": "shopify:\/\/collections\/ptac"
+          }
+        },
+        "collection-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories",
+            "link": "shopify:\/\/collections\/accessories"
+          }
+        },
+        "collection-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "scratch-and-dent-hvac",
+            "link": "shopify:\/\/collections\/4-zone-ac-units"
           }
         }
       },
       "block_order": [
-        "collection-1",
+        "2e84161f-63e6-45ba-8925-1d2e39a2da2a",
+        "8f636251-f1e7-48dc-a7b9-edcd8274d911",
         "collection-2",
-        "collection-3",
-        "collection-4",
+        "collection-6",
         "collection-5",
-        "collection-6"
+        "collection-4",
+        "collection-3",
+        "collection-1"
       ],
       "settings": {
         "title": "Our collections",

@@ -72,7 +72,10 @@
         "70fb96b3-f2ea-4ded-80e7-2dc116f2a30e": {
           "type": "documents_tab",
           "settings": {
-            "documents": "<p>w<\/p>"
+            "name_pdf_file1": "PDF file #1",
+            "name_pdf_file2": "PDF file #2",
+            "name_pdf_file3": "Name PDF file",
+            "name_pdf_file4": "Name PDF file"
           }
         },
         "b2278765-7015-499c-a4b9-e068b3b25506": {
@@ -84,21 +87,6 @@
         "13a92b53-3192-4f81-b893-530b38c8adc9": {
           "type": "accessories_tab",
           "settings": {
-            "accessories_1": "15-1-4-x-1-2-for-gree-ductless-mini-split-line-set",
-            "accessories_2": "10-kw-electric-heat-kit-for-package-unit-hkp-10c",
-            "accessories_3": "",
-            "accessories_4": "",
-            "accessories_5": "",
-            "accessories_6": "",
-            "accessories_7": "",
-            "accessories_8": "",
-            "accessories_9": "",
-            "accessories_10": "",
-            "accessories_11": "",
-            "accessories_12": "",
-            "accessories_13": "",
-            "accessories_14": "",
-            "accessories_15": ""
           }
         },
         "cabad50f-e171-4a69-8111-f7be7ed671cf": {
@@ -132,15 +120,15 @@
     "product-recommendations": {
       "type": "product-recommendations",
       "settings": {
-        "heading": "You may also like",
-        "show_quick_buy": false
+        "heading": "Other items of interest",
+        "show_quick_buy": true
       }
     },
     "recently-viewed-products": {
       "type": "recently-viewed-products",
       "settings": {
         "title": "Recently viewed",
-        "show_quick_buy": false
+        "show_quick_buy": true
       }
     }
   },

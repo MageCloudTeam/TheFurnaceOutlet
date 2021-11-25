@@ -346,7 +346,15 @@
                     </div>
                   {%- endif -%}
                 {%- when "documents_tab" -%}
-                  {%- if block.settings.documents != blank -%}
+                  {% assign documents_tab = '' %}
+                  {% for myfield in product.metafields.my_fields %}
+                    {% for field in myfield %}
+                      {% if field.value.url contains 'pdf' %}
+                        {% assign documents_tab = field %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                  {% if documents_tab != blank %}
                     <div class="product-block-list__item product-block-list__item--description documents" {{ block.shopify_attributes }}>
                       <div class="card btn">
                         <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
@@ -355,7 +363,7 @@
                         </button>
                       </div>
                     </div>
-                  {%- endif -%}
+                  {% endif %}
                 {%- when "reviews" -%}
                   <div class="product-block-list__item product-block-list__item--description reviews" {{ block.shopify_attributes }}>
                     <div class="card btn">
@@ -422,16 +430,33 @@
                       </div>
                     </div>
                   {%- endif -%}
-                 {%- when "documents_tab" -%}
-                  {%- if block.settings.documents != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
-                      <div class="card__collapsible-content">
-                        <div class="rte text--pull">
-                          {{ block.settings.documents }}
-                        </div>
+                {%- when "documents_tab" -%}
+                  <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
+                    <div class="card__collapsible-content">
+                      <div class="rte text--pull">
+                        {% if product.metafields.my_fields.documments_pdf1.value.url != blank %}
+                          <div class="pdf_item">
+                            {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf1.value.url }}">{{ block.settings.name_pdf_file1 }}</a>
+                          </div>
+                        {% endif %}
+                        {% if product.metafields.my_fields.documments_pdf2.value.url != blank %}
+                          <div class="pdf_item">
+                            {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf2.value.url }}">{{ block.settings.name_pdf_file2 }}</a>
+                          </div>
+                        {% endif %}
+                        {% if product.metafields.my_fields.documments_pdf3.value.url != blank %}
+                          <div class="pdf_item">
+                            {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf3.value.url }}">{{ block.settings.name_pdf_file3 }}</a>
+                          </div>
+                        {% endif %}
+                        {% if product.metafields.my_fields.documments_pdf4.value.url != blank %}
+                          <div class="pdf_item">
+                            {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf4.value.url }}">{{ block.settings.name_pdf_file4 }}</a>
+                          </div>
+                        {% endif %}
                       </div>
                     </div>
-                  {%- endif -%}
+                  </div>
                 {%- when "reviews" -%}
                   <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible">
                     <div class="card__collapsible-content">
@@ -898,9 +923,25 @@
       "limit": 1,
       "settings": [
         {
-          "type": "richtext",   
-          "id": "documents",
-          "label": "Documents"
+          "type": "text",
+          "id": "name_pdf_file1",
+          "label": "Name PDF file1",
+          "default": "Name PDF file"
+        },{
+          "type": "text",
+          "id": "name_pdf_file2",
+          "label": "Name PDF file2",
+          "default": "Name PDF file"
+        },{
+          "type": "text",
+          "id": "name_pdf_file3",
+          "label": "Name PDF file3",
+          "default": "Name PDF file"
+        },{
+          "type": "text",
+          "id": "name_pdf_file4",
+          "label": "Name PDF file4",
+          "default": "Name PDF file"
         }
       ]
     },

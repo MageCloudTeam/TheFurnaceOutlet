@@ -2277,7 +2277,7 @@
      {
       key: "_rerenderPopup",
       value: function _rerenderPopup() {
-        var _this2 = this;
+        var _this3 = this;
 
         var url = '';
 
@@ -2303,21 +2303,19 @@
 
                 var tempElement = document.createElement('div');
                 tempElement.innerHTML = html;
-                _this2.miniCartPopupElement.innerHTML = tempElement.querySelector('.mini-cart-popup').innerHTML;
-                // _this2.element.dispatchEvent(new CustomEvent('cart:rerendered'));
+                _this3.miniCartPopupElement.innerHTML = tempElement.querySelector('.mini-cart-popup').innerHTML;
+                _this3.element.dispatchEvent(new CustomEvent('cart:rerendered'));
 
-                let quantitySelectors = _this2.miniCartPopupElement.querySelectorAll('.quantity-selector--product');
+                let quantitySelectors = _this3.miniCartPopupElement.querySelectorAll('.quantity-selector--product');
+
 
                 fetch('/cart.js', {
                   credentials: 'same-origin',
-                  method: 'GET',
-                  headers: {
-                    'Cache-Control': 'no-cache'
-                  }
+                  method: 'GET'
                 }).then(function (content) {
                   content.json().then(function (cartObj) {
                     let itemsCartArr = cartObj['items'];
-                    new QuantityPickerAccessoriesPopup(quantitySelectors, _this2);
+                    new QuantityPickerAccessoriesPopup(quantitySelectors, _this3);
 
                     quantitySelectors.forEach((quantitySelector) => {
                       let quantityTarget = quantitySelector.querySelector('[name="quantity"]');
@@ -2348,13 +2346,15 @@
                   });
                 }
 
-                _this2.element.dispatchEvent(new CustomEvent('cart:rerendered', {
+                _this3.element.dispatchEvent(new CustomEvent('cart:rerendered', {
                   bubbles: true
                 }));
               }
             }
           });
         });
+
+
       }
     },{
       key: "_checkMiniCartScrollability",
@@ -2373,40 +2373,70 @@
       key: "_onProductAdded",
       value: function _onProductAdded(event) {
         var _this3 = this;
-
+        
         this.itemCount += event.detail.quantity;
+        let sectionMain = event.path[1]['id'];
+        let res = sectionMain.includes('main');
 
         /* Add the quantity added */
 
-        this._onCartRefreshPopup().then(function () {
-          _this3._onCartRefresh().then(function () {
-            if (window.theme.cartType === 'drawer' && !_this3.options['useStickyHeader']) {
-              window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-              });
-            }
-
-            if (window.theme.cartType === 'message' && event.detail.button) {
-              event.detail.button.innerHTML = window.languages.productAddedShort;
-              setTimeout(function () {
-                event.detail.button.innerHTML = window.languages.productFormAddToCart;
-              }, 1500);
-            }
-          })
-
-          if (window.theme.pageType !== 'cart') {
-            if (window.theme.pageType !== 'cart' && window.theme.cartType === 'drawer') {
-              if(_this3.isMiniCartPopupOpen == false){
-                _this3._openMiniCartPopup();
-                document.querySelector('.click_block').style.display = "block";
+        if(window.theme.pageType !== 'product' || res == false){
+          this._onCartRefresh().then(function () {
+            if (window.theme.pageType !== 'cart') {
+              // If we don't have the sticky header enabled, we scroll to top to make sure it is visible
+              if (window.theme.cartType === 'drawer' && !_this3.options['useStickyHeader']) {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+                });
               }
-              if(_this3.isMiniCartOpen){
-                _this3._closeMiniCart();
+  
+              if (window.theme.cartType === 'message' && event.detail.button) {
+                event.detail.button.innerHTML = window.languages.productAddedShort;
+                setTimeout(function () {
+                  event.detail.button.innerHTML = window.languages.productFormAddToCart;
+                }, 1500);
+              }
+  
+              if (window.theme.pageType !== 'cart' && window.theme.cartType === 'drawer') {
+                _this3._openMiniCart();
               }
             }
+          });
+        }else{
+          if( res == true){
+            this._onCartRefreshPopup().then(function () {
+              if (window.theme.pageType !== 'cart') {
+                if (window.theme.pageType !== 'cart' && window.theme.cartType === 'drawer') {
+    
+                  _this3._openMiniCartPopup();
+                  document.querySelector('.click_block').style.display = "block";
+    
+                  if(_this3.isMiniCartOpen){
+                    _this3._closeMiniCart();
+                  }
+                }
+              }
+            });
+    
+            this._onCartRefresh().then(function () {
+              if (window.theme.cartType === 'drawer' && !_this3.options['useStickyHeader']) {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+                });
+              }
+    
+              if (window.theme.cartType === 'message' && event.detail.button) {
+                event.detail.button.innerHTML = window.languages.productAddedShort;
+                setTimeout(function () {
+                  event.detail.button.innerHTML = window.languages.productFormAddToCart;
+                }, 1500);
+              }
+            })
           }
-        });
+          
+        }
         
       }
       /**
@@ -2433,14 +2463,7 @@
     }, {
       key: "_onCartRefreshPopup",
       value: function _onCartRefreshPopup(event) {
-
-        var scrollToTop = true;
-
-        if (event && event.detail) {
-          scrollToTop = event.detail.scrollToTop;
-        }
-
-        return this._rerenderPopup(scrollToTop).then(function () {
+        return this._rerenderPopup().then(function () {
           document.dispatchEvent(new CustomEvent('theme:loading:end'));
         });
       }
