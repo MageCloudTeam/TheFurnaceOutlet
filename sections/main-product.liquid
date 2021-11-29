@@ -392,16 +392,14 @@
                     </div>
                   </div>
                 {%- when "product_questions_tab" -%}
-                  {%- if block.settings.product_questions != blank -%}
-                    <div class="product-block-list__item product-block-list__item--description product_question" {{ block.shopify_attributes }}>
-                      <div class="card btn">
-                        <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
-                          <span class="card__title heading h3">{{ 'product.general.product_questions' | t }}</span>
-                          <span class="plus-button plus-button--large"></span>
-                        </button>
-                      </div>
+                  <div class="product-block-list__item product-block-list__item--description product_question" {{ block.shopify_attributes }}>
+                    <div class="card btn">
+                      <button class="card__button card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="block-{{ section.id }}-{{ block.id }}">
+                        <span class="card__title heading h3">{{ 'product.general.product_questions' | t }}</span>
+                        <span class="plus-button plus-button--large"></span>
+                      </button>
                     </div>
-                  {%- endif -%}
+                  </div>
               {%- endcase -%}
             {%- endfor -%}
           </div>
@@ -529,15 +527,15 @@
                     </div>
                   </div>
                 {%- when "product_questions_tab" -%}
-                  {%- if block.settings.product_questions != blank -%}
-                    <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible product_questions_tab">
-                      <div class="card__collapsible-content">
-                        <div class="rte text--pull">
-                          {{ block.settings.product_questions }}
+                  <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible product_questions_tab">
+                    <div class="card__collapsible-content">
+                      <div class="rte text--pull">
+                        <div class="product-list product-list--vertical product-list--scrollable">
+                          {% render 'cb_product-questions-answers' %}
                         </div>
                       </div>
                     </div>
-                  {%- endif -%}
+                  </div>
               {%- endcase -%}
             {%- endfor -%}
           </div>
@@ -988,13 +986,7 @@
       "type": "product_questions_tab",
       "name": "Product questions",
       "limit": 1,
-      "settings": [
-        {
-          "type": "richtext",   
-          "id": "product_questions",
-          "label": "Product questions"
-        }
-      ]
+      "settings": []
     },
     {
       "type": "content",

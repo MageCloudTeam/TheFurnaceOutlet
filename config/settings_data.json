@@ -333,6 +333,12 @@
           "show_section": false,
           "stack_mobile": true
         }
+      },
+      "custom-checkbox-checkout": {
+        "type": "custom-checkbox-checkout",
+        "settings": {
+          "linklist_title": "I agree to the Terms and Conditions"
+        }
       }
     },
     "content_for_index": [

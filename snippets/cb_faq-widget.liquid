@@ -1,0 +1,251 @@
+{% comment %}
+  <-! @copyright by CleverBooster.com-->
+  <- DONT UPDATE this file ->
+{% endcomment %}
+{% assign faqObject = null %}
+{% if template contains 'page' and page %}
+  {% assign faqObject = page %}
+{% endif %}
+
+{% if template contains 'product' and product %}
+  {% assign faqObject = product %}
+{% endif %}
+
+{% if faqObject and faqObject.metafields.cbpqa and faqObject.metafields.cbpqa.faqsettings %}
+
+{% assign faqsettings = '{}' | json %}
+{% assign faqsections = '[]' | json %}
+{% if faqObject.metafields.cbpqa and faqObject.metafields.cbpqa.faqsettings %}
+    {% assign faqsettings = faqObject.metafields.cbpqa.faqsettings  %}
+{% endif %}
+
+{% if faqObject.metafields.cbpqa and faqObject.metafields.cbpqa.faqsections %}
+    {% assign faqsections = faqObject.metafields.cbpqa.faqsections  %}
+{% endif %}
+
+
+{% comment %} check same position {% endcomment %}
+{% if faqsettings.widgetposition == widgetposition %}
+
+{% assign customerId = blank %}
+{% assign customerName = blank %}
+{% assign customerEmail = blank %}
+{% if customer %}
+  {% assign customerId = customer.id %}
+  {% assign customerName = customer.name %}
+  {% assign customerEmail = customer.email %}
+{% endif %}
+{% assign cbActiveClassDefault = ''%}
+{% if faqsettings.default_showall %}
+  {% assign cbActiveClassDefault = 'active'%}
+{% endif %}
+
+{% assign summaryPositionBottom = false %}
+
+<style type="text/css">
+  /* @copyright by CleverBooster.com */
+  .page-container{transform: none;}
+  @keyframes mmfadeIn{from{opacity:0}to{opacity:1}}@keyframes mmfadeOut{from{opacity:1}to{opacity:0}}@keyframes mmslideIn{from{transform:translateY(15%)}to{transform:translateY(0)}}@keyframes mmslideOut{from{transform:translateY(0)}to{transform:translateY(-10%)}}.cb-faqs-wrapper{position:relative;display:flex;flex-wrap:wrap}.cb-faqs-wrapper.cb-faqs-summary-float_right,.cb-faqs-wrapper.cb-faqs-summary-right{flex-wrap:wrap-reverse}.cb-faqs-wrapper.cb-faqs-summary-bottom,.cb-faqs-wrapper.cb-faqs-summary-top{display:block}.cb-faq-summary{padding:20px}.cb-summary-content{font-size:110%}.cb-summary-content ul{display:inline-block;padding-inline-start:0;margin-left:0;margin-right:5px;list-style:none}.cb-summary-content li.active{font-weight:bolder}.cb-faqs-summary-left .cb-faq-summary-left,.cb-faqs-summary-right .cb-faq-summary-right{margin:unset}.cb-faq-summary-float_left{position:fixed;left:0;top:50%}.cb-faq-summary-float_right{position:fixed;right:0;top:50%}.cb-faqs{padding:10px 0;margin:auto}.cb-faq-group{padding:10px 0}.cb-faq-header{font-weight:bolder;margin:20px auto}.cb-faq-header *{font-weight:bolder}.text-align-left{text-align:left}.text-align-center{text-align:center}.text-align-right{text-align:right}.cb-faqs{display:block;clear:both;overflow:auto}.cb-faqs:after{clear:both}.cb-faq-section{padding-top:5px;padding-bottom:5px}.cb-faqs .cb-faq-section:last-child{clear:right}.cb-faqs .cb-faq-section:last-child:after{clear:both}.cb-faq-group{display:flex;flex-wrap:wrap;justify-content:space-between}.cb-faq-section-fullwidth{width:100%;display:block}.cb-faq-section-halfwidth{width:48%;padding-right:1%;float:left}.cb-faq-section-halfwidth+.cb-faq-section-halfwidth{margin-left:1%}.cb-faq-item{width:100%}.cb-faq-item-fullwidth{width:100%}.cb-faq-item-halfwidth{width:49%}.cb-faq-content{padding:5px 0}.cb-faq-item .cb-toggle-expanded{display:none;-webkit-transition:-webkit-transform 1s ease-in-out;-ms-transition:-ms-transform 1s ease-in-out;transition:transform 1s ease-in-out}.cb-faq-item.active .cb-toggle-collapsed{display:none;-webkit-transition:-webkit-transform 1s ease-in-out;-ms-transition:-ms-transform 1s ease-in-out;transition:transform 1s ease-in-out}.cb-faq-item.active .cb-toggle-expanded{display:block}.cb-faq-item .cb-faq-question{display:flex;font-weight:500;position:relative;cursor:pointer;padding-right:30px}.cb-faq-item .cb-faq-question *{font-weight:500}.cb-faq-item .cb-faq-toggle{display:flex;align-items:center;position:absolute;right:4px;top:50%;margin-top:-12px}.cb-faq-item .cb-faq-toggle.cb-faq-toggle-left{left:5px;right:auto}.cb-faq-item .cb-faq-toggle+.cb-faq-ask{padding-left:30px}.cb-faq-question.text-align-center .cb-faq-ask,.cb-faq-question.text-align-center .cb-faq-ask *{text-align:center;margin-left:auto;margin-right:auto}.cb-faq-question.text-align-right .cb-faq-ask,.cb-faq-question.text-align-right .cb-faq-ask *{text-align:right;margin-left:auto}.cb-faq-answer{position:relative;padding-top:10px;padding-left:10px;padding-right:30px;padding-bottom:20px}.cb-faq-question-toggle-left-yes+.cb-faq-answer{padding-left:30px}.cb-answer-prefix{position:relative;display:inline}.cb-answer-prefix svg{margin-bottom:-6px}.cb-faq-ans{position:relative;display:inline}.cb-faq-answer.text-align-center .cb-faq-ans{margin:auto}.cb-faq-ans>:first-child{display:inline}.cb-faq-answer.text-align-center .cb-answer-prefix{margin-left:auto}.cb-faq-answer.text-align-center .cb-faq-ans{margin-right:auto}.cb-faq-answer.text-align-right .cb-answer-prefix{margin-left:auto}.cb-helpful-icons{position:absolute;bottom:0;right:0;display:none}.cb-faq-item.active .cb-helpful-icons,.cb-faq-item:hover .cb-helpful-icons{display:flex}.cb-helpful svg{margin-bottom:-6px;width:20px}.cb-unhelpful svg{margin-bottom:-8px;width:20px}.cb-helpful{margin-right:5px}.cb-helpful,.cb-unhelpful{cursor:pointer;opacity:.7}.cb-helpful.clicked,.cb-unhelpful.clicked{opacity:1;cursor:text}.cb-faq-simple .cb-faq-content{padding:10px 0}.cb-faq-simple .cb-faq-question{font-weight:bolder;display:flex}.cb-faq-simple .cb-faq-question *{font-weight:bolder}.cb-faq-simple .cb-faq-item .cb-faq-answer{display:none}.cb-faq-simple .cb-faq-item.active .cb-faq-answer{display:block}.cb-faq-simple .cb-faq-prefix{font-weight:bolder}.cb-faq-simple .cb-faq-ask{padding-left:10px;width:100%}.cb-faq-simple .cb-answer-prefix+.cb-faq-ans{padding-left:5px;width:100%}.cb-faq-togglerow .cb-faq-content{border-bottom:1px solid #b2b2b2;border-left:0;border-right:0;position:relative}.cb-faq-togglerow .cb-faq-item:first-child .cb-faq-content{border-top:1px solid #b2b2b2}.cb-faq-togglerow .cb-faq-item.cb-faq-item-halfwidth:nth-child(2) .cb-faq-content{border-top:1px solid #b2b2b2}.cb-faq-togglerow .cb-faq-prefix{font-weight:bolder}.cb-faq-togglerow .cb-faq-question{padding:10px 20px 10px 12px}.cb-faq-togglerow .cb-faq-question.cb-faq-question-toggle-right-yes{padding-left:0}.cb-faq-togglerow .cb-faq-ask{padding-left:0;position:relative;width:100%}.cb-faq-togglerow .cb-faq-question:hover{border-left:4px solid #313131;padding-left:10px}.cb-faq-togglerow .cb-faq-prefix{display:flex;align-items:center;margin-right:3px}.cb-faq-togglerow .cb-faq-question:hover .cb-faq-toggle{display:block}.cb-faq-togglerow .cb-faq-answer{display:none}.cb-faq-togglerow .cb-faq-ans{padding-left:0;max-height:0}.cb-faq-togglerow .active .cb-faq-question{padding-left:12px;border-left:4px solid #313131;color:#313131}.cb-faq-togglerow .active .cb-faq-answer{display:flex;padding-top:10px;padding-left:16px}.cb-faq-togglerow .active .cb-faq-ans{max-height:1000px;overflow:hidden;transition:max-height 1s ease-in-out;animation:mmslideIn .4s cubic-bezier(0,0,.2,1)}.cb-faq-togglebox .cb-qa{display:none}.cb-faq-togglebox .cb-faq-answer{display:none;max-height:0}.cb-faq-togglebox .cb-faq-content{border:1px solid #ccc;border-radius:4px;margin-bottom:5px;padding:0 0}.cb-faq-togglebox .cb-faq-item.active .cb-faq-content,.cb-faq-togglebox .cb-faq-item:hover .cb-faq-content{border-color:#000;transition:.4s}.cb-faq-togglebox .cb-faq-question{padding:10px 25px 10px 10px;position:relative;cursor:pointer}.cb-faq-togglebox .active .cb-faq-question{font-weight:bolder}.cb-faq-togglebox .active .cb-faq-answer{display:block;border-top:1px solid #ccc;padding:10px 25px 20px 25px;max-height:1000px;overflow:hidden;transition:max-height 1s ease-in-out;animation:mmslideIn .4s cubic-bezier(0,0,.2,1)}.cb-faq-togglebar .cb-faq-content{padding:0 0 5px 0;position:relative;clear:both}.cb-faq-togglebar .cb-qa{display:none}.cb-faq-togglebar .cb-faq-answer{display:none;max-height:0}.cb-faq-togglebar .cb-faq-question{transition:all .15s ease-out;padding:12px 20px 12px 10px;border-left:3px solid #313131;background-color:#f4f4f4;cursor:pointer;border-radius:4px;position:relative}.cb-faq-togglebar .cb-faq-item.active .cb-faq-question{color:#fff;background-color:#313131}.cb-faq-togglebar .cb-faq-item.active .cb-faq-question *{color:#fff}.cb-faq-togglebar .cb-faq-item.active .cb-faq-answer{display:block;font-weight:500;padding:15px 20px 25px 20px;max-height:1000px;overflow:hidden;transition:max-height 1s ease-in-out;animation:mmslideIn .4s cubic-bezier(0,0,.2,1)}@media screen and (max-width:767px){.cb-faq-section-halfwidth{width:100%;margin:auto}.cb-faq-item-halfwidth{width:100%;margin:auto}.cb-faq-summary.cb-faq-summary-float_left,.cb-faq-summary.cb-faq-summary-float_right{position:relative}}
+  /* ===================================== */
+  /* setting faq widget styles */
+  /* ===================================== */
+  {{faqsettings.custom_style}}
+</style>
+{% if faqsettings.summary_position == 'bottom' or faqsettings.summary_position == 'right' or faqsettings.summary_position == 'float_right' %}
+  {% assign summaryPositionBottom = true %}
+{% endif %}
+{% capture summarySectionHtml %}
+  <div class="cb-faq-summary cb-faq-summary-{{faqsettings.summary_position}}">
+      <div class="cb-summary-content {%if faqsettings.summary_scrollspy %} cb-scrollspy {% endif %}">
+        <ul>
+          {% for faqsection in faqsections %}
+            {% if faqsection.header %}
+              <li>
+                <a href="#{{faqsection.header_section_id}}">{{faqsection.header | strip_html | truncate: 200}}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+{% endcapture %}
+<div class="section-faq-wrapper">
+
+<div class="cb-faqs-wrapper cb-faqs-summary-{{faqsettings.summary_position}}">
+  {% if summaryPositionBottom == false and faqsettings.summary_position != 'none' and faqsettings.summary_position != blank %}
+    {{summarySectionHtml}}
+  {% endif %}
+  <div class="cb-faqs" 
+    id="cb-faqs"
+  >
+    {% assign faqsectionIdx = 0 %}
+    {% for faqsection in faqsections %}
+
+      <div class="cb-faq-section cb-faq-section-{{faqsettings.section_style}}" id="faq-section-{{faqsectionIdx}}" data-section-id="{{faqsection.header_section_id}}">
+        {% comment %} section header {% endcomment %}
+        {% if faqsection.header %}
+          <div class="cb-faq-header text-align-{{faqsettings.section_header_align}}" id="{{faqsection.header_section_id}}">
+            {{faqsection.header}}
+          </div>
+        {% endif %}
+
+        {% comment %} section content {% endcomment %}
+        {% assign questionIdx = 0 %}
+        <div class="cb-faq-group cb-faq-{{faqsettings.layout}}">
+            {% comment %} section question {% endcomment %}
+            {% for question in faqsection.questions %}
+              <div class="cb-faq-item cb-faq-item-{{faqsettings.question_style}} {{cbActiveClassDefault}}" 
+                id="cb-faq-item-{{questionIdx}}" 
+                data-section-idx="{{faqsectionIdx}}" 
+                data-question-idx="{{questionIdx}}"
+                data-question-key="{{question.unique_id}}"
+              >
+              <div class="cb-faq-content"> 
+                <div class="cb-faq-question text-align-{{faqsettings.question_align}}">
+        
+                  {% comment %} toglge left {% endcomment %}
+                  {% if faqsettings.toggle_expanded_icon and faqsettings.toggle_collapsed_icon and faqsettings.toggle_icon_position == 'left'%}
+                    <div class="cb-faq-toggle cb-faq-toggle-{{faqsettings.toggle_icon_position}}">
+                      <span class="cb-toggle-expanded">
+                        {{faqsettings.toggle_expanded_icon}}
+                      </span>
+                      <span class="cb-toggle-collapsed">
+                        {{faqsettings.toggle_collapsed_icon}}
+                      </span>
+                    </div>          
+                  {% endif %}
+                  <div class="cb-faq-ask">
+                    {{question.ask }}
+                  </div>
+                  {% comment %} toglge right {% endcomment %}
+
+                {% if faqsettings.toggle_expanded_icon and faqsettings.toggle_collapsed_icon and faqsettings.toggle_icon_position != 'left'%}
+                    <div class="cb-faq-toggle cb-faq-toggle-{{faqsettings.toggle_icon_position}}">
+                      <span class="cb-toggle-expanded">
+                        {{faqsettings.toggle_expanded_icon}}
+                      </span>
+                      <span class="cb-toggle-collapsed">
+                        {{faqsettings.toggle_collapsed_icon}}
+                      </span>
+                    </div>          
+                  {% endif %}
+
+                </div>
+                {% comment %} answer {% endcomment %}
+                <div class="cb-faq-answer text-align-{{faqsettings.answer_align}}">
+                  {%if faqsettings.answer_prefix %}
+                    <div class="cb-answer-prefix">{{faqsettings.answer_prefix}}</div>
+                  {% endif %}
+                  <div class="cb-faq-ans">
+                    {{question.answer }}
+                  </div>
+
+                  {% comment %} helpful {% endcomment %}
+                  {% if faqsettings.helpful_type and faqsettings.helpful_type != 'NONE' %}
+                    <div class="cb-helpful-icons cb-helpful-type-{{faqsettings.helpful_type}}">
+                        <span class="cb-helpful" 
+                          data-question-key="{{question.unique_id}}"
+                          data-faq-key="{{faqsettings.faq_id}}"
+                        >
+                          {% if faqsettings.helpful_type == 'LIKE_COUNT' %}
+                            <span class="cb-helpful-count"> {{question.likes_count}} </span>
+                          {% endif %}
+                          {% if faqsettings.like_icon %}
+                            {{faqsettings.like_icon}}
+                          {% else %}
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"/></svg>
+                          {% endif %}
+                        </span>                          
+                        <span class="cb-unhelpful" 
+                          data-question-key="{{question.unique_id}}"
+                          data-faq-key="{{faqsettings.faq_id}}"
+                        >
+                          {% if faqsettings.helpful_type == 'LIKE_COUNT' %}
+                            <span class="cb-unhelpful-count"> {{question.dislikes_count}} </span>
+                          {% endif %}
+                          {% if faqsettings.dislike_icon %}
+                            {{faqsettings.dislike_icon}}
+                          {% else %}
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.596 21.957c-1.301.092-2.303-.986-2.303-2.206v-1.053c0-2.666-1.813-3.785-2.774-4.2a1.864 1.864 0 00-.523-.13A1.75 1.75 0 015.25 16h-1.5A1.75 1.75 0 012 14.25V3.75C2 2.784 2.784 2 3.75 2h1.5a1.75 1.75 0 011.742 1.58c.838-.06 1.667-.296 2.69-.586l.602-.17C11.748 2.419 13.497 2 15.828 2c2.188 0 3.693.204 4.583 1.372.422.554.65 1.255.816 2.05.148.708.262 1.57.396 2.58l.051.39c.319 2.386.328 4.18-.223 5.394-.293.644-.743 1.125-1.355 1.431-.59.296-1.284.404-2.036.404h-2.05l.056.429c.025.18.05.372.076.572.06.483.117 1.006.117 1.438 0 1.245-.222 2.253-.92 2.942-.684.674-1.668.879-2.743.955zM7 5.082c1.059-.064 2.079-.355 3.118-.651.188-.054.377-.108.568-.16 1.406-.392 3.006-.771 5.142-.771 2.277 0 3.004.274 3.39.781.216.283.388.718.54 1.448.136.65.242 1.45.379 2.477l.05.385c.32 2.398.253 3.794-.102 4.574-.16.352-.375.569-.66.711-.305.153-.74.245-1.365.245h-2.37c-.681 0-1.293.57-1.211 1.328.026.244.065.537.105.834l.07.527c.06.482.105.922.105 1.25 0 1.125-.213 1.617-.473 1.873-.275.27-.774.456-1.795.528-.351.024-.698-.274-.698-.71v-1.053c0-3.55-2.488-5.063-3.68-5.577A3.485 3.485 0 007 12.861V5.08zM3.75 3.5a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h1.5a.25.25 0 00.25-.25V3.75a.25.25 0 00-.25-.25h-1.5z"/></svg>  
+                          {% endif %}
+                        </span>                          
+                       
+                    </div>
+                  {% endif %}     
+
+                </div>
+                
+
+              </div>
+              </div>
+      
+              {% assign questionIdx = questionIdx | plus: 1 %}
+            {% endfor %}
+
+        </div>
+      </div>
+
+    {% endfor %}
+  </div>
+  {% if summaryPositionBottom %}
+    {{summarySectionHtml}}
+  {% endif %}
+
+  </div>
+</div>
+<script type="text/javascript">
+  {{faqsettings.custom_script}}
+</script>
+
+{% assign cbpqa_apisetting = cbpqaMetafield.apisetting %}
+
+<script type="text/javascript">
+  (function(){
+  var cbFaq = window.cb_faq || {}
+  window.cb_faq = Object.assign(cbFaq, {
+    customerEmail: "{{customerEmail}}",
+    customerName: "{{customerName}}",
+    customerId: "{{customerId}}",
+    apiSetting: {{cbpqa_apisetting | json}},
+    toggleType: "{{faqsettings.toggle_type}}",
+    customScript: "{{faqsettings.custom_script}}",    
+  })
+  })();
+</script>
+
+<script data-cb-faq type="application/json">
+  {
+    "faqsections": {{faqsections | json}},
+    {% if customer %}
+    "customerEmail": {{customer.email | json}},
+    "customerName": {{customer.name | json}},
+    "customerId": {{customer.id | json}},
+    {% endif %}
+    "settings": {{faqsettings | json}}
+  }
+</script>
+
+<script data-faq-schema type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {% for faqsection in faqsections %}
+          {% for question in faqsection.questions%}
+            {
+              "@type": "Question",
+              "name": {{question.ask | json}},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{question.answer | json}}
+              }
+            }{%  if forloop.last == false %},{% endif %}
+          {% endfor %}{%  if forloop.last == false %},{% endif %}
+        {% endfor %}
+      ]
+  }
+</script>
+{% endif %}
+{% comment %} end position {% endcomment %}
+
+{% endif %}

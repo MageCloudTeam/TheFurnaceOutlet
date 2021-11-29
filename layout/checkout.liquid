@@ -12,6 +12,7 @@
 
     {{ checkout_stylesheets }}
     {{ checkout_scripts }}
+    <script src="{{ 'custom.js' | asset_url }}" defer></script>
   </head>
   <body>
     {{ skip_to_content_link }}
@@ -48,7 +49,7 @@
         </aside>
       </div>
     </div>
-
+    {% section 'custom-checkbox-checkout' %}
     {{ tracking_code }}
   </body>
 </html>

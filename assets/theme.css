@@ -9481,6 +9481,11 @@ shopify-payment-terms {
   display: block;
 }
 
+.tabs_wrapper .content_wrapper-items .product_questions_tab .cbpqa-heading{
+  justify-content: space-between;
+  align-items: center;
+}
+
 @media screen and (max-width: 640px) {
   .product-block-list__item:first-child .card {
     border-top: none;

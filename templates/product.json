@@ -93,6 +93,16 @@
           "type": "reviews",
           "settings": {
           }
+        },
+        "3921ab03-8dc7-4b3b-ad90-43a0a89dab40": {
+          "type": "similar_products_tab",
+          "settings": {
+          }
+        },
+        "1a55d986-04d6-4635-a782-324b87d06c9b": {
+          "type": "product_questions_tab",
+          "settings": {
+          }
         }
       },
       "block_order": [
@@ -107,7 +117,9 @@
         "70fb96b3-f2ea-4ded-80e7-2dc116f2a30e",
         "b2278765-7015-499c-a4b9-e068b3b25506",
         "13a92b53-3192-4f81-b893-530b38c8adc9",
-        "cabad50f-e171-4a69-8111-f7be7ed671cf"
+        "cabad50f-e171-4a69-8111-f7be7ed671cf",
+        "3921ab03-8dc7-4b3b-ad90-43a0a89dab40",
+        "1a55d986-04d6-4635-a782-324b87d06c9b"
       ],
       "settings": {
         "image_size": "small",
