@@ -508,20 +508,24 @@
                   <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible similar_products_tab">
                     <div class="card__collapsible-content">
                       <div class="rte text--pull">
-                        <div class="product-list product-list--vertical product-list--scrollable">
-                          {% for tag in product.tags %}
-                            {%- if tag contains 'similar_' -%}
-                              {%- assign variant_hundle = tag | remove_first: "similar_" -%}
-                              {%- assign variant_hundle_arr = variant_hundle | split: " " -%}
-
-                              {% for product_publish in variant_hundle_arr %}
-                                {% if all_products[product_publish].handle == product_publish %}
-                                  {% assign product = all_products[product_publish] %}
-                                  {%- render 'product-item', product: product, grid_classes: '1/4--lap 1/5--desk 1/6--wide' -%}
-                                {% endif %}
+                        <div class="scroller">
+                          <div class="scroller__inner">
+                            <div class="product-list product-list--vertical product-list--scrollable">
+                              {% for tag in product.tags %}
+                                {%- if tag contains 'similar_' -%}
+                                  {%- assign variant_hundle = tag | remove_first: "similar_" -%}
+                                  {%- assign variant_hundle_arr = variant_hundle | split: " " -%}
+    
+                                  {% for product_publish in variant_hundle_arr %}
+                                    {% if all_products[product_publish].handle == product_publish %}
+                                      {% assign product = all_products[product_publish] %}
+                                      {%- render 'product-item', product: product, grid_classes: '1/4--lap 1/5--desk 1/6--wide' -%}
+                                    {% endif %}
+                                  {% endfor %}
+                                {%- endif -%}
                               {% endfor %}
-                            {%- endif -%}
-                          {% endfor %}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

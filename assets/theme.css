@@ -9348,6 +9348,10 @@ shopify-payment-terms {
   margin-top: 30px;
 }
 
+.popup-icons .popup-icons_wrap{
+  display: inline-flex;
+}
+
 @media screen and (max-width: 640px) {
   .product-form__payment-container .shopify-payment-button {
     margin-top: 16px;
@@ -11742,6 +11746,12 @@ shopify-payment-terms {
   transform: scale3d(1, 0, 1);
 }
 
+@media screen and (max-width: 767px) {
+  .popup-icons .popup-btn{
+    display: flex;
+    justify-content: center;
+  }
+}
 
 @media screen and (max-width: 640px) {
   .text-with-icons {

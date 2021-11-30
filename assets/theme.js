@@ -1947,7 +1947,6 @@
         this.miniCartToggleElement = this.element.querySelector("[aria-controls=\"".concat(this.miniCartElement.id, "\"]"));
         this.miniCartPopupToggleElement = this.element.querySelector("[aria-controls=\"".concat(this.miniCartPopupElement.id, "\"]"));
         
-
         this._checkMiniCartScrollability();
       }
 
@@ -1975,6 +1974,7 @@
           this.delegateRoot.on('click', this._onWindowClick.bind(this));
           this.delegateRoot.on('click', this._onWindowClickPopup.bind(this));
           window.addEventListener('resize', this._calculateMiniCartHeightListener);
+          this.delegateRoot.on('cart:refresh', this._onCartRefreshPopup.bind(this));
         }
         
         this.delegateRoot.on('click', '[data-action="decrease-quantity"]', this._updateQuantity.bind(this));
@@ -1984,7 +1984,6 @@
         this.delegateRoot.on('keydown', '.quantity-selector__value', this._blockEnterKey.bind(this));
         this.delegateRoot.on('product:added', this._onProductAdded.bind(this));
         this.delegateRoot.on('cart:refresh', this._onCartRefresh.bind(this));
-        this.delegateRoot.on('cart:refresh', this._onCartRefreshPopup.bind(this));
       }
     }, {
       key: "_toggleMiniCart",
@@ -2375,7 +2374,7 @@
         var _this3 = this;
         
         this.itemCount += event.detail.quantity;
-        let sectionMain = event.path[1]['id'];
+        let sectionMain = event.target.attributes[0]['nodeValue'];
         let res = sectionMain.includes('main');
 
         /* Add the quantity added */
