@@ -263,6 +263,14 @@
       <input type="hidden" name="quantity" value="1">
     {%- endif -%}
   {%- endif -%}
+
+  {%- if selected_variant.compare_at_price > selected_variant.price -%}
+    {% assign wholesale_price = selected_variant.price | times: 0.025 | times: 0.99 | money %}
+    <a href="https://www.paypal.com/us/webapps/mpp/paypal-credit/"><span class="product-form__info-title text--strong">As low as <strong>{{ wholesale_price }}</strong> per month</span></a>
+  {%- else -%}
+    {% assign retail_price = selected_variant.price | times: 0.025 | money %}
+    <a href="https://www.paypal.com/us/webapps/mpp/paypal-credit/"><span class="product-form__info-title text--strong">As low as <strong>{{ retail_price }}</strong> per month</span></a>
+  {%- endif -%}
 </div>
 
 {% style %}
