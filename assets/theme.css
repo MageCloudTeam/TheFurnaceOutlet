@@ -4434,6 +4434,24 @@ img.lazyload[data-sizes=auto] {
   width: 100%;
 }
 
+.content_wrapper-items .description .text--pull,
+.content_wrapper-items .specifications .text--pull{
+  position: relative;
+  flex-wrap: wrap;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  z-index: 1;
+}
+
+.content_wrapper-items .description .product-list-description,
+.content_wrapper-items .specifications .product-list-specifications{
+  padding: 20px;
+}
+
+
+
 @media screen and (max-width: 640px) {
   .product-list--scrollable::before,
   .product-list--scrollable::after {

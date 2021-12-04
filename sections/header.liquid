@@ -379,9 +379,12 @@
 
             {%- if settings.cart_type != 'page' and template != 'cart' -%}
               {%- render 'mini-cart' -%}
+            {%- endif -%}
+            {%- if settings.cart_type != 'page' and template != 'cart' -%}
               {%- render 'mini-cart-popup' -%}
             {%- endif -%}
           </div>
+
         </div>
       </div>
     </div>

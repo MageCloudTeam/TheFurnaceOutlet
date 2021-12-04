@@ -75,24 +75,24 @@
           "type": "item",
           "settings": {
             "icon": "bi-delivery",
-            "title": "Free delivery worldwide",
-            "content": "<p>Short content about your store<\/p>"
+            "title": "Free Shipping",
+            "content": "<p>We offer free shipping within continental USA.  <\/p><p><a href=\"\/policies\/shipping-policy\" title=\"Shipping Policy\">See Details<\/a><\/p>"
           }
         },
         "icon-2": {
           "type": "item",
           "settings": {
             "icon": "bi-returns",
-            "title": "Satisfied or refunded",
-            "content": "<p>Short content about your store<\/p>"
+            "title": "Satisfied or Refunded",
+            "content": "<p>Find out more about our return policy here. <\/p><p><a href=\"\/pages\/return\" target=\"_blank\" title=\"Return Policy\">See Details<\/a><\/p>"
           }
         },
         "icon-3": {
           "type": "item",
           "settings": {
             "icon": "bi-customer-support",
-            "title": "Top-notch support",
-            "content": "<p>Short content about your store<\/p>"
+            "title": "Need Help?",
+            "content": "<p>We have you covered, you can call us or chat with us. <\/p>"
           }
         },
         "icon-4": {

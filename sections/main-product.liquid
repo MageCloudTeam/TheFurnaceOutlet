@@ -411,7 +411,7 @@
                     <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible description">
                       <div class="card__collapsible-content">
                         <div class="rte text--pull">
-                          <div class="product-list product-list--vertical product-list--scrollable">
+                          <div class="product-list-description">
                             {{ product.description | remove: 'data-section-type="product"' }}
                           </div>
                         </div>
@@ -423,7 +423,7 @@
                     <div id="block-{{ section.id }}-{{ block.id }}" show="false" class="card__collapsible specifications">
                       <div class="card__collapsible-content">
                         <div class="rte text--pull">
-                          <div class="product-list product-list--vertical product-list--scrollable">
+                          <div class="product-list-specifications">
                             {{ block.settings.specifications_parameters }}
                           </div>
                         </div>
