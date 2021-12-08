@@ -1937,7 +1937,6 @@
       }
 
       this.miniCartElement = this.element.querySelector('.mini-cart');
-      this.miniCartElementPopup = this.element.querySelector('.mini-cart-popup');
 
       this.isMiniCartOpen = false;
 
@@ -2237,30 +2236,34 @@
         var _this3 = this;
         
         this.itemCount += event.detail.quantity;
+        let sectionMain = event.target.attributes[0]['nodeValue'];
+        let res = sectionMain.includes('main');
 
         /* Add the quantity added */
+        if(window.theme.pageType !== 'product' || res == false){
+          this._onCartRefresh().then(function () {
+            if (window.theme.pageType !== 'cart') {
+              // If we don't have the sticky header enabled, we scroll to top to make sure it is visible
+              if (window.theme.cartType === 'drawer' && !_this3.options['useStickyHeader']) {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+                });
+              }
+  
+              if (window.theme.cartType === 'message' && event.detail.button) {
+                event.detail.button.innerHTML = window.languages.productAddedShort;
+                setTimeout(function () {
+                  event.detail.button.innerHTML = window.languages.productFormAddToCart;
+                }, 1500);
+              }
 
-        this._onCartRefresh().then(function () {
-          if (window.theme.pageType !== 'cart') {
-            // If we don't have the sticky header enabled, we scroll to top to make sure it is visible
-            if (window.theme.cartType === 'drawer' && !_this3.options['useStickyHeader']) {
-              window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-              });
+              if (window.theme.pageType !== 'cart' && window.theme.cartType === 'drawer') {
+                _this3._openMiniCart();
+              }
             }
-
-            if (window.theme.cartType === 'message' && event.detail.button) {
-              event.detail.button.innerHTML = window.languages.productAddedShort;
-              setTimeout(function () {
-                event.detail.button.innerHTML = window.languages.productFormAddToCart;
-              }, 1500);
-            }
-
-            onProductAddedItem();
-          }
-        });
-        
+          });
+        }
       }
       /**
        * Allows to refresh the mini-cart
@@ -2294,207 +2297,6 @@
 
     return Cart;
   }();
-
-let cartPopupWrap = document.querySelector('.mini-cart-popup'),
-  btnAddToCart = document.querySelector('.product-form__add-button'),
-  isMiniCartPopupOpen = false;
-
-// btnAddToCart.addEventListener('click', onProductAddedItem)
-window.addEventListener('click', closeMiniCartPopup)
-window.addEventListener('keydown', _checkMiniCartClosePopup)
-
-function openMiniCartPopup() {
-        
-  cartPopupWrap.setAttribute('aria-hidden', 'false');
-  isMiniCartPopupOpen = true;
-}
-
-function closeMiniCartPopup() {
-
-  cartPopupWrap.setAttribute('aria-hidden', 'true');
-  document.querySelector('.click_block').style.display = "none";
-  
-  isMiniCartPopupOpen = false;
-  document.body.classList.remove('no-mobile-scroll');
-}
-
-function _checkMiniCartClosePopup(event) {
-  if (!isMiniCartPopupOpen) {
-    return;
-  }
-
-  if(event){
-    event.preventDefault();
-
-    if(event.key === 'Escape'){
-      closeMiniCartPopup();
-    }
-  }
-}
-
-
-
-function updateQuantity(event, target) {
-  var _this = this;
-
-  var parsedQuantity = 1;
-
-  if (target.tagName === 'INPUT') {
-    parsedQuantity = parseInt(target.value);
-  } else {
-    parsedQuantity = parseInt(target.getAttribute('data-quantity'));
-  } // If we are in "page" mode, we reload the page instead of doing that in Ajax to have a better compatibility with apps
-
-  if (window.theme.cartType === 'page') {
-    if (target.hasAttribute('data-href')) {
-      window.location.href = target.getAttribute('data-href');
-    } else {
-      window.location.href = "".concat(window.routes.cartChangeUrl, "?line=").concat(target.getAttribute('data-line'), "&quantity=").concat(parsedQuantity);
-    }
-
-    return;
-  }
-
-  document.dispatchEvent(new CustomEvent('theme:loading:start'));
-  fetch("".concat(window.routes.cartChangeUrl, ".js"), {
-    body: JSON.stringify({
-      line: target.getAttribute('data-line'),
-      quantity: parsedQuantity
-    }),
-    credentials: 'same-origin',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest' // This is needed as currently there is a bug in Shopify that assumes this header
-
-    }
-  }).then(function (cart) {
-    cart.json().then(function (content) {
-
-      _this.itemCount = content['item_count'];
-
-      rerenderPopup(false).then(function () {
-        document.dispatchEvent(new CustomEvent('theme:loading:end'));
-      });
-    });
-  });
-  event.preventDefault();
-}
-
-
-function blockEnterKey(event) {
-  if (event.key === 'Enter') {
-    return false;
-  }
-}
-
-function rerenderPopup() {
-
-  return fetch('/cart?section_id=mini-cart-popup', {
-    credentials: 'same-origin',
-    method: 'GET',
-    headers: {
-      'Cache-Control': 'no-cache'
-    }
-  }).then(function (content) {
-
-    content.text().then(function (html) {
-
-      console.log(html)
-
-      var myDiv = document.createElement('div');
-        myDiv.innerHTML = html;
-
-      //   _this2.element.querySelector('.header__cart-count').textContent = _this2.itemCount;
-
-      if (window.theme.cartType !== 'page') {
-        if (window.theme.pageType !== 'cart') {
-
-          var tempElement = document.createElement('div');
-          tempElement.innerHTML = html;
-
-          cartPopupWrap.innerHTML = tempElement.querySelector('.mini-cart-popup').innerHTML;
-
-          let quantitySelectors = cartPopupWrap.querySelectorAll('.quantity-selector--product');
-
-          // fetch('/cart.js', {
-          //   credentials: 'same-origin',
-          //   method: 'GET'
-          // }).then(function (content) {
-          //   content.json().then(function (cartObj) {
-          //     let itemsCartArr = cartObj['items'];
-          //     new QuantityPickerAccessoriesPopup(quantitySelectors, _this2);
-
-          //     quantitySelectors.forEach((quantitySelector) => {
-          //       let quantityTarget = quantitySelector.querySelector('[name="quantity"]');
-
-          //       itemsCartArr.forEach((itemCart) => {
-          //         let productJsonElementAccessories = quantitySelector.querySelector('[data-product-json-accessories]');
-          //         let jsonDataAccessories = JSON.parse(productJsonElementAccessories.innerHTML);
-          //         if(itemCart['id'] == jsonDataAccessories['product-accessories']){
-          //           quantityTarget.value = itemCart['quantity'];
-          //         }
-          //       })
-          //     })
-          //   })
-          // })
-
-        } else {
-          var _tempElement = document.createElement('div');
-
-          _tempElement.innerHTML = html;
-          var originalCart = document.querySelector('[data-section-type="cart"]');
-          originalCart.innerHTML = _tempElement.querySelector('[data-section-type="cart"]').innerHTML;
-
-          if (scrollToTop) {
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
-          }
-        }
-      }
-    });
-  });
-}
-  
-function onProductAddedItem(event) {
-  
-  // this.itemCount += event.detail.quantity;
-
-  fetch('/cart?section_id=mini-cart-popup', {
-    credentials: 'same-origin',
-    method: 'GET',
-    headers: {
-      'Cache-Control': 'no-cache'
-    }
-  }).then(function (response) {
-    
-    if(response.status == 200){
-      onCartRefreshPopup().then(function () {
-        if (window.theme.pageType !== 'cart') {
-          openMiniCartPopup();
-          document.querySelector('.click_block').style.display = "block";
-        }
-      });
-      
-    }
-  })
-}
-  
-  
-function onCartRefreshPopup() {
-  return rerenderPopup();
-}
-
-
-
-function onWindowClickPopup(event) {
-  if (this.miniCartPopupElement && this.isMiniCartPopupOpen && !this.element.contains(event.target)) {
-    closeMiniCartPopup();
-  }
-}
-
 
   var MobileNavigation = /*#__PURE__*/function () {
     function MobileNavigation(element) {
