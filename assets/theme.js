@@ -2409,8 +2409,6 @@ function rerenderPopup() {
 
     content.text().then(function (html) {
 
-      console.log(html)
-
       var myDiv = document.createElement('div');
         myDiv.innerHTML = html;
 
