@@ -1937,7 +1937,6 @@
       }
 
       this.miniCartElement = this.element.querySelector('.mini-cart');
-      this.miniCartElementPopup = this.element.querySelector('.mini-cart-popup');
 
       this.isMiniCartOpen = false;
 
@@ -2237,30 +2236,40 @@
         var _this3 = this;
         
         this.itemCount += event.detail.quantity;
+        let sectionMain = event.target.attributes[0]['nodeValue'];
+        let res = sectionMain.includes('main');
 
         /* Add the quantity added */
 
-        this._onCartRefresh().then(function () {
-          if (window.theme.pageType !== 'cart') {
-            // If we don't have the sticky header enabled, we scroll to top to make sure it is visible
-            if (window.theme.cartType === 'drawer' && !_this3.options['useStickyHeader']) {
-              window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-              });
-            }
+        if(window.theme.pageType !== 'product' || res == false){
+          this._onCartRefresh().then(function () {
+            if (window.theme.pageType !== 'cart') {
+              // If we don't have the sticky header enabled, we scroll to top to make sure it is visible
+              if (window.theme.cartType === 'drawer' && !_this3.options['useStickyHeader']) {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+                });
+              }
+  
+              if (window.theme.cartType === 'message' && event.detail.button) {
+                event.detail.button.innerHTML = window.languages.productAddedShort;
+                setTimeout(function () {
+                  event.detail.button.innerHTML = window.languages.productFormAddToCart;
+                }, 1500);
+              }
 
-            if (window.theme.cartType === 'message' && event.detail.button) {
-              event.detail.button.innerHTML = window.languages.productAddedShort;
-              setTimeout(function () {
-                event.detail.button.innerHTML = window.languages.productFormAddToCart;
-              }, 1500);
+              if (window.theme.pageType !== 'cart' && window.theme.cartType === 'drawer') {
+                _this3._openMiniCart();
+              }
             }
-
+          });
+        }else{
+          if( res == true){
             onProductAddedItem();
           }
-        });
-        
+        }
+
       }
       /**
        * Allows to refresh the mini-cart
@@ -2297,9 +2306,9 @@
 
 let cartPopupWrap = document.querySelector('.mini-cart-popup'),
   btnAddToCart = document.querySelector('.product-form__add-button'),
+  cartCount = document.querySelector('.header__cart-count'),
   isMiniCartPopupOpen = false;
 
-// btnAddToCart.addEventListener('click', onProductAddedItem)
 window.addEventListener('click', closeMiniCartPopup)
 window.addEventListener('keydown', _checkMiniCartClosePopup)
 
@@ -2459,8 +2468,6 @@ function rerenderPopup() {
 }
   
 function onProductAddedItem(event) {
-  
-  // this.itemCount += event.detail.quantity;
 
   fetch('/cart?section_id=mini-cart-popup', {
     credentials: 'same-origin',
@@ -2471,12 +2478,23 @@ function onProductAddedItem(event) {
   }).then(function (response) {
     
     if(response.status == 200){
-      onCartRefreshPopup().then(function () {
-        if (window.theme.pageType !== 'cart') {
-          openMiniCartPopup();
-          document.querySelector('.click_block').style.display = "block";
-        }
-      });
+      fetch('/cart.js', {
+        credentials: 'same-origin',
+        method: 'GET'
+      }).then(function (content) {
+        content.json().then(function (cartObj) {
+          cartCount.innerHTML = cartObj.item_count;
+          console.log(cartObj.item_count)
+          if(cartObj.item_count > 0){
+            onCartRefreshPopup().then(function () {
+              if (window.theme.pageType !== 'cart') {
+                openMiniCartPopup();
+                document.querySelector('.click_block').style.display = "block";
+              }
+            });
+          }
+        })
+      })
       
     }
   })
@@ -3944,6 +3962,8 @@ function onWindowClickPopup(event) {
         let productData = {
           'items': items
         }; 
+
+        console.log(productData)
 
         fetch('/cart/add.js', {
           body: JSON.stringify(productData),
