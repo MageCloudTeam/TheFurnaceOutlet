@@ -227,7 +227,7 @@
             "type": "newsletter",
             "settings": {
               "title": "Newsletter",
-              "subheading": "<p>A short sentence describing what someone will receive by subscribing<\/p>"
+              "subheading": "<p>Sign up to be notified with our latest news and updates<\/p>"
             }
           }
         },
