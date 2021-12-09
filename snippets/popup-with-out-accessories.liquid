@@ -1,0 +1,83 @@
+<div class="mini-cart__content-popup">
+    {%- render 'icon', icon: 'full-cart' -%}
+    <div class="wrap_heading-cart">
+      {%- render 'icon', icon: 'confirm-cart' -%}
+      <p class="heading-cart">{{ 'cart.general.full_cart' | t }}</p>
+    </div>
+
+    <div class="wrap_title-product mini-cart__price-list-popup">
+      <span class="price"><strong>Title:</strong></span>
+      <a href="{{ line_item.url }}" class="mini-cart__product-title-popup text--strong link">{{ line_item.title }}</a>
+    </div>
+
+    <div class="mini-cart__price-list-popup">
+      {%- if line_item.product.compare_at_price > line_item.product.price -%}
+        <span class="price"><strong>Qty: </strong>{{ line_item.quantity }} x </span>
+        <span class="price price--highlight">{{ line_item.final_line_price | money }}</span>
+        <span class="price price--compare">{{ line_item.product.compare_at_price | times: line_item.quantity | money }}</span><br>
+        
+        
+        <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
+        <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
+
+        <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
+      {%- else  -%}
+        <span class="price"><strong>Qty: </strong>{{ line_item.quantity }}</span><br>
+
+        <span class="price"><strong>Item Total: </strong>{{ line_item.product.price | money }}</span>
+        <span class="price price--compare">{{ line_item.product.compare_at_price | money }}</span><br>
+
+        <div class="price"><strong>Total Items in Cart: </strong>{{ cart.item_count }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="mini-cart__button-container">
+      <div class="button-group button-group--loose button-group--fit">
+        <a href="{{ routes.cart_url }}" class="button button--secondary view-cart">{{ 'cart.general.view_cart' | t }}</a>
+        <a href="{{ settings.cart_empty_button_link }}" class="button button--primary button--full">{{ 'cart.general.empty_button' | t }}</a>
+      </div>
+    </div>
+  </div>
+
+  {% style %}
+    .mini-cart__line-item-popup{
+      padding: 100px 0 100px;
+    }
+
+    .mini-cart__line-item-list-popup{
+      max-height: none;
+    }
+    
+    .mini-cart__inner-popup{
+      width: 80%;
+      margin: auto;
+      padding: 20px 0;
+    }
+
+    .wrap_heading-cart{
+      display: flex;
+      justify-content: center;
+      padding: 15px 0;
+    }
+
+    .wrap_heading-cart svg{
+      width: 24px;
+      margin-right: 20px;
+    }
+
+    .heading-cart{
+      text-align: center;
+      font-size: 25px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #00a912;
+    }
+
+    .wrap_title-product{
+      display: flex;
+    }
+
+    .wrap_title-product .price{
+      flex-basis: 38px;
+    }
+  {% endstyle %}

@@ -3224,7 +3224,8 @@ img.lazyload[data-sizes=auto] {
 
 .mini-cart__inner-popup .card__collapsible-content .product-list--vertical-accessories{
   overflow: auto;
-  height: 273px;
+  max-height: 273px;
+  height: auto;
   border: 1px solid #efefef;
 }
 
@@ -9230,7 +9231,8 @@ select option {
 
 .product-list--vertical-accessories{
   overflow: auto;
-  height: 400px;
+  max-height: 388px;
+  height: auto;
   border: 1px solid #efefef;
 }
 

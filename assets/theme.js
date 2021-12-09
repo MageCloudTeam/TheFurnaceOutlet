@@ -3846,8 +3846,6 @@
           'items': items
         }; 
 
-        console.log(productData)
-
         fetch('/cart/add.js', {
           body: JSON.stringify(productData),
           method: 'POST',
@@ -3857,22 +3855,38 @@
             'X-Requested-With': 'XMLHttpRequest'
           }
           
-        }).then(response => {
+        })
+        .then(response => {
            
           document.dispatchEvent(new CustomEvent('theme:loading:end'));
           
           if (response.ok) {
-            target.removeAttribute('disabled'); // We simply trigger an event so the mini-cart can re-render
             
-            _this4.element.dispatchEvent(new CustomEvent('product:added', {
-              bubbles: true,
-              detail: {
-                variant: _this4.currentVariant,
-                quantity: parseInt(cartQty)
+            target.removeAttribute('disabled'); // We simply trigger an event so the mini-cart can re-render
+
+            let cartAttr = {
+              'attributes': {
+                'main-prod-title': _this4.productData.title
               }
-            })); // If we are in the context of quick view, we also force closing the modal
-
-
+            }
+            fetch('/cart/update.js', {
+              body: JSON.stringify(cartAttr),
+              method: 'POST',
+              credentials: 'same-origin', 
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+              }
+            }).then(()=>{
+              _this4.element.dispatchEvent(new CustomEvent('product:added', {
+                bubbles: true,
+                detail: {
+                  variant: _this4.currentVariant,
+                  quantity: parseInt(cartQty)
+                }
+              })); // If we are in the context of quick view, we also force closing the modal
+            })
+            
             if (_this4.options['isQuickView'] && window.theme.cartType === 'drawer') {
               document.dispatchEvent(new CustomEvent('modal:close'));
             }
@@ -3880,30 +3894,14 @@
             if (window.theme.cartType === 'message') {
               _this4._showAlert(window.languages.productAdded, 'success', target);
             }
+
           } else {
             response.json().then(function (content) {
               _this4._showAlert(content['description'], 'error', target);
             });
           }
-
-        });
-
-        let cartAttr = {
-          'attributes': {
-            'main-prod-title': _this4.productData.title
-          }
-        }
-
-        fetch('/cart/update.js', {
-          body: JSON.stringify(cartAttr),
-          method: 'POST',
-          credentials: 'same-origin', 
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
-          }
-          
         })
+
         
         event.preventDefault();
       }
@@ -3917,7 +3915,14 @@
        * In order to have a small animation when the inventory bar is visible, we setup an intersection observer
        */
 
-    }, {
+    }, 
+    // {
+    //   key: "_asy",
+    //   value: function _asy() {
+        
+    //   }
+    // },
+    {
       key: "_setupStockCountdown",
       value: function _setupStockCountdown() {
         var _this5 = this;
