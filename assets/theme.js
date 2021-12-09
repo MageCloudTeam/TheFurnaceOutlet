@@ -1930,12 +1930,8 @@
         return;
       }
       this.miniCartElement = this.element.querySelector('.mini-cart');
-<<<<<<< HEAD
-
-=======
       this.miniCartPopupElement = this.element.querySelector('.mini-cart-popup');
       this.isMiniCartPopupOpen = false;
->>>>>>> dev
       this.isMiniCartOpen = false;
       if (window.theme.pageType !== 'cart' && this.miniCartElement) {
         this.closeMiniCartPopup = this.miniCartPopupElement.querySelector('.close__mini-cart-popup');
@@ -2314,19 +2310,12 @@
                   event.detail.button.innerHTML = window.languages.productFormAddToCart;
                 }, 1500);
               }
-<<<<<<< HEAD
-
-=======
   
->>>>>>> dev
               if (window.theme.pageType !== 'cart' && window.theme.cartType === 'drawer') {
                 _this3._openMiniCart();
               }
             }
           });
-<<<<<<< HEAD
-        }
-=======
         }else{
           if( res == true){
             this._onCartRefreshPopup().then(function () {
@@ -2362,7 +2351,6 @@
           
         }
         
->>>>>>> dev
       }
       /**
        * Allows to refresh the mini-cart
