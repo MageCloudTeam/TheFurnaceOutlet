@@ -83,8 +83,8 @@
           "type": "item",
           "settings": {
             "icon": "bi-returns",
-            "title": "Money-Back Guarantee",
-            "content": "<p>We believe in 100% satisfaction or your money back. <\/p><p><a href=\"\/pages\/return-policy\" target=\"_blank\" title=\"Return Policy\">See Details<\/a><\/p>"
+            "title": "Satisfied or Refunded",
+            "content": "<p>Find out more about our return policy here. <\/p><p><a href=\"\/pages\/return\" target=\"_blank\" title=\"Return Policy\">See Details<\/a><\/p>"
           }
         },
         "icon-3": {
@@ -92,15 +92,15 @@
           "settings": {
             "icon": "bi-customer-support",
             "title": "Need Help?",
-            "content": "<p>We have you covered! You can call us, email us, or chat with us. <\/p><p><a href=\"\/pages\/contact-us\" target=\"_blank\" title=\"Contact Us\">See Details<\/a><\/p>"
+            "content": "<p>We have you covered, you can call us or chat with us. <\/p>"
           }
         },
         "icon-4": {
           "type": "item",
           "settings": {
             "icon": "bi-secure-payment",
-            "title": "Low-Price Guarantee",
-            "content": "<p>We work hard to give you the best prices possible.<\/p>"
+            "title": "Secure payments",
+            "content": "<p>Short content about your store<\/p>"
           }
         }
       },
@@ -289,7 +289,7 @@
     "16329210310203bf32": {
       "type": "image-with-text",
       "settings": {
-        "image": "shopify:\/\/shop_images\/logoTheFurnaceOutlet1_1-ColorCorrect.png",
+        "image": "shopify:\/\/shop_images\/furnace.png",
         "image_position": "left",
         "image_width": 35,
         "title": "ABOUT OUR STORE",
