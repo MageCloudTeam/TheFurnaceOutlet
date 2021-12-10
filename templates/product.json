@@ -35,8 +35,8 @@
           "type": "popup_icons",
           "settings": {
             "icon": "bi-fast-delivery",
-            "header_icon": "Free Delivery",
-            "content_popap": "<p><strong>Free Delivery<\/strong><\/p>"
+            "header_icon": "Fast Free Shipping",
+            "content_popap": "<p><strong>Free Delivery<\/strong><\/p><p>Free shipping to everywhere in the continental United States from our network of<br\/>locations nationwide is included on all items we offer. Our national delivery<br\/>average is 1-5 business days. While our competitors ship from one location<br\/>which leads to longer shipping times and more damaged shipments, we ship from<br\/>several warehouses to ensure the products get to you quickly and safely. Orders<br\/>placed before 2pm are processed same day. <\/p>"
           }
         },
         "12bb0c56-ef50-4663-88ac-d7a693ed08e0": {
