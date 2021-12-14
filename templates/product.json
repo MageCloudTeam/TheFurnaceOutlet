@@ -50,7 +50,7 @@
         "b77484dd-3df5-48d2-a988-8d771caed17b": {
           "type": "popup_icons",
           "settings": {
-            "icon": "bi-network",
+            "icon": "bi-credit-card",
             "header_icon": "Low-Price Guarantee",
             "content_popap": "<p>Here at The Furnace Outlet, we work hard to be able to give our customers the best prices possible. We work so hard at it, we actually <strong>GUARANTEE<\/strong> that our price is the lowest online. If a you spot a price that is lower than ours anywhere online, tell us and we will beat the price the product or give you $100! <\/p>"
           }
@@ -58,12 +58,20 @@
         "1ec9991d-54b9-4980-bb46-5a818bfac3a9": {
           "type": "popup_icons",
           "settings": {
-            "icon": "bi-shop-pin",
+            "icon": "bi-shield",
             "header_icon": "Warranty Information",
             "content_popap": "<p>Goodman Warranty – As long as the item is installed by a qualified installer and registered within 60 days of installation, units come with the manufacturer's 10 year parts limited<br\/>warranty. <\/p><p><\/p><p>Amana – Amana PTACs come with a 5 Parts limited warranty as long as they are registered and the first year of that warranty includes labor, as well. <\/p><p><\/p><p>GREE – <br\/>A warranty period of 5 Years on all Parts and 5 Years on the Compressor when installed in a residential and any non-owner occupied application.<br\/>Registration of installation is strongly recommended. <\/p><p><\/p><p>MRCOOL – Varies by product line up. Five years on all parts to the original registered end-user warranty, Seven (7) years  compressor warranty. One (1) year warranty on remote control unit.<\/p><p><\/p><p>DURASTAR - Subject to all of the terms of this Limited Warranty, including, but not limited to, the specific exclusions set forth below and subject to the Manufacturer’s right to inspect and validate the warranty claim as set forth below, Manufacturer will repair or replace, at its option, ANY PART of Covered Equipment that is found to be defective in materials or workmanship. If an exact replacement part is not available, an equivalent part or credit will be provided. The parts are warranted for a period<br\/>of ten (10) years to the original owner of the mini-split equipment under normal use and service. For a period of ten (10) years from the date of<br\/>installation, if any parts prove defective due to improper workmanship and\/or<br\/>material, Durastar with<br\/>replace any defective part without charge for the part. Replacement parts carry<br\/>the balance of the original 10-year parts warranty.<\/p>"
           }
         },
         "aa241037-dfa9-43bd-8c3d-53d80d5d610e": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-customer-support",
+            "header_icon": "Default text",
+            "content_popap": "<p>Default text<\/p>"
+          }
+        },
+        "1ca49fec-fbe9-4b26-82d3-8c3c64bcee8c": {
           "type": "popup_icons",
           "settings": {
             "icon": "bi-customer-support",
@@ -122,6 +130,7 @@
         "b77484dd-3df5-48d2-a988-8d771caed17b",
         "1ec9991d-54b9-4980-bb46-5a818bfac3a9",
         "aa241037-dfa9-43bd-8c3d-53d80d5d610e",
+        "1ca49fec-fbe9-4b26-82d3-8c3c64bcee8c",
         "description",
         "70fb96b3-f2ea-4ded-80e7-2dc116f2a30e",
         "b2278765-7015-499c-a4b9-e068b3b25506",
