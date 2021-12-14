@@ -58,9 +58,9 @@
         "1ec9991d-54b9-4980-bb46-5a818bfac3a9": {
           "type": "popup_icons",
           "settings": {
-            "icon": "bi-time",
-            "header_icon": "Video",
-            "content_popap": "<p><strong>Video<\/strong><\/p>"
+            "icon": "bi-alert",
+            "header_icon": "Warranty Information",
+            "content_popap": "<p>Goodman Warranty – As long as the item is installed by a qualified installer and registered within 60 days of installation, units come with the manufacturer's 10 year parts limited<br\/>warranty. <\/p><p><\/p><p>Amana – Amana PTACs come with a 5 Parts limited warranty as long as they are registered and the first year of that warranty includes labor, as well. <\/p><p><\/p><p>GREE – <br\/>A warranty period of 5 Years on all Parts and 5 Years on the Compressor when installed in a residential and any non-owner occupied application.<br\/>Registration of installation is strongly recommended. <\/p><p><\/p><p>MRCOOL – Varies by product line up. Five years on all parts to the original registered end-user warranty, Seven (7) years  compressor warranty. One (1) year warranty on remote control unit.<\/p><p><\/p><p>DURASTAR - Subject to all of the terms of this Limited Warranty, including, but not limited to, the specific exclusions set forth below and subject to the Manufacturer’s right to inspect and validate the warranty claim as set forth below, Manufacturer will repair or replace, at its option, ANY PART of Covered Equipment that is found to be defective in materials or workmanship. If an exact replacement part is not available, an equivalent part or credit will be provided. The parts are warranted for a period<br\/>of ten (10) years to the original owner of the mini-split equipment under normal use and service. For a period of ten (10) years from the date of<br\/>installation, if any parts prove defective due to improper workmanship and\/or<br\/>material, Durastar with<br\/>replace any defective part without charge for the part. Replacement parts carry<br\/>the balance of the original 10-year parts warranty.<\/p>"
           }
         },
         "description": {
