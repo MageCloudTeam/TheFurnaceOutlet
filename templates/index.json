@@ -99,8 +99,8 @@
           "type": "item",
           "settings": {
             "icon": "bi-secure-payment",
-            "title": "Secure payments",
-            "content": "<p>Short content about your store<\/p>"
+            "title": "Low Price Guarantee",
+            "content": "<p>We work hard to give you the lowest prices possible. <\/p>"
           }
         }
       },
