@@ -76,7 +76,7 @@
           "settings": {
             "icon": "bi-delivery",
             "title": "Free Shipping",
-            "content": "<p>We offer free shipping within continental USA.  <\/p><p><a href=\"\/policies\/shipping-policy\" title=\"Shipping Policy\">See Details<\/a><\/p>"
+            "content": "<p>We offer free shipping on any item within continental USA.  <\/p><p><a href=\"\/policies\/shipping-policy\" title=\"Shipping Policy\">See Details<\/a><\/p>"
           }
         },
         "icon-2": {
