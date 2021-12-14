@@ -292,6 +292,7 @@
         "blocks": {
           "static-text-with-icons-0": {
             "type": "item",
+            "disabled": true,
             "settings": {
               "icon": "bi-delivery",
               "title": "Free delivery worldwide",
@@ -300,6 +301,7 @@
           },
           "static-text-with-icons-1": {
             "type": "item",
+            "disabled": true,
             "settings": {
               "icon": "bi-returns",
               "title": "Satisfied or refunded",
@@ -308,6 +310,7 @@
           },
           "static-text-with-icons-2": {
             "type": "item",
+            "disabled": true,
             "settings": {
               "icon": "bi-customer-support",
               "title": "Top-notch support",
@@ -316,6 +319,7 @@
           },
           "static-text-with-icons-3": {
             "type": "item",
+            "disabled": true,
             "settings": {
               "icon": "bi-secure-payment",
               "title": "Secure payments",

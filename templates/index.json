@@ -111,7 +111,7 @@
         "icon-4"
       ],
       "settings": {
-        "stack_mobile": false
+        "stack_mobile": true
       }
     },
     "featured-collection": {
