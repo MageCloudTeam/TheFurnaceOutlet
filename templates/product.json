@@ -74,9 +74,9 @@
         "1ca49fec-fbe9-4b26-82d3-8c3c64bcee8c": {
           "type": "popup_icons",
           "settings": {
-            "icon": "bi-customer-support",
-            "header_icon": "Default text",
-            "content_popap": "<p>Default text<\/p>"
+            "icon": "bi-time",
+            "header_icon": "Flat-Rate Return Service",
+            "content_popap": "<p>Why feel unsure when purchasing? If you select this option, you have 30 days to return anything on your order and we will pay for the return shipping! <\/p>"
           }
         },
         "description": {
