@@ -2468,6 +2468,7 @@ img.lazyload[data-sizes=auto] {
 .button--primary {
   background: var(--primary-button-background);
   color: var(--primary-button-text-color);
+  border-radius: 30px;
 }
 
 .button--primary:hover {
@@ -2702,7 +2703,7 @@ img.lazyload[data-sizes=auto] {
 .card__collapsible-content .pdf_item{
   display: flex;
   align-items: center;
-  width: 350px;
+  width: 100%;
   padding: 10px;
 }
 
@@ -2762,6 +2763,18 @@ img.lazyload[data-sizes=auto] {
   .card__section--flex .button {
     margin-top: 20px;
     width: 100%;
+  }
+
+  .documents_tab .text--pull{
+    border: 1px solid #e1e3e4;
+  }
+
+  .card__collapsible-content .pdf_item svg{
+    width: 90px;
+  }
+
+  .card__collapsible-content .pdf_item a{
+    font-size: 14px;
   }
 }
 
@@ -9512,11 +9525,7 @@ shopify-payment-terms {
   align-items: center;
 }
 
-@media screen and (max-width: 640px) {
-  .product-block-list__item:first-child .card {
-    border-top: none;
-  }
-}
+
 
 @media screen and (max-width: 999px) {
   /* we have a logic on desktop with overflow scroller and we must force it to disabled on mobile */
@@ -11697,6 +11706,8 @@ shopify-payment-terms {
 .text-with-icons__item {
   width: 100%;
   line-height: 1.6;
+  pointer-events: none;
+  position: relative;
 }
 
 .text-with-icons__title {
@@ -11723,15 +11734,15 @@ shopify-payment-terms {
 
 .content_icon-close{
   position: relative;
-  margin: 10px 0;
+  margin: 17px 0;
 }
 
 .popup-icons_wrap .content_icon-wrap{
   position: absolute;
   top: 48px;
-  left: 0;
+  right: -29%;
   background: white;
-  min-width: 350px;
+  min-width: 310px;
   width: 100%;
   border: 1px solid #606060;
   transition: all 0.2s;
@@ -11771,11 +11782,24 @@ shopify-payment-terms {
   transform: scale3d(1, 0, 1);
 }
 
+.active-popup::after{
+  content: '';
+  height: 8px;
+  width: 8px;
+  position: absolute;
+  bottom: 10px;
+  border-radius: 50%;
+  left: -15px;
+  background: #005985;
+}
+
 @media screen and (max-width: 767px) {
   .popup-icons .popup-btn{
     display: flex;
     justify-content: center;
   }
+
+
 }
 
 @media screen and (max-width: 640px) {
@@ -11799,6 +11823,36 @@ shopify-payment-terms {
 
   .text-with-icons--stacked::after {
     content: ""; /* Disable Flickity */
+  }
+
+  .popup-icons .popup-icons_wrap{
+    position: relative;
+  }
+
+  .content_icon-close,
+  .popup-icons_wrap .col-6,
+  .popup-icons_wrap .col-6{
+    position: initial;
+  }
+
+  .popup-icons_wrap .content_icon-wrap{
+    top: auto;
+    left: 0;
+    bottom: -130px;
+  }
+
+  .popup-icons_wrap .text-with-icons__icon-wrapper{
+    margin: 0;
+  }
+
+  .popup-icons .popup-icons_wrap {
+    display: flex;
+  }
+
+  .active-popup::after{
+    bottom: -10px;
+    left: 50%;
+    transform: translate(-50%, 0px);
   }
 }
 

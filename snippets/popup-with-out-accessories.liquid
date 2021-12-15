@@ -1,3 +1,6 @@
+<button class="close-popup">
+  {%- render 'icon', icon: 'close' -%}
+</button>
 <div class="mini-cart__content-popup">
     {%- render 'icon', icon: 'full-cart' -%}
     <div class="wrap_heading-cart">
@@ -83,4 +86,71 @@
     .wrap_title-product .price{
       flex-basis: 38px;
     }
+
+    .mini-cart-popup .close-popup{
+      margin: 0 20px 0 auto;
+      display: none;
+    }
+
+    @media screen and (max-width: 1200px) {
+      .mini-cart-popup[aria-hidden=false] {
+        transform: translate(-15%, 0);
+      }
+    
+      .mini-cart__inner-popup {
+        width: 90% ;
+      }
+    }
+    
+    @media screen and (max-width: 1000px) {
+      .mini-cart-popup[aria-hidden=false] {
+        transform: translate(-5%, 0);
+      }
+    }
+    
+    @media screen and (max-width: 880px) {
+      .mini-cart-popup{
+        width: 700px;
+      }
+    }
+    
+    @media screen and (max-width: 750px) {
+      .mini-cart-popup[aria-hidden=false]{
+        transform: translate(-20%, 0);
+      }
+    
+      .mini-cart-popup{
+        width: 600px;
+      }
+    }
+
+    @media screen and (max-width: 640px) {
+      .mini-cart-popup[aria-hidden=false]{
+        position: fixed;
+        transform: translate(0%, 0);
+        max-height: inherit;
+        width: 100vw;
+        top: 0;
+      }
+
+      .mini-cart__inner-popup{
+        width: 100%;
+      }
+    
+      .mini-cart__content-popup{
+        margin: auto;
+      }
+
+      .mini-cart-popup .button-group{
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .mini-cart-popup .button-group .button{
+        padding: 10px 15px;
+        line-height: normal;
+        font-size: 14px;
+      }
+    }
+    
   {% endstyle %}
