@@ -71,6 +71,14 @@
             "content_popap": "<p>Liftgate is the mechanism on the back of a semi truck that drops the shipment from truck level to ground level for you. If you decide against the additional lift gate service, please have help ready when the shipment arrives so that it can be unloaded.<\/p>"
           }
         },
+        "9dd6b3dd-3c09-4310-9265-2e30460f3408": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-customer-support",
+            "header_icon": "Flat Rate Return",
+            "content_popap": "<p>Liftgate is the mechanism on the back of a semi truck that drops the shipment from truck level to ground level for you. If you decide against the additional lift gate service, please have help ready when the shipment arrives so that it can be unloaded.<\/p>"
+          }
+        },
         "description": {
           "type": "description",
           "settings": {
@@ -122,6 +130,7 @@
         "b77484dd-3df5-48d2-a988-8d771caed17b",
         "1ec9991d-54b9-4980-bb46-5a818bfac3a9",
         "94d0a9a6-f6d4-4b13-8154-59d1601be7f9",
+        "9dd6b3dd-3c09-4310-9265-2e30460f3408",
         "description",
         "70fb96b3-f2ea-4ded-80e7-2dc116f2a30e",
         "b2278765-7015-499c-a4b9-e068b3b25506",
