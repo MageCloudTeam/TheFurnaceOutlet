@@ -50,9 +50,9 @@
         "b77484dd-3df5-48d2-a988-8d771caed17b": {
           "type": "popup_icons",
           "settings": {
-            "icon": "bi-shield",
-            "header_icon": "Premium Guarante",
-            "content_popap": "<p><strong>Premium Guarante<\/strong><\/p>"
+            "icon": "bi-secure-payment",
+            "header_icon": "Low Price Guarantee",
+            "content_popap": "<p>Here at The Furnace Outlet, we work hard to be able to give our customers the best prices possible. We work so hard at it, we actually GUARANTEE that our price is the lowest online. If a you spot a price that is lower than ours anywhere online, tell us and we will beat the price the product or give you $100! <\/p>"
           }
         },
         "1ec9991d-54b9-4980-bb46-5a818bfac3a9": {
