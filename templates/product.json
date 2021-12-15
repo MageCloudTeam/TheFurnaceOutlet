@@ -35,48 +35,32 @@
           "type": "popup_icons",
           "settings": {
             "icon": "bi-fast-delivery",
-            "header_icon": "Fast Free Shipping",
-            "content_popap": "<p>Free shipping to everywhere in the continental United States from our network of locations nationwide is included on all items we offer. Our national delivery average is 1-5 business days. While our competitors ship from one location which leads to longer shipping times and more damaged shipments, we ship from several warehouses to ensure the products get to you quickly and safely. Orders<br\/>placed before 2PM are processed same day. <\/p>"
+            "header_icon": "Free Delivery",
+            "content_popap": "<p><strong>Free Delivery<\/strong><\/p>"
           }
         },
         "12bb0c56-ef50-4663-88ac-d7a693ed08e0": {
           "type": "popup_icons",
           "settings": {
             "icon": "bi-returns",
-            "header_icon": "Money-Back Guarantee",
-            "content_popap": "<p>The Furnace Outlet team believes in your 100% satisfaction. If you are not completely satisfied with the product ordered, just send it back to us. As long as the item is in its original condition and packaging, if returned within 30 days you will get a full refund minus the shipping cost. <\/p>"
+            "header_icon": "Easy Returns",
+            "content_popap": "<p><strong>Easy Returns<\/strong><\/p>"
           }
         },
         "b77484dd-3df5-48d2-a988-8d771caed17b": {
           "type": "popup_icons",
           "settings": {
-            "icon": "bi-secure-payment",
-            "header_icon": "Low-Price Guarantee",
-            "content_popap": "<p>Here at The Furnace Outlet, we work hard to be able to give our customers the best prices possible. We work so hard at it, we actually <strong>GUARANTEE<\/strong> that our price is the lowest online. If a you spot a price that is lower than ours anywhere online, tell us and we will beat the price the product or give you $100! <\/p>"
+            "icon": "bi-shield",
+            "header_icon": "Premium Guarante",
+            "content_popap": "<p><strong>Premium Guarante<\/strong><\/p>"
           }
         },
         "1ec9991d-54b9-4980-bb46-5a818bfac3a9": {
           "type": "popup_icons",
           "settings": {
-            "icon": "bi-shield",
-            "header_icon": "Warranty Information",
-            "content_popap": "<p>Goodman Warranty – As long as the item is installed by a qualified installer and registered within 60 days of installation, units come with the manufacturer's 10 year parts limited<br\/>warranty. <\/p><p><\/p><p>Amana – Amana PTACs come with a 5 Parts limited warranty as long as they are registered and the first year of that warranty includes labor, as well. <\/p><p><\/p><p>GREE – <br\/>A warranty period of 5 Years on all Parts and 5 Years on the Compressor when installed in a residential and any non-owner occupied application.<br\/>Registration of installation is strongly recommended. <\/p><p><\/p><p>MRCOOL – Varies by product line up. Five years on all parts to the original registered end-user warranty, Seven (7) years  compressor warranty. One (1) year warranty on remote control unit.<\/p><p><\/p><p>DURASTAR - Subject to all of the terms of this Limited Warranty, including, but not limited to, the specific exclusions set forth below and subject to the Manufacturer’s right to inspect and validate the warranty claim as set forth below, Manufacturer will repair or replace, at its option, ANY PART of Covered Equipment that is found to be defective in materials or workmanship. If an exact replacement part is not available, an equivalent part or credit will be provided. The parts are warranted for a period<br\/>of ten (10) years to the original owner of the mini-split equipment under normal use and service. For a period of ten (10) years from the date of<br\/>installation, if any parts prove defective due to improper workmanship and\/or<br\/>material, Durastar with<br\/>replace any defective part without charge for the part. Replacement parts carry<br\/>the balance of the original 10-year parts warranty.<\/p>"
-          }
-        },
-        "aa241037-dfa9-43bd-8c3d-53d80d5d610e": {
-          "type": "popup_icons",
-          "settings": {
-            "icon": "bi-delivery",
-            "header_icon": "Liftgate Service",
-            "content_popap": "<p>Liftgate is the mechanism on the back of a semi truck that drops the shipment from truck level to ground level for you. If you decide against the additional lift gate service, please have help ready when the shipment arrives so that it can be unloaded.<\/p>"
-          }
-        },
-        "1ca49fec-fbe9-4b26-82d3-8c3c64bcee8c": {
-          "type": "popup_icons",
-          "settings": {
             "icon": "bi-time",
-            "header_icon": "Flat-Rate Return Service",
-            "content_popap": "<p>Why feel unsure when purchasing? If you select this option, you have 30 days to return anything on your order and we will pay for the return shipping! <\/p>"
+            "header_icon": "Video",
+            "content_popap": "<p><strong>Video<\/strong><\/p>"
           }
         },
         "description": {
@@ -90,8 +74,8 @@
           "settings": {
             "name_pdf_file1": "PDF file #1",
             "name_pdf_file2": "PDF file #2",
-            "name_pdf_file3": "PDF file #3",
-            "name_pdf_file4": "PDF file #4"
+            "name_pdf_file3": "Name PDF file",
+            "name_pdf_file4": "Name PDF file"
           }
         },
         "b2278765-7015-499c-a4b9-e068b3b25506": {
@@ -129,8 +113,6 @@
         "12bb0c56-ef50-4663-88ac-d7a693ed08e0",
         "b77484dd-3df5-48d2-a988-8d771caed17b",
         "1ec9991d-54b9-4980-bb46-5a818bfac3a9",
-        "aa241037-dfa9-43bd-8c3d-53d80d5d610e",
-        "1ca49fec-fbe9-4b26-82d3-8c3c64bcee8c",
         "description",
         "70fb96b3-f2ea-4ded-80e7-2dc116f2a30e",
         "b2278765-7015-499c-a4b9-e068b3b25506",

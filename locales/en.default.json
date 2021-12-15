@@ -195,7 +195,7 @@
     },
     "product": {
       "from_price_html": "From {{price_min}}",
-      "add_to_cart": "Add to cart",
+      "add_to_cart": "Click for Best Price",
       "pre_order": "Pre-order",
       "quick_view": "Quick view",
       "choose_options": "Choose options",
@@ -418,7 +418,7 @@
         "one": "In stock ({{count}} unit), ready to be shipped",
         "other": "In stock ({{count}} units), ready to be shipped"
       },
-      "add_to_cart": "Add to cart",
+      "add_to_cart": "Click for Best Price",
       "sold_out": "Sold out",
       "pre_order": "Pre-order",
       "unavailable": "Unavailable",

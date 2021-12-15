@@ -76,15 +76,15 @@
           "settings": {
             "icon": "bi-delivery",
             "title": "Free Shipping",
-            "content": "<p>We offer free shipping on any item within the continental USA.  <\/p><p><a href=\"\/policies\/shipping-policy\" title=\"Shipping Policy\">See Details<\/a><\/p>"
+            "content": "<p>We offer free shipping within continental USA.  <\/p><p><a href=\"\/policies\/shipping-policy\" title=\"Shipping Policy\">See Details<\/a><\/p>"
           }
         },
         "icon-2": {
           "type": "item",
           "settings": {
             "icon": "bi-returns",
-            "title": "Money-Back Guarantee",
-            "content": "<p>We believe in 100% satisfaction or your money back.<\/p><p><a href=\"\/pages\/return-policy\" target=\"_blank\" title=\"Return Policy\">See Details<\/a><\/p>"
+            "title": "Satisfied or Refunded",
+            "content": "<p>Find out more about our return policy here. <\/p><p><a href=\"\/pages\/return\" target=\"_blank\" title=\"Return Policy\">See Details<\/a><\/p>"
           }
         },
         "icon-3": {
@@ -92,15 +92,15 @@
           "settings": {
             "icon": "bi-customer-support",
             "title": "Need Help?",
-            "content": "<p>We have you covered! You can call,  chat, or email us.<\/p><p><a href=\"https:\/\/ffo1.myshopify.com\/pages\/contact-us?ose=false\" target=\"_blank\" title=\"https:\/\/ffo1.myshopify.com\/pages\/contact-us?ose=false\">See Details<\/a><\/p>"
+            "content": "<p>We have you covered, you can call us or chat with us. <\/p>"
           }
         },
         "icon-4": {
           "type": "item",
           "settings": {
             "icon": "bi-secure-payment",
-            "title": "Low Price Guarantee",
-            "content": "<p>Find a lower price? We will match it or pay you $100<\/p>"
+            "title": "Secure payments",
+            "content": "<p>Short content about your store<\/p>"
           }
         }
       },
@@ -111,7 +111,7 @@
         "icon-4"
       ],
       "settings": {
-        "stack_mobile": true
+        "stack_mobile": false
       }
     },
     "featured-collection": {

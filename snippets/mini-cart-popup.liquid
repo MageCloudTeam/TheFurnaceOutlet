@@ -13,6 +13,9 @@
   {%- endcapture -%}
   {%- if cart.item_count > 0 -%}
     <div class="mini-cart__inner-popup">
+      <button class="close-popup" style="display: block;margin: 20px 20px 0 auto;">
+        {%- render 'icon', icon: 'close' -%}
+      </button>
       {% assign show_popup_with_accessories = false %}
       {%- for line_item in cart.items -%}
         {% if line_item.title == cart.attributes.main-prod-title %}
