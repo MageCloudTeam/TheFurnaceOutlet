@@ -100,7 +100,7 @@
           "settings": {
             "icon": "bi-secure-payment",
             "title": "Low Price Guarantee",
-            "content": "<p>Find a price lower than ours anywhere on line and we will beat it or give you $100. <\/p>"
+            "content": "<p>Find a price lower than ours and we will match it or give you $100. <\/p>"
           }
         }
       },
