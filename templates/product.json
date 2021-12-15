@@ -58,9 +58,9 @@
         "1ec9991d-54b9-4980-bb46-5a818bfac3a9": {
           "type": "popup_icons",
           "settings": {
-            "icon": "bi-time",
-            "header_icon": "Video",
-            "content_popap": "<p><strong>Video<\/strong><\/p>"
+            "icon": "bi-shield",
+            "header_icon": "Warranty Information",
+            "content_popap": "<p><strong>Goodman Warranty<\/strong> <\/p><p>As long as the item is installed by a qualified installer and registered within 60 days of installation, units come with the manufacturer's 10 year parts limited warranty. <\/p>"
           }
         },
         "description": {
