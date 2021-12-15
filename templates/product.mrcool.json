@@ -1,0 +1,170 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "product_meta": {
+          "type": "product_meta",
+          "settings": {
+            "show_vendor": false,
+            "show_sku": true,
+            "show_reviews_badge": true,
+            "show_share_buttons": true,
+            "show_short_description": true,
+            "bolt_text": true
+          }
+        },
+        "variant_selector": {
+          "type": "variant_selector",
+          "settings": {
+            "selector_mode": "block",
+            "color_mode": "color",
+            "show_quantity_selector": true,
+            "show_taxes_included": false,
+            "show_inventory_quantity": false,
+            "low_inventory_threshold": 0
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false
+          }
+        },
+        "2af6353b-3f87-44b8-bb11-a281c780d4f0": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-fast-delivery",
+            "header_icon": "Fast Free Shipping",
+            "content_popap": "<p>Free shipping to everywhere in the continental United States from our network of locations nationwide is included on all items we offer. Our national delivery average is 1-5 business days. While our competitors ship from one location which leads to longer shipping times and more damaged shipments, we ship from several warehouses to ensure the products get to you quickly and safely. Orders placed before 2PM are processed same day. <\/p>"
+          }
+        },
+        "12bb0c56-ef50-4663-88ac-d7a693ed08e0": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-returns",
+            "header_icon": "Money Back Guarantee",
+            "content_popap": "<p>The Furnace Outlet team believe in your 100% satisfaction. If you are not completely satisfied with the product ordered, just send it back to us. As long as the item is in its original condition and packaging, if returned within 30 days you will get a full refund minus the shipping cost. <\/p>"
+          }
+        },
+        "b77484dd-3df5-48d2-a988-8d771caed17b": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-secure-payment",
+            "header_icon": "Low Price Guarantee",
+            "content_popap": "<p>Here at The Furnace Outlet, we work hard to be able to give our customers the best prices possible. We work so hard at it, we actually GUARANTEE that our price is the lowest online. If a you spot a price that is lower than ours anywhere online, tell us and we will beat the price the product or give you $100! <\/p>"
+          }
+        },
+        "1ec9991d-54b9-4980-bb46-5a818bfac3a9": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-shield",
+            "header_icon": "Warranty Information",
+            "content_popap": "<p><strong>Goodman Warranty<\/strong><\/p><p><\/p><p>As long as the item is installed by a qualified installer and registered within 60 days of installation, units come with the manufacturer's 10 year parts limited warranty. <\/p>"
+          }
+        },
+        "94d0a9a6-f6d4-4b13-8154-59d1601be7f9": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-delivery",
+            "header_icon": "Lift Gate Service",
+            "content_popap": "<p>Liftgate is the mechanism on the back of a semi truck that drops the shipment from truck level to ground level for you. If you decide against the additional lift gate service, please have help ready when the shipment arrives so that it can be unloaded.<\/p>"
+          }
+        },
+        "9dd6b3dd-3c09-4310-9265-2e30460f3408": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-customer-support",
+            "header_icon": "Flat Rate Return",
+            "content_popap": "<p>Why feel unsure when purchasing? If you select this option, you have 30 days to return anything on your order and we will pay for the return shipping! <\/p>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "display_mode": "collapse"
+          }
+        },
+        "70fb96b3-f2ea-4ded-80e7-2dc116f2a30e": {
+          "type": "documents_tab",
+          "settings": {
+            "name_pdf_file1": "",
+            "name_pdf_file2": "",
+            "name_pdf_file3": "",
+            "name_pdf_file4": ""
+          }
+        },
+        "b2278765-7015-499c-a4b9-e068b3b25506": {
+          "type": "specifications",
+          "settings": {
+            "specifications_parameters": "<p>{{ product.metafields.my_fields.specification_text | metafield_tag }}<\/p>"
+          }
+        },
+        "13a92b53-3192-4f81-b893-530b38c8adc9": {
+          "type": "accessories_tab",
+          "settings": {
+          }
+        },
+        "cabad50f-e171-4a69-8111-f7be7ed671cf": {
+          "type": "reviews",
+          "settings": {
+          }
+        },
+        "3921ab03-8dc7-4b3b-ad90-43a0a89dab40": {
+          "type": "similar_products_tab",
+          "settings": {
+          }
+        },
+        "1a55d986-04d6-4635-a782-324b87d06c9b": {
+          "type": "product_questions_tab",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "product_meta",
+        "variant_selector",
+        "buy_buttons",
+        "2af6353b-3f87-44b8-bb11-a281c780d4f0",
+        "12bb0c56-ef50-4663-88ac-d7a693ed08e0",
+        "b77484dd-3df5-48d2-a988-8d771caed17b",
+        "1ec9991d-54b9-4980-bb46-5a818bfac3a9",
+        "94d0a9a6-f6d4-4b13-8154-59d1601be7f9",
+        "9dd6b3dd-3c09-4310-9265-2e30460f3408",
+        "description",
+        "70fb96b3-f2ea-4ded-80e7-2dc116f2a30e",
+        "b2278765-7015-499c-a4b9-e068b3b25506",
+        "13a92b53-3192-4f81-b893-530b38c8adc9",
+        "cabad50f-e171-4a69-8111-f7be7ed671cf",
+        "3921ab03-8dc7-4b3b-ad90-43a0a89dab40",
+        "1a55d986-04d6-4635-a782-324b87d06c9b"
+      ],
+      "settings": {
+        "image_size": "small",
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "zoom_effect": "outside",
+        "carousel_effect": "fade"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "Other items of interest",
+        "show_quick_buy": true
+      }
+    },
+    "recently-viewed-products": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "title": "Recently viewed",
+        "show_quick_buy": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product-recommendations",
+    "recently-viewed-products"
+  ]
+}
