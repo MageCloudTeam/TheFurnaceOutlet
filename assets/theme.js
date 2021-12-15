@@ -1034,7 +1034,7 @@
       key: "_attachListeners",
       value: function _attachListeners() {
         this.domDelegate.on('click', '[data-action="toggle-collapsible-popup"]', this._toggleCollapsible.bind(this));
-        document.addEventListener('collapsible:toggle', this._toggleCollapsible.bind(this));
+        document.addEventListener('click', this._clickOnWindow.bind(this))
 
         if( this.domDelegate.rootElement.classList.contains('template-product')){
           this.popupCollapsibleWrap = document.querySelector('.popup-icons_wrap');
@@ -1046,14 +1046,16 @@
        * Toggle a given collapsible
        */
 
-    },  {
+    }, {
       key: "_toggleCollapsible",
       value: function _toggleCollapsible(event, target) {
         var _this = this;
         // If the target is null, it may be because someone has sent the global event "collapsible:toggle". If that the case
         // we can retrieve the toggle button by using the event.detail.id
         if (!target && event.detail) {
+          
           target = document.querySelector("[aria-controls=\"".concat(event.detail.id, "\"]"));
+          console.log(target)
         }
 
         var isOpen = target.getAttribute('aria-expanded') === 'true',
@@ -1064,7 +1066,6 @@
         } else {
           _this._open(parentCollapsible);
         } // We make sure to close any siblings collapsible as well
-
 
         if (target.getAttribute('data-close-siblings') !== 'false') {
           Dom.getSiblings(parentCollapsible).forEach(function (collapsibleToClose) {
@@ -1097,8 +1098,9 @@
             toggleButton.classList.toggle("Show");
             toggleButton.setAttribute('aria-expanded', 'false')
           }
-
+          toggleButton.querySelector('.text-with-icons__item').classList.toggle("active-popup");
           toggleButton.setAttribute('aria-expanded', 'true');
+          collapsibleContent.setAttribute('show', 'true');
         }
         
       }
@@ -1117,13 +1119,40 @@
         }
 
         if( this.domDelegate.rootElement.classList.contains('template-product')){
-          if(collapsibleContent.getAttribute('show') === 'false'){
+          if(collapsibleContent.getAttribute('show') === 'true'){
             collapsibleContent.classList.add("Hide");
             collapsibleContent.classList.remove("Show");
           }
         }
 
         toggleButton.setAttribute('aria-expanded', 'false');
+        toggleButton.querySelector('.text-with-icons__item').classList.toggle("active-popup");
+        collapsibleContent.setAttribute('show', 'false');
+      }
+    },{
+      key: "_clickOnWindow",
+      value: function _clickOnWindow(event) {
+        let arrPopup = document.querySelectorAll('.content_icon-close');
+
+        let target = event.target;
+        if(target.matches(".content_icon-close")){
+          return;
+        }else if(!target.matches(".content_icon-close") || !target.closest(".popup-btn")){
+          arrPopup.forEach((item) => {
+            let collapsibleContent = document.querySelector("#".concat(item.getAttribute('aria-controls')));
+      
+            if(item.getAttribute('aria-expanded') === 'true'){
+              item.setAttribute('aria-expanded', 'false');
+              item.querySelector('.text-with-icons__item').classList.toggle("active-popup");
+            }
+      
+            if(collapsibleContent.getAttribute('show') === 'true'){
+              collapsibleContent.classList.add("Hide");
+              collapsibleContent.classList.remove("Show");
+              collapsibleContent.setAttribute('show', 'false');
+            }
+          })
+        }
       }
     }]);
 
@@ -1934,7 +1963,6 @@
       this.isMiniCartPopupOpen = false;
       this.isMiniCartOpen = false;
       if (window.theme.pageType !== 'cart' && this.miniCartElement) {
-        this.closeMiniCartPopup = this.miniCartPopupElement.querySelector('.close__mini-cart-popup');
         this.miniCartToggleElement = this.element.querySelector("[aria-controls=\"".concat(this.miniCartElement.id, "\"]"));
         this.miniCartPopupToggleElement = this.element.querySelector("[aria-controls=\"".concat(this.miniCartPopupElement.id, "\"]"));
 
@@ -1962,6 +1990,7 @@
           window.addEventListener('keyup', this._checkMiniCartClosePopup.bind(this));
           this.delegateRoot.on('click', this._onWindowClick.bind(this));
           this.delegateRoot.on('click', this._onWindowClickPopup.bind(this));
+          this.delegateRoot.on('click', '.close-popup', this._closeMiniCartPopup.bind(this));
           window.addEventListener('resize', this._calculateMiniCartHeightListener);
         }
 
@@ -2233,6 +2262,7 @@
                 _this3.miniCartPopupElement.innerHTML = tempElement.querySelector('.mini-cart-popup').innerHTML;
                 _this3.element.dispatchEvent(new CustomEvent('cart:rerendered'));
                 let quantitySelectors = _this3.miniCartPopupElement.querySelectorAll('.quantity-selector--product');
+                
                 fetch('/cart.js', {
                   credentials: 'same-origin',
                   method: 'GET'
