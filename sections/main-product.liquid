@@ -437,22 +437,22 @@
                         <div class="product-list product-list--vertical product-list--scrollable">
                           {% if product.metafields.my_fields.documments_pdf1.value.url != blank %}
                             <div class="pdf_item">
-                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf1.value.url }}">{{ block.settings.name_pdf_file1 }}</a>
+                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf1.value.url }}">{{product.title}} - №1 {{ block.settings.name_pdf_file1 }}</a>
                             </div>
                           {% endif %}
                           {% if product.metafields.my_fields.documments_pdf2.value.url != blank %}
                             <div class="pdf_item">
-                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf2.value.url }}">{{ block.settings.name_pdf_file2 }}</a>
+                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf2.value.url }}">{{product.title}} - №2 {{ block.settings.name_pdf_file2 }}</a>
                             </div>
                           {% endif %}
                           {% if product.metafields.my_fields.documments_pdf3.value.url != blank %}
                             <div class="pdf_item">
-                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf3.value.url }}">{{ block.settings.name_pdf_file3 }}</a>
+                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf3.value.url }}">{{product.title}} - №3 {{ block.settings.name_pdf_file3 }}</a>
                             </div>
                           {% endif %}
                           {% if product.metafields.my_fields.documments_pdf4.value.url != blank %}
                             <div class="pdf_item">
-                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf4.value.url }}">{{ block.settings.name_pdf_file4 }}</a>
+                              {%- render 'icon', icon: 'adobe-icon' -%}<a href="{{ product.metafields.my_fields.documments_pdf4.value.url }}">{{product.title}} - №4 {{ block.settings.name_pdf_file4 }}</a>
                             </div>
                           {% endif %}
                         </div>
@@ -481,7 +481,7 @@
                     <div class="card__collapsible-content">
                       <div class="text--pull">
                         <div class="product-recommendations">
-                          <div class="scroller">
+                          <div>
                             <div class="scroller__inner">
                               <div class="product-list--vertical-accessories">
                                 {% for tag in product.tags %}
@@ -497,6 +497,23 @@
                                     {% endfor %}
                                   {%- endif -%}
                                 {% endfor %}
+
+                                <style>
+                                  @media screen and (max-width: 640px) {
+                                    .scroller__inner{
+                                      white-space: normal;
+                                    }
+
+                                    .product-form-accessories{
+                                      display: block;
+                                    }
+
+                                    .quantity-selector--product{
+                                      height: 35px;
+                                    }
+                                  }
+                                  
+                                </style>
                               </div>
                             </div>
                           </div>
@@ -943,23 +960,19 @@
         {
           "type": "text",
           "id": "name_pdf_file1",
-          "label": "Name PDF file1",
-          "default": "Name PDF file"
+          "label": "Name PDF file1"
         },{
           "type": "text",
           "id": "name_pdf_file2",
-          "label": "Name PDF file2",
-          "default": "Name PDF file"
+          "label": "Name PDF file2"
         },{
           "type": "text",
           "id": "name_pdf_file3",
-          "label": "Name PDF file3",
-          "default": "Name PDF file"
+          "label": "Name PDF file3"
         },{
           "type": "text",
           "id": "name_pdf_file4",
-          "label": "Name PDF file4",
-          "default": "Name PDF file"
+          "label": "Name PDF file4"
         }
       ]
     },
