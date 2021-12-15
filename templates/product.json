@@ -72,10 +72,10 @@
         "70fb96b3-f2ea-4ded-80e7-2dc116f2a30e": {
           "type": "documents_tab",
           "settings": {
-            "name_pdf_file1": "PDF file #1",
-            "name_pdf_file2": "PDF file #2",
-            "name_pdf_file3": "Name PDF file",
-            "name_pdf_file4": "Name PDF file"
+            "name_pdf_file1": "",
+            "name_pdf_file2": "",
+            "name_pdf_file3": "",
+            "name_pdf_file4": ""
           }
         },
         "b2278765-7015-499c-a4b9-e068b3b25506": {
