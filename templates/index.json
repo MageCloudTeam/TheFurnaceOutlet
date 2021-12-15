@@ -76,15 +76,15 @@
           "settings": {
             "icon": "bi-delivery",
             "title": "Free Shipping",
-            "content": "<p>We offer free shipping within the continental USA.  <\/p><p><a href=\"\/policies\/shipping-policy\" title=\"Shipping Policy\">See Details<\/a><\/p>"
+            "content": "<p>We offer free shipping within the continental USA.  <\/p><p><a href=\"\/policies\/shipping-policy\" target=\"_blank\" title=\"Shipping Policy\">See Details<\/a><\/p>"
           }
         },
         "icon-2": {
           "type": "item",
           "settings": {
             "icon": "bi-returns",
-            "title": "Satisfied or Refunded",
-            "content": "<p>Find out more about our return policy here. <\/p><p><a href=\"\/pages\/return\" target=\"_blank\" title=\"Return Policy\">See Details<\/a><\/p>"
+            "title": "Money Back Guarantee",
+            "content": "<p>We believe in 100% satisfaction or your money back.<\/p><p><a href=\"\/pages\/return-policy\" target=\"_blank\" title=\"Return Policy\">See Details<\/a><\/p>"
           }
         },
         "icon-3": {
