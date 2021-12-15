@@ -173,6 +173,9 @@
 </form>
 
 {% style %}
+.mini-cart-popup .scroller__inner{
+  white-space: normal;
+}
 
 @media screen and (max-width: 1200px) {
   .mini-cart-popup[aria-hidden=false] {
@@ -180,7 +183,8 @@
   }
 
   .mini-cart__inner-popup {
-    width: 90% ;
+    width: 90%;
+    margin: auto;
   }
 }
 
@@ -231,10 +235,6 @@
 
   .mini-cart-popup .mini-cart__line-item-popup .mini-cart__image-wrapper-popup{
     margin: auto;
-  }
-
-  .mini-cart-popup .scroller__inner{
-    white-space: normal;
   }
 
   .mini-cart__inner-popup .product-item-accessories{
