@@ -9244,7 +9244,7 @@ select option {
 
 .product-list--vertical-accessories{
   overflow: auto;
-  max-height: 388px;
+  max-height: 373px;
   height: auto;
   border: 1px solid #efefef;
 }
@@ -9270,6 +9270,12 @@ select option {
 
 .product-item--horizontal-accessories{
   display: flex;
+  position: relative;
+}
+
+.product-item--horizontal-accessories .product-item__label-list{
+  left: -10px;
+  top: 0;
 }
 
 .product-form__info-list-accessories {
