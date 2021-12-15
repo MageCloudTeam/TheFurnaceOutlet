@@ -92,7 +92,7 @@
           "settings": {
             "icon": "bi-customer-support",
             "title": "Need Help?",
-            "content": "<p>We have you covered, you can call us or chat with us. <\/p>"
+            "content": "<p>We have you covered, You can call,  chat or email us. <\/p><p><a href=\"\/pages\/contact-us\" target=\"_blank\" title=\"Contact Us\">See Details<\/a><\/p>"
           }
         },
         "icon-4": {
