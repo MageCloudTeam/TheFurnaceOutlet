@@ -2432,13 +2432,20 @@ img.lazyload[data-sizes=auto] {
   display: inline-block;
   padding: 0 30px;
   line-height: 48px;
-  border-radius: 2px;
   text-align: center;
   font-weight: var(--text-font-bolder-weight);
   font-size: var(--base-text-font-size);
   cursor: pointer;
   transition: background 0.25s ease-in-out, color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  border-radius: 30px;
 }
+
+.product_questions_tab .question-answer-box .button{
+  width: 150px;
+  padding: 0;
+  background: #0c648f;
+  border: none;
+} 
 
 .button[disabled] {
   cursor: not-allowed;
@@ -2473,6 +2480,7 @@ img.lazyload[data-sizes=auto] {
 
 .button--primary:hover {
   background: rgba(var(--primary-button-background-rgb), 0.8);
+  color: white;
 }
 
 .button--secondary {
@@ -2482,6 +2490,7 @@ img.lazyload[data-sizes=auto] {
 
 .button--secondary:hover {
   background: rgba(var(--secondary-button-background-rgb), 0.8);
+  color: white;
 }
 
 #mini-cart-popup .add-accessories{
@@ -9454,7 +9463,7 @@ shopify-payment-terms {
 }
 
 .shopify-payment-button__button--branded .shopify-cleanslate > div {
-  border-radius: 2px !important;
+  border-radius: 30px;
 }
 
 .shopify-payment-button__more-options {
@@ -10711,6 +10720,7 @@ shopify-payment-terms {
   float: none;
   background: var(--primary-button-background);
   color: var(--primary-button-text-color);
+  border-radius: 30px;
 }
 
 #shopify-product-reviews .spr-summary-actions-newreview:hover,

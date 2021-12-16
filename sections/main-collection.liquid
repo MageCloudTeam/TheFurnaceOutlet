@@ -60,14 +60,14 @@
       </nav>
     </div>
 
-    <div class="layout" {% if has_filters %}{% endif %}>
+    <div {% if has_filters %}class="layout"{% endif %}>
       {%- comment -%}
       --------------------------------------------------------------------------------------
       FILTER BAR (DESKTOP)
       --------------------------------------------------------------------------------------
       {%- endcomment -%}
 
-      
+      {% if has_filters %}
         <div class="layout__section layout__section--secondary hidden-pocket">
           <div class="card">
             {%- if quick_links_menu.links.size > 0 -%}
@@ -256,10 +256,10 @@
             {%- endif -%}
           </div>
         </div>
-      
+      {%- endif -%}
 
       {%- paginate collection.products by items_per_page -%}
-        <div class="layout__section"{% if has_filters %}{% endif %}>
+        <div {% if has_filters %}class="layout__section"{% endif %}>
           <div class="collection">
             {%- unless collection.template_suffix == 'brand' -%}
               {%- if section.settings.show_collection_image and collection.image and collection.all_products_count > 0 -%}
