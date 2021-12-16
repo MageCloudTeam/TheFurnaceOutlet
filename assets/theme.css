@@ -2445,6 +2445,11 @@ img.lazyload[data-sizes=auto] {
   padding: 0;
   background: #0c648f;
   border: none;
+  color: white;
+}
+
+.product_questions_tab .question-answer-box .button:hover{
+  opacity: 0.8;
 } 
 
 .button[disabled] {
