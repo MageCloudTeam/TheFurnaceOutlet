@@ -9545,7 +9545,24 @@ shopify-payment-terms {
   align-items: center;
 }
 
+@media screen and (max-width: 500px) {
+  .tabs_wrapper .content_wrapper-items .product_questions_tab .cbpqa-heading{
+    display: block;
+  }
 
+  .tabs_wrapper .content_wrapper-items .product_questions_tab .cbpqa-heading .cbpqa-header{
+    text-align: center;
+  }
+
+  .tabs_wrapper .content_wrapper-items .product_questions_tab .cbpqa-heading a{
+    display: block;
+    margin: auto;
+  }
+
+  .tabs_wrapper .content_wrapper-items .product_questions_tab .question-answer-box{
+    min-width: 380px;
+  }
+}
 
 @media screen and (max-width: 999px) {
   /* we have a logic on desktop with overflow scroller and we must force it to disabled on mobile */
