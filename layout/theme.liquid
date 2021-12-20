@@ -27,8 +27,6 @@
     {%- endif -%}
 
     {%- comment -%}Few prefech to increase performance on commonly used third-parties{%- endcomment -%}
-    <link rel="preload" as="style" href="{{ 'theme.css' | asset_url }}">
-    <!-- <link rel="preload" as="script" href="{{ 'theme.js' | asset_url }}"> -->
     <link rel="preconnect" href="https://cdn.shopify.com">
     <link rel="preconnect" href="https://fonts.shopifycdn.com">
     <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
@@ -41,8 +39,10 @@
 
     {{ content_for_header }}
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+    {%- if request.page_type == 'product' -%}
+      <link rel="prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {%- endif -%}
+    <link rel="preload" href="{{ 'theme.css' | asset_url }}">
     
 
     {% render 'microdata-schema' %}
@@ -102,8 +102,8 @@
     </script>
 
     {%- if request.page_type == 'customers/addresses' -%}
-      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
-      <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
+      <script rel="prefetch" src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+      <script rel="prefetch" src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
     {%- endif -%}
     
 
