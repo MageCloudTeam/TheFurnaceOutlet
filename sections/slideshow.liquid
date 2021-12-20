@@ -23,7 +23,7 @@
         {%- endif -%}
 
         {%- capture slide_inner -%}
-          <div class="slideshow__slide-inner slideshow__slide-inner--{{ block.settings.content_position | replace: '_', '-' }} lazyload image--fade-in" {% if block.settings.image and section.settings.section_size != 'preserve_ratio' %}data-bgset="{{ bgset }}" data-sizes="auto"{% endif %}>
+          <div class="slideshow__slide-inner slideshow__slide-inner--{{ block.settings.content_position | replace: '_', '-' }} image--fade-in" {% if block.settings.image and section.settings.section_size != 'preserve_ratio' %}data-bgset="{{ bgset }}" data-sizes="auto"{% endif %}>
             {%- unless block.settings.image -%}
               {%- capture placeholder -%}{% cycle 'lifestyle-1', 'lifestyle-2' %}{%- endcapture -%}
 
@@ -41,7 +41,7 @@
               {%- assign image_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
               <div class="aspect-ratio {% if block.settings.mobile_image %}hidden-phone{% endif %}" style="padding-bottom: {{ 100.0 | divided_by: block.settings.image.aspect_ratio }}%">
-                <img class="slideshow__image lazyload image--fade-in" alt="{{ block.settings.image.alt | escape }}" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto">
+                <img class="slideshow__image image--fade-in" alt="{{ block.settings.image.alt | escape }}" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto">
 
                 <noscript>
                   <img src="{{ block.settings.image | img_url: '1200x' }}" alt="{{ block.settings.image.alt | escape }}">
@@ -53,7 +53,7 @@
                 {%- assign image_url = block.settings.mobile_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
                 <div class="aspect-ratio hidden-tablet-and-up" style="padding-bottom: {{ 100.0 | divided_by: block.settings.mobile_image.aspect_ratio }}%">
-                  <img class="slideshow__image lazyload image--fade-in" alt="{{ block.settings.mobile_image.alt | escape }}" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto">
+                  <img class="slideshow__image image--fade-in" alt="{{ block.settings.mobile_image.alt | escape }}" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto">
 
                   <noscript>
                     <img src="{{ block.settings.mobile_image | img_url: '800x' }}" alt="{{ block.settings.mobile_image.alt | escape }}">
