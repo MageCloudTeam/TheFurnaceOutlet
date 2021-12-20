@@ -109,6 +109,7 @@
     {%- endif -%}
     
 
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
  
     {%- if request.page_type != 'cart' -%}
       <script>
@@ -157,7 +158,6 @@
       {{ content_for_layout }}
     </main>
 
-    {% section 'static-text-with-icons' %}
     {% section 'footer' %}
 
     <ul hidden>
