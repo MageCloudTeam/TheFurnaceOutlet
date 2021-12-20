@@ -76,15 +76,15 @@
           "settings": {
             "icon": "bi-delivery",
             "title": "Free Shipping",
-            "content": "<p>We offer free shipping within the continental USA.  <\/p><p><a href=\"\/policies\/shipping-policy\" target=\"_blank\" title=\"Shipping Policy\">See Details<\/a><\/p>"
+            "content": "<p>We offer free shipping within continental USA.  <\/p><p><a href=\"\/policies\/shipping-policy\" title=\"Shipping Policy\">See Details<\/a><\/p>"
           }
         },
         "icon-2": {
           "type": "item",
           "settings": {
             "icon": "bi-returns",
-            "title": "Money Back Guarantee",
-            "content": "<p>We believe in 100% satisfaction or your money back.<\/p><p><a href=\"\/pages\/return-policy\" target=\"_blank\" title=\"Return Policy\">See Details<\/a><\/p>"
+            "title": "Satisfied or Refunded",
+            "content": "<p>Find out more about our return policy here. <\/p><p><a href=\"\/pages\/return\" target=\"_blank\" title=\"Return Policy\">See Details<\/a><\/p>"
           }
         },
         "icon-3": {
@@ -92,15 +92,15 @@
           "settings": {
             "icon": "bi-customer-support",
             "title": "Need Help?",
-            "content": "<p>We have you covered, You can call,  chat or email us. <\/p><p><a href=\"\/pages\/contact-us\" target=\"_blank\" title=\"Contact Us\">See Details<\/a><\/p>"
+            "content": "<p>We have you covered, you can call us or chat with us. <\/p>"
           }
         },
         "icon-4": {
           "type": "item",
           "settings": {
             "icon": "bi-secure-payment",
-            "title": "Low Price Guarantee",
-            "content": "<p>Find a price lower than ours and we will match it or give you $100. <\/p>"
+            "title": "Secure payments",
+            "content": "<p>Short content about your store<\/p>"
           }
         }
       },
