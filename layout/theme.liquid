@@ -40,9 +40,9 @@
     {{ content_for_header }}
 
     {%- if request.page_type == 'product' -%}
-      <link rel="prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="prefetch" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     {%- endif -%}
-    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+    <link rel="preload" rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
     
 
     {% render 'microdata-schema' %}
