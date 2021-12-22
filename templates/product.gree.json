@@ -35,37 +35,48 @@
           "type": "popup_icons",
           "settings": {
             "icon": "bi-fast-delivery",
-            "header_icon": "Free Delivery",
-            "content_popap": "<p><strong>Free Delivery<\/strong><\/p>"
+            "header_icon": "Fast Free Shipping",
+            "content_popap": "<p>Free shipping to everywhere in the continental United States from our network of locations nationwide is included on all items we offer. Our national delivery average is 1-5 business days. While our competitors ship from one location which leads to longer shipping times and more damaged shipments, we ship from several warehouses to ensure the products get to you quickly and safely. Orders placed before 2PM are processed same day. <\/p>"
           }
         },
         "12bb0c56-ef50-4663-88ac-d7a693ed08e0": {
           "type": "popup_icons",
           "settings": {
             "icon": "bi-returns",
-            "header_icon": "Easy Returns",
-            "content_popap": "<p><strong>Easy Returns<\/strong><\/p>"
+            "header_icon": "Money Back Guarantee",
+            "content_popap": "<p>The Furnace Outlet team believe in your 100% satisfaction. If you are not completely satisfied with the product ordered, just send it back to us. As long as the item is in its original condition and packaging, if returned within 30 days you will get a full refund minus the shipping cost. <\/p>"
           }
         },
         "b77484dd-3df5-48d2-a988-8d771caed17b": {
           "type": "popup_icons",
           "settings": {
-            "icon": "bi-shield",
-<<<<<<< HEAD
-            "header_icon": "Premium Guarante",
-            "content_popap": "<p><strong>Premium Guarante<\/strong><\/p>"
-=======
-            "header_icon": "Warranty Information",
-            "content_popap": "<p>As long as the item is installed by a qualified installer and registered within 60 days of installation, units come with the manufacturer's 10 year parts limited warranty. <\/p>"
->>>>>>> 130fbe1d2d99b8b6212e130dd66cdbe269b4e1f3
+            "icon": "bi-secure-payment",
+            "header_icon": "Low Price Guarantee",
+            "content_popap": "<p>Here at The Furnace Outlet, we work hard to be able to give our customers the best prices possible. We work so hard at it, we actually GUARANTEE that our price is the lowest online. If a you spot a price that is lower than ours anywhere online, tell us and we will beat the price the product or give you $100! <\/p>"
           }
         },
         "1ec9991d-54b9-4980-bb46-5a818bfac3a9": {
           "type": "popup_icons",
           "settings": {
+            "icon": "bi-shield",
+            "header_icon": "Warranty Information",
+            "content_popap": "<p><strong>Gree Warranty<\/strong><\/p><p>A warranty period of 5 Years on all Parts and 5 Years on the Compressor when installed in a residential and any non-owner occupied application. Registration of installation is strongly recommended.<\/p>"
+          }
+        },
+        "94d0a9a6-f6d4-4b13-8154-59d1601be7f9": {
+          "type": "popup_icons",
+          "settings": {
+            "icon": "bi-delivery",
+            "header_icon": "Lift Gate Service",
+            "content_popap": "<p>Liftgate is the mechanism on the back of a semi truck that drops the shipment from truck level to ground level for you. If you decide against the additional lift gate service, please have help ready when the shipment arrives so that it can be unloaded.<\/p>"
+          }
+        },
+        "9dd6b3dd-3c09-4310-9265-2e30460f3408": {
+          "type": "popup_icons",
+          "settings": {
             "icon": "bi-time",
-            "header_icon": "Video",
-            "content_popap": "<p><strong>Video<\/strong><\/p>"
+            "header_icon": "Flat Rate Return",
+            "content_popap": "<p>Why feel unsure when purchasing? If you select this option, you have 30 days to return anything on your order and we will pay for the return shipping! <\/p>"
           }
         },
         "description": {
@@ -118,6 +129,8 @@
         "12bb0c56-ef50-4663-88ac-d7a693ed08e0",
         "b77484dd-3df5-48d2-a988-8d771caed17b",
         "1ec9991d-54b9-4980-bb46-5a818bfac3a9",
+        "94d0a9a6-f6d4-4b13-8154-59d1601be7f9",
+        "9dd6b3dd-3c09-4310-9265-2e30460f3408",
         "description",
         "70fb96b3-f2ea-4ded-80e7-2dc116f2a30e",
         "b2278765-7015-499c-a4b9-e068b3b25506",
