@@ -1,0 +1,110 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection-boost-pfs-original",
+      "settings": {
+        "show_collection_image": true,
+        "collapse_collection_description": true,
+        "collection_image_size": "small",
+        "products_per_row": "4",
+        "default_products_per_page": 24,
+        "default_view_layout": "grid",
+        "show_quick_buy": "list_grid",
+        "show_quick_view": "list",
+        "quick_links": "",
+        "quick_links_show_products_count": true,
+        "show_filters": true,
+        "show_filter_color_swatch": true,
+        "open_group_filters_mode": "all_closed"
+      }
+    },
+    "1632920335dd3dd6f1": {
+      "type": "logo-list",
+      "blocks": {
+        "1632920335dd3dd6f1-0": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/download__1_-removebg-preview.png",
+            "link": ""
+          }
+        },
+        "1632920335dd3dd6f1-1": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/mrcool.png",
+            "link": ""
+          }
+        },
+        "1632920335dd3dd6f1-2": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Laars.png",
+            "link": ""
+          }
+        },
+        "1632920335dd3dd6f1-3": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Honeywell.png",
+            "link": ""
+          }
+        },
+        "1632920335dd3dd6f1-4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/goodman.png",
+            "link": ""
+          }
+        },
+        "1632920335dd3dd6f1-5": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/GE.png",
+            "link": ""
+          }
+        },
+        "5692f19d-52c5-4a2b-8c65-298596546b36": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/clean-comfort-logo.png",
+            "link": ""
+          }
+        },
+        "65a31711-7031-4687-906c-c3635a436563": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/amana.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "1632920335dd3dd6f1-0",
+        "1632920335dd3dd6f1-1",
+        "1632920335dd3dd6f1-2",
+        "1632920335dd3dd6f1-3",
+        "1632920335dd3dd6f1-4",
+        "1632920335dd3dd6f1-5",
+        "5692f19d-52c5-4a2b-8c65-298596546b36",
+        "65a31711-7031-4687-906c-c3635a436563"
+      ],
+      "settings": {
+        "title": "Featured Brands",
+        "link_title": "",
+        "link": ""
+      }
+    },
+    "recently-viewed-products": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "title": "Recently viewed",
+        "show_quick_buy": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1632920335dd3dd6f1",
+    "recently-viewed-products"
+  ]
+}
