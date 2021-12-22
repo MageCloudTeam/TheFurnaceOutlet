@@ -162,6 +162,18 @@
               "image_2_text": "",
               "image_2_link": ""
             }
+          },
+          "5213e7ed-90fd-4199-9c4b-7ed13ad38e22": {
+            "type": "mega_menu",
+            "settings": {
+              "menu_item": "Accessories",
+              "image_1_heading": "Your image",
+              "image_1_text": "Tell your story",
+              "image_1_link": "",
+              "image_2_heading": "Your image",
+              "image_2_text": "Tell your story",
+              "image_2_link": ""
+            }
           }
         },
         "block_order": [
@@ -171,7 +183,8 @@
           "3683478a-e48c-4c6b-9d2a-9563092c4ad5",
           "7736d03c-c6fc-47c6-bfab-cbce449af42e",
           "d9c56bbb-267b-4346-a9b9-d228dcc770ab",
-          "305aadc6-a6df-49ca-9299-99735d66df05"
+          "305aadc6-a6df-49ca-9299-99735d66df05",
+          "5213e7ed-90fd-4199-9c4b-7ed13ad38e22"
         ],
         "settings": {
           "enable_sticky_header": true,
