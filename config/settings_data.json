@@ -43,7 +43,7 @@
     "product_price_position": "after_title",
     "product_image_size": "natural",
     "show_color_swatch": true,
-    "show_inventory_quantity": true,
+    "show_inventory_quantity": false,
     "low_inventory_threshold": 0,
     "cart_type": "drawer",
     "cart_empty_button_link": "shopify:\/\/collections\/all",
